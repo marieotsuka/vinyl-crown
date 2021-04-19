@@ -8,7 +8,7 @@
 body{
 	
 	font-family: 'Arial',sans-serif;
-	font-size: 30px;
+	font-size: 20px;
 	--color: rgb(244 64 52);
 	--secondcolor: rgb(21 88 80);
 	--bgcolor: rgb(247 243 229);
@@ -35,13 +35,14 @@ main{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	width: 740px;
-	padding: 20px 20px 30px;
+	padding: 10px 20px 30px 10px;
 }
 .menu-item{
 	margin: 20px;
 }
 button{
 	display: block;
+	outline: none;
 	border: 1px solid white;
 	background: var(--buttoncolor);
 	width: 300px;
@@ -87,6 +88,37 @@ button:hover{
 	overflow-y: auto;
 	position: fixed;
 	background: var(--bgcolor);
+	resize: both;
+}
+
+.release-info{
+	display: flex;
+	justify-content: space-between;
+}
+/*#releases .title, #releases .buy-link{
+	display: inline-block;
+}
+*/
+.item{
+	margin-bottom: 20px;
+}
+
+#merchandise{
+	width: 1000px;
+}
+
+#merchandise .scroll{
+	padding: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	font-size: 18px;
+	column-gap: 20px;
+	row-gap: 30px;
+}
+
+.product-info{
+	display: flex;
+	justify-content: space-between;
 }
 
 .window[data-open=false]{
@@ -99,6 +131,7 @@ button:hover{
 	background: black;
 	height: 30px;
 	color: var(--bgcolor);
+	border-bottom: 3px solid black;
 }
 .menu-title{
 	font-size: 1.3rem;
@@ -106,29 +139,37 @@ button:hover{
 	text-transform: uppercase;
 }
 .close{
-	position: absolute;
-    right: 0;
-    top: 0;
+    position: absolute;
+    right: 2px;
+    top: 2px;
     z-index: 20;
     background: var(--bgcolor);
     color: black;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 23px;
     text-align: center;
-    line-height: .9;
+    line-height: .7;
+    font-size: 28px;
+}
+
+.close:hover{
+	background: var(--buttoncolor);
 }
 
 .menu2{
-	background: var(--buttoncolor);
-	mix-blend-mode: multiply;
 	/*background-image: url('img/texture-test.jpg');*/
-	/*background-blend-mode: multiply;*/
+	background: transparent;
 	padding: 20px;
 	margin-left: 20px;
 	margin-top: 45vh;
+}
+.tracks{
+	background: var(--buttoncolor);
+	mix-blend-mode: multiply;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-end;
+	padding-bottom: 20px;
 }
 
 .board{
@@ -143,6 +184,7 @@ button:hover{
 	width: 150px;
 }
 .track-button{
+	cursor: pointer;
 	background: var(--bgcolor);
 	height: 50px;
 	width: 150px;
@@ -159,10 +201,10 @@ button:hover{
 	position: fixed;
 	right: 20px;
 	top: 20px;
-	width: 300px;
-	height: 300px;
+	width: 250px;
+	height: 250px;
 	border-radius: 50%;
-	border: 80px solid var(--color);
+	border: 70px solid var(--color);
 	z-index: 100;
 	animation: turn linear 2s forwards infinite;
 }
@@ -204,7 +246,6 @@ h1,p{
 .buy-link{
 	font-family: 'Arial', sans-serif;
 	font-weight: bold;
-	font-size: 20px;
 	text-transform: uppercase;
 }
 
@@ -219,20 +260,28 @@ footer{
 	border: 3px solid var(--color);
 	font-size: 18px;
 	padding: 5px;
-	width: 400px;
+	width: 710px;
 	height: 50px;
 	background: background: var(--bgcolor);
 }
 
 
-
+.social{
+	padding: 20px;
+}
 .social svg{
-	background: var(--buttoncolor);
+	background: var(--secondcolor);
 	height: 50px;
 	width: 150px;
-	fill: var(--color);
-	box-shadow: 2px 2px 0px 1px var(--color);
+	fill: var(--bgcolor);
+	box-shadow: 5px 5px 0px 2px var(--color);
 	margin-right: 20px;
+}
+.social svg:hover{
+	position: relative;
+	top: 2px;
+	left: 2px;
+	box-shadow: 3px 3px 0px 2px var(--color);
 }
 
 
@@ -250,6 +299,10 @@ footer{
 }
 
 */
+
+.top{
+	z-index: 1000;
+}
 
 @keyframes float{
 	0%{
