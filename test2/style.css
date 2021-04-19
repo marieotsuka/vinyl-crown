@@ -35,6 +35,7 @@ main{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	width: 740px;
+	height: 85vh;
 	padding: 10px 20px 30px 10px;
 }
 .menu-item{
@@ -74,7 +75,7 @@ button:hover{
 }
 #player{
 	width: 800px;
-	height: 90vh;
+	height: 80vh;
 }
 #player iframe{
 	height: 100%;	
@@ -159,9 +160,7 @@ button:hover{
 .menu2{
 	/*background-image: url('img/texture-test.jpg');*/
 	background: transparent;
-	padding: 20px;
 	margin-left: 20px;
-	margin-top: 45vh;
 }
 .tracks{
 	background: var(--buttoncolor);
@@ -174,6 +173,7 @@ button:hover{
 
 .board{
 	display: flex;
+	align-items: flex-end;
 }
 .track{
 	margin: 20px;
