@@ -45,8 +45,8 @@ button{
 	outline: none;
 	border: 1px solid white;
 	background: var(--buttoncolor);
-	width: 300px;
-	height: 300px;
+	width: 250px;
+	height: 250px;
 	font-size: 20px;
 	text-transform: uppercase;
 	/*font-family: Arial, sans-serif*/
@@ -260,7 +260,7 @@ footer{
 	border: 3px solid var(--color);
 	font-size: 18px;
 	padding: 5px;
-	width: 710px;
+	width: 610px;
 	height: 50px;
 	background: background: var(--bgcolor);
 }
@@ -286,7 +286,7 @@ footer{
 
 
 .vinylcrown{
-	width: 300px;
+	width: 250px;
 }
 
 /*#balloon{
