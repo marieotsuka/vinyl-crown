@@ -1,4 +1,3 @@
-
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -8,7 +7,7 @@
   ## Structure
   ## Elements
 # Page Agnostic Overrides
-	## Nav
+  ## Nav
   ## Structure
   ## Archive
   ## Article
@@ -17,13 +16,13 @@
   ## Nav
   ## Structure
   ## Pages 
-  ## Articles
+  ## Posts
   ## Mailchimp
 --------------------------------------------------------------*/
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-// @import "mixins";
+// @import "mixins"; later for responsive shortcut
 
 $vanilla: #FFEBC6;
 $black: #200304;
@@ -33,17 +32,19 @@ $green-light: #6F7E7C;
 $font-primary: 'Fraunces', serif;
 $font-secondary: 'Arial', sans-serif;
 
-$h1: 3.125rem; /*50px*/
-$h2: 2.625rem; /*42px*/
-$h3: 1.875rem; /*30px*/
-$h4: 1.125rem; /*18px*/
-$h5: 0.875rem; /*14px*/
-$body: 1.625rem; /*26px*/
-$xsmall: 0.75rem; /*12px;*/
-$xlarge: 4.5rem; /*72px*/
+$h1: 3.125rem; /* 50px */
+$h2: 2.625rem; /* 42px */
+$h3: 1.875rem; /* 30px */
+$h4: 1.125rem; /* 18px */
+$h5: 0.875rem; /* 14px */
+$body: 1.625rem; /* 26px */
+$xsmall: 0.75rem; /* 12px */
+$xlarge: 4.5rem; /* 72px */
 
-$bold: 800;
+$regular: 400;
+$medium: 500;
 $semibold: 600;
+$bold: 700;
 
 $spacing_lg: 80px;
 $spacing_md: $spacing_lg / 2;
@@ -64,7 +65,7 @@ body {
     font-family: $font-primary;
     color: $black;
     font-size: $body;
-    font-weight: normal;
+    font-weight: $regular;
     background-color: $vanilla;
     margin: 0;
     padding: 0;
@@ -75,39 +76,32 @@ a {
 }
 
 
-h1 { /*page title*/
+h1 { /* default: page title */
     font-size: $h1;
-    font-weight: normal;
+    font-weight: $regular;
     font-style: italic;
 }
 
 h2 {
     font-size: $h2;
-    font-weight: normal;
+    font-weight: $regular;
 }
 
 h3 {
     font-size: $h3;
-    font-weight: normal;
+    font-weight: $regular;
 }
 
 h4 {
     font-size: $h4;
-    font-weight: normal;
+    font-weight: $regular;
 }
 
 h5 {
     font-size: $h5;
-    font-weight: normal;
+    font-weight: $regular;
 }
 
-ul {
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 0px;
-}
 
 .san-serif {
     font-family: $font-secondary;
@@ -120,9 +114,6 @@ Element Defaults
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 */
 
-li {
-    list-style-type: none;
-}
 
 header {
     nav {
@@ -161,20 +152,14 @@ header {
                     color: $vanilla;
                 }
             }
-
             &:first-child { /*home button*/
                 display: none;
             }
-            // &:nth-child(odd){
-            //     margin-right: 5px;
-            // }
-            // &:nth-child(1), &:nth-child(2) {
-            //     margin-bottom: 5px;
-            // }
 
         }
     }
 }
+
 main {
     width: calc(100% - 80px);
     margin: 0 auto $spacing_lg auto;
@@ -194,6 +179,27 @@ footer {
     background-color: $black;
 }
 
+
+ul {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+li {
+    list-style-type: none;
+}
+
+// table { /* default: product > credits */
+//     border-spacing: 0px;
+//     td {
+//         padding: 0;
+//         padding-right: 16px;
+//     }
+// }
+
 button, input {
     font-family: $font-primary;
     font-size: $h4;
@@ -207,9 +213,13 @@ button, input {
     border-right: 3px solid $black;
     border-bottom: 3px solid $black;
     cursor: pointer;
+    &:hover {
+        color: $vanilla;
+        background-color: $black;
+    }
 }
 
-figure { /* item modules */
+figure { /* default: item modules */
     display: flex;
     flex-direction: row;
     width: fit-content;
@@ -219,7 +229,6 @@ figure { /* item modules */
     border-left: 3px solid white;
     border-right: 3px solid $black;
     border-bottom: 3px solid $black;
-
     img {
         max-width: 132px;
         margin-left: 16px;
@@ -235,13 +244,7 @@ time {
     font-size: $h5;
 }
 
-table { /*product > credits */
-    border-spacing: 0px;
-    td {
-        padding: 0;
-        padding-right: 16px;
-    }
-}
+
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Page Agnostic Overrides
@@ -267,11 +270,23 @@ header {
         padding: 6px 8px;
         text-decoration: none;
         z-index: 100;
-
         &:hover {
             background: $black;
             color: $vanilla;
         }
+    }
+}
+
+section.title {
+    text-align: center;
+    // max-width: 800px;
+    margin: 30px auto 48px auto;
+    h1 {
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+    h4 {
+        margin-block-start: 1em;
     }
 }
 
@@ -288,18 +303,6 @@ header {
     float:left;
 }
 
-section.title {
-    text-align: center;
-    // max-width: 800px;
-    margin: 30px auto 48px auto;
-    h1 {
-        margin-block-start: 0;
-        margin-block-end: 0;
-    }
-    h4 {
-        margin-block-start: 1em;
-    }
-}
 
 button, input {
     &.action {
@@ -320,105 +323,7 @@ Page Specific Overrides
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 */
 
-
-.template-product {
-
-    section.title {
-        .platforms a{
-            padding: 0 12px;
-            &:first-child { /*apple*/
-                padding-right: 18px;
-            }
-        }
-    }
-
-    .hero {
-        text-align: center; /*for hero img alignment*/
-    }
-    .subdescription, .tracklist, .credit {
-        font-size: $h4;
-    }
-    .subdescription {
-        font-style: italic;
-    }
-    .tracklist, #product-variants {
-        border: solid 1px;
-        padding: 16px 24px;
-        li {
-            display: flex;
-            align-items: center;
-            padding: 4px 0;
-        }
-    }
-    .tracklist {
-        margin-top: $spacing_lg;
-        div { /*title*/
-            padding-bottom: 16px;
-        }
-        ul {
-            display: flex;
-            flex-direction: row;
-            li {
-                width: 8%;
-            }
-            li:nth-child(2) {
-                width: 54%;
-            }
-        }
-    }
-    #product-variants {
-        font-size: $h4;
-        width: 80%;
-        ul {
-            display: flex;
-            flex-direction: row;
-            li {
-                &:first-child {
-                    width: 40%;
-                }
-                &:nth-child(2) {
-                    width: 20%;
-                }
-            }
-        }
-    }
-
-    /*music*/
-    .video {
-        clear:both;
-    }
-    .video-container {  
-        position: relative; 
-        padding-bottom: 56.25%; /* 16:9 */
-        // padding-top: 30px; 
-        height: 0; 
-        overflow: hidden; 
-        max-width: 100%;
-        margin-bottom: $spacing_md;
-        & iframe { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-        }
-    }
-
-}
-
-.template-article {
-    main {
-        max-width: 66.66%;
-        margin: 0 auto;
-        h1 {
-            font-size: $h2 * 0.85;
-        }
-        time {
-            font-size: $h4;
-        }
-    }
-}
-.template-index{
+.template-index{ /* homepage */ 
     background-color: black;
     #logo svg path{
         fill: $vanilla;
@@ -427,30 +332,8 @@ Page Specific Overrides
         display: none;
     }
 }
-#music.template-collection {
 
-    main {
-        max-width: calc(100% - 200px);
-        text-align: center;
-        li {
-            font-size: $xlarge;
-            line-height: $xlarge;
-            padding-bottom: 48px;
-            a {
-                text-decoration: none;
-            }
-            img {
-                display: none;
-            }
-        }
-        .colophon {
-            position: absolute;
-            display: contents;
-            padding-left: $spacing_sm;
-        }
-    }    
-}
-#about {
+#about { /* about page */
     color: $vanilla;
     background-color: $green;
     #logo svg path{
@@ -476,4 +359,130 @@ Page Specific Overrides
         border: solid 1px $vanilla;
     }
 }
+
+#music.template-collection { /* music list page */
+    main {
+        max-width: calc(100% - 200px);
+        text-align: center;
+        li {
+            font-size: $xlarge;
+            line-height: $xlarge;
+            padding-bottom: 48px;
+            a {
+                text-decoration: none;
+            }
+            img {
+                display: none;
+            }
+        }
+        .colophon {
+            position: absolute;
+            display: contents;
+            padding-left: $spacing_sm;
+        }
+    }    
+}
+
+.template-product { /* product post */
+    section.title {
+        .platforms a{ /* music post > platform links */
+            padding: 0 12px;
+            &:first-child { /* apple */
+                padding-right: 18px;
+            }
+        }
+    }
+    .hero { /* music post > hero image */
+        text-align: center; 
+    }
+    .subdescription, .tracklist, .credit, .video-credit {
+        font-size: $h4;
+    }
+    .subdescription {
+        font-style: italic;
+    }
+    .tracklist, #product-variants {
+        border: solid 1px;
+        padding: 16px 24px;
+        li {
+            display: flex;
+            align-items: center;
+            padding: 4px 0;
+        }
+    }
+    .tracklist {
+        margin-top: $spacing_lg;
+        div { /* title */
+            padding-bottom: 16px;
+        }
+        ul {
+            display: flex;
+            flex-direction: row;
+            li {
+                width: 8%;
+            }
+            li:nth-child(2) {
+                width: 54%;
+            }
+        }
+    }
+    .credit {
+        display: grid;  
+        grid-template-columns: 1fr 1fr;
+    }
+    .video-credit {
+        display: grid;  
+        grid-template-columns: 1fr 2fr 2fr;
+    }
+    #product-variants {
+        font-size: $h4;
+        width: 80%;
+        ul {
+            display: flex;
+            flex-direction: row;
+            li {
+                &:first-child {
+                    width: 40%;
+                }
+                &:nth-child(2) {
+                    width: 20%;
+                }
+            }
+        }
+    }
+    .video { /* music post > video section */
+        clear:both;
+    }
+    .video-container {  
+        position: relative; 
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0; 
+        overflow: hidden; 
+        max-width: 100%;
+        margin-bottom: $spacing_md;
+        & iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+        }
+    }
+}
+
+.template-article { /* news post */
+    main {
+        max-width: 66.66%;
+        margin: 0 auto;
+        h1:not(.title h1) {
+            font-size: $h2 * 0.85;
+        }
+        time {
+            font-size: $h4;
+        }
+    }
+}
+
+
+
 

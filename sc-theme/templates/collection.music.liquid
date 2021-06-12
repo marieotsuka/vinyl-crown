@@ -63,7 +63,7 @@
     {% for product in collection.products %}
         <li>
           <a href="{{ product.url | within: collection }}">
-            {{ product.title }} <span class="colophon san-serif">{{product.metafields.colophon.album}}</span>
+            {{ product.title }} <span class="colophon san-serif">{{product.metafields.type.album}}, {{product.metafields.year.album}}</span>
             <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
           </a>
         </li>

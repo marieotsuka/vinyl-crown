@@ -45,9 +45,9 @@
       <section itemprop="description">
         <div class="col-2">
           <div>
-            {{ product.description}}
+            <p>{{product.metafields.description.album}}</p>
             <p class="subdescription">{{product.metafields.subdescription.album}}</p>
-            <p class="san-serif">{{product.metafields.colophon.album}}</p>
+            <p class="san-serif">{{product.metafields.type.album}}, released {{product.metafields.year.album}}</p>
           </div>
           {% if product.metafields.tracks.album != blank %}
             <div class="tracklist">
@@ -71,7 +71,25 @@
           {% endif %}
         </div>
         <div class="col-2">
-
+          {% if product.metafields.credit_name.album != blank %}
+            <div class="credit">
+                {% for value in product.metafields.credit_name.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 2 | plus: 1 %}
+                  <div class="item--{{ i }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.credit_role.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 2  | plus: 2 %}
+                  <div class="item--{{ i }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+            </div>
+          {% endif %}
+          {% comment %} alternative: JSON
             {% if product.metafields.credits.album != blank %}
               <table class="credit">
                 <tbody>                
@@ -86,7 +104,7 @@
               </tbody>
               </table>
           {% endif %}
-
+          {% endcomment %}
       <script>
         var obj = JSON.parse(localStorage.getItem("_myobject"));
         obj.map(function(item) { 
@@ -185,10 +203,28 @@
       <div class="video-container">
         <iframe src="{{product.metafields.url.video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-                
-        {% if product.metafields.credits.video != blank %}
-        <table class="credit video-credit">
-          <tbody>
+      <div class="video-credit">
+          {% if product.metafields.credit_name.video != blank %}
+            <div>Credit </div>
+            <div class="credit">
+                {% for value in product.metafields.credit_name.video %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 2 | plus: 1 %}
+                  <div class="item--{{ i }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.credit_role.video %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 2  | plus: 2 %}
+                  <div class="item--{{ i }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+            </div>
+          {% endif %}
+        {% comment %}
+          <table class="credit video-credit"><tbody>
           {% assign credit_array = product.metafields.credits.video %}
             {% for value in credit_array %}
             <tr class="item item--{{ i }}">
@@ -200,7 +236,8 @@
          
           </tbody>
         </table>
-    {% endif %}
+        {% endcomment %}
+      </div>
     </section>
 
   </form>
