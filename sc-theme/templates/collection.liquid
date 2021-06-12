@@ -6,7 +6,9 @@
 
 {% paginate collection.products by 10 %}
 
-  <h1>{{ collection.title }}</h1>
+  <section class="title">
+    <h1>{{ collection.title }}</h1>
+  </section>
 
   {% comment %}
     Collection sorting. Needs the JavaScript that is at the bottom of this file.

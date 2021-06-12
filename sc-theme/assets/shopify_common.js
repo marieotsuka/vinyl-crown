@@ -12,3 +12,4 @@ if (location.search.length) {
     }
   }
 }
+

@@ -1,5 +1,7 @@
-<h1>Shopping Cart</h1>
-  
+
+<section class="title">
+  <h1>Shopping Cart</h1>
+</section>
 {% if cart.item_count > 0 %}
 
 <form action="/cart" method="post">
@@ -104,7 +106,7 @@
 
 {% else %}
 
-  <h2>It appears that your cart is currently empty!</h2>
-  <h3>You can continue browsing <a href="/collections/all">here</a>.</h3>
+  <P>It appears that your cart is currently empty!</P>
+  <h4>You can continue browsing <a href="/collections/all">here</a>.</h4>
 
 {% endif %}

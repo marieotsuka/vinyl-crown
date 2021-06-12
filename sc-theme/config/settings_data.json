@@ -1,7 +1,10 @@
 {
   "current": {
     "customer_layout": "theme",
-    "example_option": "option"
+    "example_option": "option",
+    "sections" : {
+      
+    }
   },
   "presets": {
     "Naked": {

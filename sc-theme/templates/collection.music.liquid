@@ -6,30 +6,34 @@
 
 {% paginate collection.products by 10 %}
 
-  <h1>{{ collection.title }}</h1>
+  <section class="title">
+    <h1>{{ collection.title }}</h1>
+  </section>
+
 
   {% comment %}
     Collection sorting. Needs the JavaScript that is at the bottom of this file.
+    
+    {% if collection.products_count > 1 %}
+      <select class="sort-by right">
+        <option value="manual">Featured</option>
+        <option value="price-ascending">Price: Low to High</option>
+        <option value="price-descending">Price: Hight to Low</option>
+        <option value="title-ascending">A-Z</option>
+        <option value="title-descending">Z-A</option>
+        <option value="created-ascending">Oldest to Newest</option>
+        <option value="created-descending">Newest to Oldest</option>
+        <option value="best-selling">Best Selling</option>
+      </select>
+    {% endif %}
   {% endcomment %}
-  {% if collection.products_count > 1 %}
-    <select class="sort-by right">
-      <option value="manual">Featured</option>
-      <option value="price-ascending">Price: Low to High</option>
-      <option value="price-descending">Price: Hight to Low</option>
-      <option value="title-ascending">A-Z</option>
-      <option value="title-descending">Z-A</option>
-      <option value="created-ascending">Oldest to Newest</option>
-      <option value="created-descending">Newest to Oldest</option>
-      <option value="best-selling">Best Selling</option>
-    </select>
-  {% endif %}
 
   {% comment %}
     Listing all tags within the current collection.
     Shopify uses product tags to manage subcategories inside collections.
     See 'How do I create subcategories of products?' at 
     http://bit.ly/1j1Dti4 for details.
-  {% endcomment %}
+
 
 
   {% if collection.all_tags.size > 0 %}
@@ -50,14 +54,20 @@
       {% endfor %}  
     </ul>
   {% endif %}
-
+  
   {% if collection.description.size > 0 %}
     {{ collection.description }}
   {% endif %}
+  {% endcomment %}
 
   {% for product in collection.products %}
     <ul>
-      {% include 'product-item' %}
+      <li>
+        <a href="{{ product.url | within: collection }}">
+          {{ product.title }}
+          <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
+        </a>
+      </li>
     </ul>
   {% else %}
     <p>There are no products in this view.</p>
