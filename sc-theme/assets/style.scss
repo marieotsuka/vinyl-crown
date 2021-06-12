@@ -387,6 +387,7 @@ Page Specific Overrides
     section.title {
         .platforms a{ /* music post > platform links */
             padding: 0 12px;
+            text-decoration: none;
             &:first-child { /* apple */
                 padding-right: 18px;
             }
@@ -408,22 +409,33 @@ Page Specific Overrides
             display: flex;
             align-items: center;
             padding: 4px 0;
+            &::before {
+                font-family: $font-secondary;
+            }
         }
     }
     .tracklist {
         margin-top: $spacing_lg;
-        div { /* title */
+        div { /* heading */
             padding-bottom: 16px;
         }
         ul {
-            display: flex;
-            flex-direction: row;
+           
             li {
-                width: 8%;
+                list-style-type: decimal-leading-zero;  
+                 display: flex;
+                flex-direction: row;
+                div {
+                    width: 8%;
+                }
+                div:nth-child(2) { /* title */
+                    width: 54%;
+                }
+                div.lyrics-popup {
+                    display: none;
+                }
             }
-            li:nth-child(2) {
-                width: 54%;
-            }
+
         }
     }
     .credit {

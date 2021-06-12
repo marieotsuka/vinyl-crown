@@ -50,6 +50,53 @@
             <p class="san-serif">{{product.metafields.type.album}}, released {{product.metafields.year.album}}</p>
           </div>
           {% if product.metafields.tracks.album != blank %}
+          <div class="tracklist">
+            <div class="san-serif">Tracklist</div>
+            <ul>
+              <li>
+                {% for value in product.metafields.track_title.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign num = i  | times: 5 | plus: 1 %}
+                  {% assign j = i  | times: 5 | plus: 2 %}
+                  <div class="item--{{ j }} san-serif" style="order:{{num}}">
+                    {{num}}
+                  </div>
+                  <div class="item--{{ j }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.track_duration.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 5 | plus: 3 %}
+                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.track_url.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 5 | plus: 4 %}
+                  <div class="item--{{ j }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% if product.metafields.track_lyrics.album != blank %}
+                  {% for value in product.metafields.track_lyrics.album %}
+                    {% assign i = forloop.index0 %}
+                    {% assign j = i  | times: 5  | plus: 5 %}
+                      <div class="item--{{ j }}" style="order:{{j}}">
+                        <a><i>lyrics</i></a>
+                        <div class="lyrics-popup">
+                          {{value}}
+                        </div>
+                      </div>                   
+                  {% endfor %}
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+        {% endif %}
+        {% comment %}
+          {% if product.metafields.tracks.album != blank %}
             <div class="tracklist">
               <div class="san-serif">Tracklist</div>
               {% assign tracklist = product.metafields.tracks.album %}
@@ -69,6 +116,7 @@
               {% endfor %}
             </div>
           {% endif %}
+          {% endcomment %}
         </div>
         <div class="col-2">
           {% if product.metafields.credit_name.album != blank %}
