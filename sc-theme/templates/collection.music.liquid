@@ -59,20 +59,18 @@
     {{ collection.description }}
   {% endif %}
   {% endcomment %}
-
-  {% for product in collection.products %}
-    <ul>
-      <li>
-        <a href="{{ product.url | within: collection }}">
-          {{ product.title }}
-          <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
-        </a>
-      </li>
-    </ul>
-  {% else %}
-    <p>There are no products in this view.</p>
-  {% endfor %}
-
+  <ul>
+    {% for product in collection.products %}
+        <li>
+          <a href="{{ product.url | within: collection }}">
+            {{ product.title }} <span class="colophon san-serif">{{product.metafields.colophon.album}}</span>
+            <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
+          </a>
+        </li>
+    {% else %}
+      <p>There are no products in this view.</p>
+    {% endfor %}
+  </ul>
   {% if paginate.pages > 1 %}
     {{ paginate | default_pagination }}
   {% endif %}

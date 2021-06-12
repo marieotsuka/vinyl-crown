@@ -33,14 +33,14 @@ $green-light: #6F7E7C;
 $font-primary: 'Fraunces', serif;
 $font-secondary: 'Arial', sans-serif;
 
-$h1: 50px;
-$h2: 42px;
-$h3: 30px;
-$h4: 18px;
-$h5: 14px;
-$body: 26px;
-$xxsmall: 12px;
-$xxlarge: 76px;
+$h1: 3.125rem; /*50px*/
+$h2: 2.625rem; /*42px*/
+$h3: 1.875rem; /*30px*/
+$h4: 1.125rem; /*18px*/
+$h5: 0.875rem; /*14px*/
+$body: 1.625rem; /*26px*/
+$xsmall: 0.75rem; /*12px;*/
+$xlarge: 4.5rem; /*72px*/
 
 $bold: 800;
 $semibold: 600;
@@ -115,8 +115,14 @@ ul {
 Element Defaults
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 */
+
+li {
+    list-style-type: none;
+}
+
 header {
     nav {
+        z-index: 100;
         position:fixed;
         display: inline-block;
         top: 20px;
@@ -127,7 +133,6 @@ header {
             margin: -2.5px;
         }
         li {
-            list-style-type: none;
             a {
                 display: flex;
                 justify-content: center;
@@ -171,6 +176,12 @@ main {
     margin: 0 auto 80px auto;
     min-height: 90vh;
 }
+
+section {
+    margin-bottom: 80px;
+    overflow: hidden;
+}
+
 footer {
     min-height: 10vh;
     padding: 40px;
@@ -186,12 +197,12 @@ button, input {
     font-weight: $semibold;
     text-align: center;
     padding: 12px;
-    margin: 56px 0;
     background-color: initial;
     border-top: 3px solid white;
     border-left: 3px solid white;
     border-right: 3px solid $black;
     border-bottom: 3px solid $black;
+    cursor: pointer;
 }
 
 figure { /* item modules */
@@ -219,6 +230,14 @@ time {
     font-family: $font-secondary;
     font-size: $h5;
 }
+
+table { /*product > credits */
+    border-spacing: 0px;
+    td {
+        padding: 0;
+        padding-right: 16px;
+    }
+}
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Page Agnostic Overrides
@@ -230,6 +249,7 @@ header {
         position: fixed;
         top: 40px;
         left: 40px;
+        z-index: 10;
     }
     a#cart {
         display: inline-block;
@@ -237,11 +257,13 @@ header {
         top: 30+155px;
         right: 20px;
         background-color: $vanilla;
-        font-size: $xxsmall;
+        font-size: $xsmall;
         border: solid 1px $black;
         border-radius: 3px;
         padding: 6px 8px;
         text-decoration: none;
+        z-index: 100;
+
         &:hover {
             background: $black;
             color: $vanilla;
@@ -249,9 +271,7 @@ header {
     }
 }
 
-div[itemprop="description"] {
-    text-align: left;
-    padding-top: 72px;
+*[itemprop="description"] {
     & p:first-child {
         margin-block-start: 0;
     }
@@ -277,10 +297,11 @@ section.title {
 button, input {
     &.action {
         min-width: 200px;
+        margin: 56px 0;
     }
-
     &.option {
-
+        min-width: 100px;
+        padding: 8px;
     }
 }
 
@@ -294,7 +315,7 @@ Page Specific Overrides
 
 
 .template-product {
-    form {
+    .hero {
         text-align: center; /*for hero img alignment*/
     }
     .subdescription, .tracklist, .credit {
@@ -303,28 +324,59 @@ Page Specific Overrides
     .subdescription {
         font-style: italic;
     }
-}
-
-#product-variants {
-    border: solid 1px;
-    padding: 16px 24px;
-    font-size: $h4;
-    width: 80%;
-
-    ul {
-        display: flex;
-        flex-direction: row;
+    .tracklist, #product-variants {
+        border: solid 1px;
+        padding: 16px 24px;
         li {
-            list-style-type: none;
-            &:first-child {
-                width: 40%;
-            }
-            &:nth-child(2) {
-                width: 20%;
+            padding: 4px 0;
+        }
+    }
+    .tracklist {
+        ul {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+    #product-variants {
+        font-size: $h4;
+        width: 80%;
+        ul {
+            display: flex;
+            flex-direction: row;
+            li {
+                &:first-child {
+                    width: 40%;
+                }
+                &:nth-child(2) {
+                    width: 20%;
+                }
             }
         }
     }
+
+    /*music*/
+    .video {
+        clear:both;
+    }
+    .video-container {  
+        position: relative; 
+        padding-bottom: 56.25%; /* 16:9 */
+        // padding-top: 30px; 
+        height: 0; 
+        overflow: hidden; 
+        max-width: 100%;
+        margin-bottom: 40px;
+        & iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+        }
+    }
+
 }
+
 .template-article {
     main {
         max-width: 66.66%;
@@ -345,6 +397,28 @@ Page Specific Overrides
     #cart {
         display: none;
     }
+}
+#music.template-collection {
+    main {
+        max-width: calc(100% - 200px);
+        text-align: center;
+        li {
+            font-size: $xlarge;
+            line-height: $xlarge;
+            padding-bottom: 48px;
+            a {
+                text-decoration: none;
+            }
+            img {
+                display: none;
+            }
+        }
+        .colophon {
+            position: absolute;
+            display: contents;
+            padding-left: 20px;
+        }
+    }    
 }
 #about {
     color: $vanilla;
@@ -370,22 +444,6 @@ Page Specific Overrides
         color: $vanilla;
         background-color: $green;
         border: solid 1px $vanilla;
-    }
-}
-.video-container {  /*responsive video*/
-    position: relative; 
-    padding-bottom: 56.25%; 
-    padding-top: 30px; 
-    height: 0; 
-    overflow: hidden; 
-    & iframe, 
-    & object, 
-    & embed { 
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%; 
     }
 }
 
