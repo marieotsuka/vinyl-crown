@@ -5,10 +5,6 @@
   
   <form action="/cart/add" method="post" enctype="multipart/form-data">
     
-    <section class="title">
-      <h1>{{ product.title }}</h1>
-      <h4>{{product.metafields.subtitle.album}}</h4>
-    </section>
     <section class="hero">
       {% if product.images.size == 0 %}
         <img src="{{ '' | img_url: 'grande' }}" alt="" />
@@ -53,22 +49,26 @@
             <p class="subdescription">{{product.metafields.subdescription.album}}</p>
             <p class="san-serif">{{product.metafields.colophon.album}}</p>
           </div>
-             {% comment %}
-            {% if product.metafields.tracks.album != blank %}
+          {% if product.metafields.tracks.album != blank %}
             <div class="tracklist">
+              <div class="san-serif">Tracklist</div>
               {% assign tracklist = product.metafields.tracks.album %}
-              <ul>
-                {% for value in tracklist %}
+                {% for myitems in tracklist %}
+                <ul class="item item--{{ i }}">
                   {% assign i = forloop.index0 %}
-                  <li class="item item--{{ i }}">
-                     {{value[1]}}
+                  <li class="item san-serif">
+                    {% assign j = i|plus:1 %}
+                    {{ j }}
                   </li>
-               {% endfor %}
-              </ul>
+                  {% for value in myitems %}
+                  <li>
+                    {{value[1]}}
+                  </li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
             </div>
-            {% endif %}
-                  {% endcomment %}
-
+          {% endif %}
         </div>
         <div class="col-2">
 

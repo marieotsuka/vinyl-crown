@@ -45,6 +45,10 @@ $xlarge: 4.5rem; /*72px*/
 $bold: 800;
 $semibold: 600;
 
+$spacing_lg: 80px;
+$spacing_md: $spacing_lg / 2;
+$spacing_sm: $spacing_lg / 4;
+
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,8 +129,8 @@ header {
         z-index: 100;
         position:fixed;
         display: inline-block;
-        top: 20px;
-        right: 20px;
+        top: $spacing_sm;
+        right: $spacing_sm;
         ul {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -173,18 +177,18 @@ header {
 }
 main {
     width: calc(100% - 80px);
-    margin: 0 auto 80px auto;
+    margin: 0 auto $spacing_lg auto;
     min-height: 90vh;
 }
 
 section {
-    margin-bottom: 80px;
+    margin-bottom: $spacing_lg;
     overflow: hidden;
 }
 
 footer {
     min-height: 10vh;
-    padding: 40px;
+    padding: $spacing_md;
     font-size: $h4;
     color: $vanilla;
     background-color: $black;
@@ -247,15 +251,15 @@ Page Agnostic Overrides
 header {
     #logo {
         position: fixed;
-        top: 40px;
-        left: 40px;
+        top: $spacing_md;
+        left: $spacing_md;
         z-index: 10;
     }
     a#cart {
         display: inline-block;
         position: fixed;
         top: 30+155px;
-        right: 20px;
+        right: $spacing_sm;
         background-color: $vanilla;
         font-size: $xsmall;
         border: solid 1px $black;
@@ -292,6 +296,9 @@ section.title {
         margin-block-start: 0;
         margin-block-end: 0;
     }
+    h4 {
+        margin-block-start: 1em;
+    }
 }
 
 button, input {
@@ -301,7 +308,7 @@ button, input {
     }
     &.option {
         min-width: 100px;
-        padding: 8px;
+        padding: 4px;
     }
 }
 
@@ -315,6 +322,16 @@ Page Specific Overrides
 
 
 .template-product {
+
+    section.title {
+        .platforms a{
+            padding: 0 12px;
+            &:first-child { /*apple*/
+                padding-right: 18px;
+            }
+        }
+    }
+
     .hero {
         text-align: center; /*for hero img alignment*/
     }
@@ -328,13 +345,25 @@ Page Specific Overrides
         border: solid 1px;
         padding: 16px 24px;
         li {
+            display: flex;
+            align-items: center;
             padding: 4px 0;
         }
     }
     .tracklist {
+        margin-top: $spacing_lg;
+        div { /*title*/
+            padding-bottom: 16px;
+        }
         ul {
             display: flex;
             flex-direction: row;
+            li {
+                width: 8%;
+            }
+            li:nth-child(2) {
+                width: 54%;
+            }
         }
     }
     #product-variants {
@@ -365,7 +394,7 @@ Page Specific Overrides
         height: 0; 
         overflow: hidden; 
         max-width: 100%;
-        margin-bottom: 40px;
+        margin-bottom: $spacing_md;
         & iframe { 
             position: absolute; 
             top: 0; 
@@ -399,6 +428,7 @@ Page Specific Overrides
     }
 }
 #music.template-collection {
+
     main {
         max-width: calc(100% - 200px);
         text-align: center;
@@ -416,7 +446,7 @@ Page Specific Overrides
         .colophon {
             position: absolute;
             display: contents;
-            padding-left: 20px;
+            padding-left: $spacing_sm;
         }
     }    
 }

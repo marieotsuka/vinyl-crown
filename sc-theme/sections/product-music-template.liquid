@@ -7,10 +7,7 @@
          {% comment %}{{ product.template_suffix }}       {% endcomment %}
 
     
-    <section class="title">
-      <h1>{{ product.title }}</h1>
-      <h4>{{product.metafields.subtitle.album}}</h4>
-    </section>
+
     <section class="hero">
       {% if product.images.size == 0 %}
       <img src="{{ '' | img_url: 'grande' }}" alt="" />
