@@ -31,7 +31,7 @@
     Shopify uses product tags to manage subcategories inside collections.
     See 'How do I create subcategories of products?' at 
     http://bit.ly/1j1Dti4 for details.
-  {% endcomment %}
+ 
 
   {% if collection.all_tags.size > 0 %}
     <ul>
@@ -51,25 +51,25 @@
       {% endfor %}  
     </ul>
   {% endif %}
-
+ {% endcomment %}
+ 
   {% if collection.description.size > 0 %}
     {{ collection.description }}
   {% endif %}
+  <section class="product-list">
+    {% for product in collection.products %}
+      <ul>
+        {% include 'product-item' %}
+      </ul>
+    {% else %}
+      <p>There are no products in this view.</p>
+    {% endfor %}
 
-  {% for product in collection.products %}
-    <ul>
-      {% include 'product-item' %}
-    </ul>
-  {% else %}
-    <p>There are no products in this view.</p>
-  {% endfor %}
-
-  {% if paginate.pages > 1 %}
-    {{ paginate | default_pagination }}
-  {% endif %}
-
-{% endpaginate %}
-
+    {% if paginate.pages > 1 %}
+      {{ paginate | default_pagination }}
+    {% endif %}
+  {% endpaginate %}
+  </section>
 {% comment %}
   JavaScript for collection sorting.
 {% endcomment %}

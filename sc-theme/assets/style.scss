@@ -244,6 +244,9 @@ time {
     font-size: $h5;
 }
 
+img {
+    width: 100%;
+}
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -377,6 +380,23 @@ Page Specific Overrides
     }    
 }
 
+#merch.template-collection {
+
+    section.product-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: $spacing_lg;
+        text-align: center;
+        a {
+            text-decoration: none;
+        }
+        h4, h5 {
+            margin-block-start: 0.325em;
+            margin-block-end: 0.325em;
+        }
+    }
+
+}
 .template-product { /* product post */
     section.title {
         .platforms a{ /* music post > platform links */
@@ -394,6 +414,9 @@ Page Specific Overrides
     }
     .hero { /* music post > hero image */
         text-align: center; 
+        img {
+            max-width: 860px;
+        }
     }
     .subdescription, .tracklist, .credit, .video-credit {
         font-size: $h4;
@@ -417,13 +440,29 @@ Page Specific Overrides
         border: none;
         padding: 0;
         margin: $spacing_md 0; 
-        li {
+        div {
             display: inline-block;
             width: fit-content;
+        }
+        label {
             border: solid 1px;
             border-radius: 3px;
             padding: 8px 24px;
             margin-right: 8px;
+            &:hover {
+                background-color: $black;
+                color: $vanilla;
+            }        
+        }
+        input[type=radio] {
+            display: none;
+        }
+        input[type=radio]:checked + label {
+            background-color: $black;
+            color: $vanilla;
+        }
+        input[type=radio]:not(:disabled) ~ label {
+            cursor: pointer;
         }
     }
     .tracklist {
@@ -521,6 +560,11 @@ Page Specific Overrides
         }
         li {
             padding-bottom: 8px;
+        }
+    }
+    .product-info {
+        h1 { /*title*/
+            margin-block-start: 0;
         }
     }
 }

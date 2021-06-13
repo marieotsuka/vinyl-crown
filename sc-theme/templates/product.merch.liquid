@@ -59,7 +59,7 @@
     
     {% endif %}
     </div>
-    <div class="description">
+    <div class="product-info">
       <h1>{{ product.title }}</h1>
       <h3>{{product.metafields.description.merch}}</h3>
       {% if product.metafields.features.merch.size > 1 %}
@@ -104,8 +104,16 @@
       {% endif %}
       
       <div id="product-variants" class="merch {% if hide_default_title %} hidden{% endif %}">
-        {% for variant in product.variants %}
-           <li>{{ variant.title }}</li>
+      {% for variant in product.variants %}
+        {% assign i = forloop.index0 %}
+        <div>
+          {% if i == 0 %}
+            <input type="radio" value="{{ variant.title }}" checked="checked">
+            {% else %}
+            <input type="radio" value="{{ variant.title }}">
+          {% endif %}
+            <label for="{{ variant.title }}">{{ variant.title }}</label>
+        </div>
         {% endfor %}
       </div>  
 

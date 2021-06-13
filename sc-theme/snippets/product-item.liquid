@@ -8,13 +8,10 @@
 
   <a href="{{ product.url | within: collection }}">
     <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
-  </a>
+    <h4>{{ product.title }}</h4>
   
-  <a href="{{ product.url | within: collection }}">
-    {{ product.title }}
-  </a>
   {% if product.price_varies %}From{% endif %}
-  {{ product.price | money }}
+    <h5 class="san-serif">{{ product.price | money }} — {{ product.variants.size }} {{product.options }} </h5> 
   {% if on_sale %}
     <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
   {% endif %}
@@ -23,5 +20,6 @@
     https://apps.shopify.com/product-reviews
   {% endcomment %}
   <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
-  
+  </a>
 </li>
+
