@@ -52,75 +52,53 @@
           {% if product.metafields.tracks.album != blank %}
           <div class="tracklist">
             <div class="san-serif">Tracklist</div>
-            <ul>
-              <li>
-                {% for value in product.metafields.track_title.album %}
-                  {% assign i = forloop.index0 %}
-                  {% assign num = i  | times: 5 | plus: 1 %}
-                  {% assign j = i  | times: 5 | plus: 2 %}
-                  <div class="item--{{ j }} san-serif" style="order:{{num}}">
-                    {{num}}
-                  </div>
-                  <div class="item--{{ j }}" style="order:{{j}}">
-                    {{value}}
-                  </div>
-                {% endfor %}
-                {% for value in product.metafields.track_duration.album %}
-                  {% assign i = forloop.index0 %}
-                  {% assign j = i  | times: 5 | plus: 3 %}
-                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
-                    {{value}}
-                  </div>
-                {% endfor %}
-                {% for value in product.metafields.track_url.album %}
-                  {% assign i = forloop.index0 %}
-                  {% assign j = i  | times: 5 | plus: 4 %}
-                    <div class="item--{{ j }} track_play" style="order:{{j}}">
-                      <a href="{{value}}" target="_blanks">
-                        <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M13 7.5L0.249999 14.8612L0.25 0.138783L13 7.5Z" fill="#200304"/>
-                        </svg>
-                      </a>
-                    </div>
-                {% endfor %}
-                {% if product.metafields.track_lyrics.album != blank %}
-                  {% for value in product.metafields.track_lyrics.album %}
+              <ul>
+                <li>
+                  {% for value in product.metafields.track_title.album %}
                     {% assign i = forloop.index0 %}
-                    {% assign j = i  | times: 5  | plus: 5 %}
-                      <div class="item--{{ j }}" style="order:{{j}}">
-                        <a><i>lyrics</i></a>
-                        <div class="lyrics-popup">
-                          {{value}}
-                        </div>
-                      </div>                   
+                    {% assign num = i  | times: 5 | plus: 1 %}
+                    {% assign j = i  | times: 5 | plus: 2 %}
+                    <div class="item--{{ j }} san-serif" style="order:{{num}}">
+                      {{num}}
+                    </div>
+                    <div class="item--{{ j }}" style="order:{{j}}">
+                      {{value}}
+                    </div>
                   {% endfor %}
-                {% endif %}
-              </li>
-            </ul>
-          </div>
-        {% endif %}
-        {% comment %}
-          {% if product.metafields.tracks.album != blank %}
-            <div class="tracklist">
-              <div class="san-serif">Tracklist</div>
-              {% assign tracklist = product.metafields.tracks.album %}
-                {% for myitems in tracklist %}
-                <ul class="item item--{{ i }}">
-                  {% assign i = forloop.index0 %}
-                  <li class="item san-serif">
-                    {% assign j = i|plus:1 %}
-                    {{ j }}
-                  </li>
-                  {% for value in myitems %}
-                  <li>
-                    {{value[1]}}
-                  </li>
+                  {% for value in product.metafields.track_duration.album %}
+                    {% assign i = forloop.index0 %}
+                    {% assign j = i  | times: 5 | plus: 3 %}
+                    <div class="item--{{ j }} san-serif" style="order:{{j}}">
+                      {{value}}
+                    </div>
                   {% endfor %}
-                </ul>
-              {% endfor %}
+                  {% for value in product.metafields.track_url.album %}
+                    {% assign i = forloop.index0 %}
+                    {% assign j = i  | times: 5 | plus: 4 %}
+                      <div class="item--{{ j }} track_play" style="order:{{j}}">
+                        <a href="{{value}}" target="_blanks">
+                          <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 7.5L0.249999 14.8612L0.25 0.138783L13 7.5Z" fill="#200304"/>
+                          </svg>
+                        </a>
+                      </div>
+                  {% endfor %}
+                  {% if product.metafields.track_lyrics.album != blank %}
+                    {% for value in product.metafields.track_lyrics.album %}
+                      {% assign i = forloop.index0 %}
+                      {% assign j = i  | times: 5  | plus: 5 %}
+                        <div class="item--{{ j }}" style="order:{{j}}">
+                          <a><i>lyrics</i></a>
+                          <div class="lyrics-popup">
+                            {{value}}
+                          </div>
+                        </div>                   
+                    {% endfor %}
+                  {% endif %}
+                </li>
+              </ul>
             </div>
           {% endif %}
-          {% endcomment %}
         </div>
         <div>
           {% if product.metafields.credit_name.album != blank %}
@@ -141,7 +119,7 @@
                 {% endfor %}
             </div>
           {% endif %}
-          {% comment %} alternative: JSON
+          {% comment %} alternative: JSON custom field
             {% if product.metafields.credits.album != blank %}
               <table class="credit">
                 <tbody>                
@@ -170,7 +148,6 @@
       {% comment %}
         All themes by Shopify should support the Product Reviews app out of the box.
         https://apps.shopify.com/product-reviews
-      
       {% endcomment %}
 
       <div id="product-add">
@@ -211,7 +188,7 @@
             </li>
           </ul>
         {% endfor %}
-        
+
         {% comment %}   
         <select id="product-select" name="id">
         {% for variant in product.variants %}
@@ -255,39 +232,25 @@
         <iframe src="{{product.metafields.url.video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
       <div class="video-credit">
-          {% if product.metafields.credit_name.video != blank %}
-            <div>Credit </div>
-            <div class="credit">
-                {% for value in product.metafields.credit_name.video %}
-                  {% assign i = forloop.index0 %}
-                  {% assign j = i  | times: 2 | plus: 1 %}
-                  <div class="item--{{ i }}" style="order:{{j}}">
-                    {{value}}
-                  </div>
-                {% endfor %}
-                {% for value in product.metafields.credit_role.video %}
-                  {% assign i = forloop.index0 %}
-                  {% assign j = i  | times: 2  | plus: 2 %}
-                  <div class="item--{{ i }}" style="order:{{j}}">
-                    {{value}}
-                  </div>
-                {% endfor %}
-            </div>
-          {% endif %}
-        {% comment %}
-          <table class="credit video-credit"><tbody>
-          {% assign credit_array = product.metafields.credits.video %}
-            {% for value in credit_array %}
-            <tr class="item item--{{ i }}">
-              {% assign i = forloop.index0 %}
-              <td>{{value[0]}}</td>
-              <td>{{value[1]}}</td>
-            </tr>
-          {% endfor %}
-         
-          </tbody>
-        </table>
-        {% endcomment %}
+        {% if product.metafields.credit_name.video != blank %}
+          <div>Credit </div>
+          <div class="credit">
+              {% for value in product.metafields.credit_name.video %}
+                {% assign i = forloop.index0 %}
+                {% assign j = i  | times: 2 | plus: 1 %}
+                <div class="item--{{ i }}" style="order:{{j}}">
+                  {{value}}
+                </div>
+              {% endfor %}
+              {% for value in product.metafields.credit_role.video %}
+                {% assign i = forloop.index0 %}
+                {% assign j = i  | times: 2  | plus: 2 %}
+                <div class="item--{{ i }}" style="order:{{j}}">
+                  {{value}}
+                </div>
+              {% endfor %}
+          </div>
+        {% endif %}
       </div>
     </section>
 
