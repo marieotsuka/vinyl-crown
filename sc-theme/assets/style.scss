@@ -362,6 +362,11 @@ Page Specific Overrides
         background-color: $green;
         border: solid 1px $vanilla;
     }
+    section[itemprop="description"] {
+        font-size: $h4;
+        grid-template-columns: 1fr 2fr;
+        column-gap: $spacing_lg;
+    }
 }
 
 #music.template-collection { /* music list page */
