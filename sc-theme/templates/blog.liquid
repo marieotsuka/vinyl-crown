@@ -1,20 +1,23 @@
 {% paginate blog.articles by 5 %}
 
-    <section class="title">
-      {% if current_tags %}
-        <h1>{{ blog.title | link_to: blog.url }} - {{ current_tags.first }}</h1>
-      {% else %}
-        <h1>{{ blog.title }}</h1>
-      {% endif %}
-    </section>
+  <section class="title">
+    {% if current_tags %}
+      <h1>{{ blog.title | link_to: blog.url }} - {{ current_tags.first }}</h1>
+    {% else %}
+      <h1>{{ blog.title }}</h1>
+    {% endif %}
+  </section>
+  <div>(featured article)</div>
 
-{% for article in blog.articles %}
+  {% for article in blog.articles %}
   
   {% comment %}
     Let's extract a blog image.
     We will look for an image in the excerpt first, and in the blog post itself second.
     We will remove the image suffix to grab as big an image as we can.
   {% endcomment %}
+
+
   <a href="{{ article.url }}">
     <figure>
       {% assign article_has_image = false %}

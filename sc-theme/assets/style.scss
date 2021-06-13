@@ -296,12 +296,6 @@ section.title {
     }
 }
 
-.col-2 {
-    width: 50%;
-    padding: 10px;
-    display: inline-block;
-    float:left;
-}
 
 
 button, input {
@@ -393,6 +387,11 @@ Page Specific Overrides
             }
         }
     }
+    section[itemprop="description"] {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: $spacing_lg;
+    }
     .hero { /* music post > hero image */
         text-align: center; 
     }
@@ -414,6 +413,19 @@ Page Specific Overrides
             }
         }
     }
+    #product-variants.merch { /* merch */
+        border: none;
+        padding: 0;
+        margin: $spacing_md 0; 
+        li {
+            display: inline-block;
+            width: fit-content;
+            border: solid 1px;
+            border-radius: 3px;
+            padding: 8px 24px;
+            margin-right: 8px;
+        }
+    }
     .tracklist {
         margin-top: $spacing_lg;
         div { /* heading */
@@ -423,13 +435,34 @@ Page Specific Overrides
            
             li {
                 list-style-type: decimal-leading-zero;  
-                 display: flex;
+                display: flex;
                 flex-direction: row;
+                padding: 0;
                 div {
                     width: 8%;
+                    margin-right: 16px;
                 }
                 div:nth-child(2) { /* title */
-                    width: 54%;
+                    width: 50%;
+                }
+                div.track_play a{
+                    display: inline-block;
+                    width: 50px;
+                    height:  50px;
+                    text-align: center;
+                    padding-top: 12px;
+                    border-top: 3px solid #fff;
+                    border-left: 3px solid #fff;
+                    border-right: 3px solid #200304;
+                    border-bottom: 3px solid #200304;
+                    border-radius: 50%;
+                    &:hover {
+                        background-color:$black;
+                        svg path {
+                            fill: $vanilla;
+                        }
+                    }
+                    
                 }
                 div.lyrics-popup {
                     display: none;
@@ -478,6 +511,16 @@ Page Specific Overrides
             left: 0; 
             width: 100%; 
             height: 100%; 
+        }
+    }
+
+    .features { /* merch post > features */
+        font-size: $h4;
+        li::before {
+            content: '— ';
+        }
+        li {
+            padding-bottom: 8px;
         }
     }
 }

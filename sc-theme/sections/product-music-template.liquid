@@ -4,15 +4,12 @@
   <meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
   
   <form action="/cart/add" method="post" enctype="multipart/form-data">
-         {% comment %}{{ product.template_suffix }}       {% endcomment %}
-
     
-
     <section class="hero">
       {% if product.images.size == 0 %}
-      <img src="{{ '' | img_url: 'grande' }}" alt="" />
+        <img src="{{ '' | img_url: 'grande' }}" alt="" />
       {% else %} 
-        {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+      {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
         <a href="{{ featured_image | img_url: '1024x1024' }}">
           <img src="{{ featured_image | img_url: 'grande' }}" alt="{{ product.title | escape }}" />
         </a>
@@ -29,10 +26,8 @@
         {% endif %}
       {% endif %}
     </section>
-         
-   
       
-      {% assign product_vendor_handle = product.vendor | handle %}
+    {% assign product_vendor_handle = product.vendor | handle %}
       {% comment %}
       Do we have a collection that has the same name as our product vendor name?
       If we do, let's have the vendor link point to it.
@@ -45,32 +40,143 @@
       {% endif %}
       <h2 itemprop="brand">{{ product.vendor | link_to: vendor_url }}</h2>
        {% endcomment %}
-      <div itemprop="description">
-        <div class="col-2">
-          {{ product.description }}
-          {{ product.metafields.colophon.album }}
-          {{ product.metafields.credit.album }}
-        </div>
-        <div class="col-2">
-          {{ product.description }}
-           {{ product.metafields.tracklist.album }} 
-        </div>
-      </div>
-      <div class="col-1 video">
-        <iframe width="100%" src="{{product.metafields.url.video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="video_credit">{{product.metafields.credits.video}}</div>
-      </div>
 
-      
-    
 
+      <section itemprop="description" id="music">
+        <div>
+          <div>
+            <p>{{product.metafields.description.album}}</p>
+            <p class="subdescription">{{product.metafields.subdescription.album}}</p>
+            <p class="san-serif">{{product.metafields.type.album}}, released {{product.metafields.year.album}}</p>
+          </div>
+          {% if product.metafields.tracks.album != blank %}
+          <div class="tracklist">
+            <div class="san-serif">Tracklist</div>
+            <ul>
+              <li>
+                {% for value in product.metafields.track_title.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign num = i  | times: 5 | plus: 1 %}
+                  {% assign j = i  | times: 5 | plus: 2 %}
+                  <div class="item--{{ j }} san-serif" style="order:{{num}}">
+                    {{num}}
+                  </div>
+                  <div class="item--{{ j }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.track_duration.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 5 | plus: 3 %}
+                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.track_url.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 5 | plus: 4 %}
+                    <div class="item--{{ j }} track_play" style="order:{{j}}">
+                      <a href="{{value}}" target="_blanks">
+                        <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M13 7.5L0.249999 14.8612L0.25 0.138783L13 7.5Z" fill="#200304"/>
+                        </svg>
+                      </a>
+                    </div>
+                {% endfor %}
+                {% if product.metafields.track_lyrics.album != blank %}
+                  {% for value in product.metafields.track_lyrics.album %}
+                    {% assign i = forloop.index0 %}
+                    {% assign j = i  | times: 5  | plus: 5 %}
+                      <div class="item--{{ j }}" style="order:{{j}}">
+                        <a><i>lyrics</i></a>
+                        <div class="lyrics-popup">
+                          {{value}}
+                        </div>
+                      </div>                   
+                  {% endfor %}
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+        {% endif %}
+        {% comment %}
+          {% if product.metafields.tracks.album != blank %}
+            <div class="tracklist">
+              <div class="san-serif">Tracklist</div>
+              {% assign tracklist = product.metafields.tracks.album %}
+                {% for myitems in tracklist %}
+                <ul class="item item--{{ i }}">
+                  {% assign i = forloop.index0 %}
+                  <li class="item san-serif">
+                    {% assign j = i|plus:1 %}
+                    {{ j }}
+                  </li>
+                  {% for value in myitems %}
+                  <li>
+                    {{value[1]}}
+                  </li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
+            </div>
+          {% endif %}
+          {% endcomment %}
+        </div>
+        <div>
+          {% if product.metafields.credit_name.album != blank %}
+            <div class="credit">
+                {% for value in product.metafields.credit_name.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 2 | plus: 1 %}
+                  <div class="item--{{ i }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.credit_role.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 2  | plus: 2 %}
+                  <div class="item--{{ i }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+            </div>
+          {% endif %}
+          {% comment %} alternative: JSON
+            {% if product.metafields.credits.album != blank %}
+              <table class="credit">
+                <tbody>                
+                {% assign credit_array = product.metafields.credits.album %}
+                  {% for value in credit_array %}
+                    {% assign i = forloop.index0 %}
+                    <tr class="item item--{{ i }}">
+                      <td>{{value[0]}}</td> 
+                      <td>{{value[1]}}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+              </table>
+          {% endif %}
+          {% endcomment %}
+      <script>
+        var obj = JSON.parse(localStorage.getItem("_myobject"));
+        obj.map(function(item) { 
+            // (really just the first key)
+            for (var key in item) 
+                return "Number: " + key + " - Time: " + item[key]; 
+        }).join(" ");
+      </script>
+     
 
       {% comment %}
         All themes by Shopify should support the Product Reviews app out of the box.
         https://apps.shopify.com/product-reviews
-      {% endcomment %}
-      <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
       
+      {% endcomment %}
+
+      <div id="product-add">
+        <input class="action" type="submit" name="add" id="add" value="Buy">
+      </div>
+      {% comment %}
       <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
         {% if product.available %}
@@ -88,20 +194,35 @@
           {% endif %}
         </p>
       </div>
-      
+       {% endcomment %}
+
       {% assign hide_default_title = false %}
       {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
         {% assign hide_default_title = true %}
       {% endif %}       
 
       <div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
+        {% for variant in product.variants %}
+          <ul>
+            <li>{{ variant.title }}</li>
+            <li class="san-serif">{{ variant.price | money }}</li>
+            <li>    
+              <input class="option" type="submit" name="add" id="add" value="Add">
+            </li>
+          </ul>
+        {% endfor %}
+        
+        {% comment %}   
         <select id="product-select" name="id">
         {% for variant in product.variants %}
+       
           <option{% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
           {{ variant.title }} - {{ variant.price | money }}
           </option>
+               
         {% endfor %}
         </select>
+        {% endcomment %}
       </div>        
              
       {% comment %}      
@@ -110,10 +231,8 @@
         </div>
       {% endcomment %}
         
-      <div id="product-add">
-        <input type="submit" name="add" id="add" value="{{ add_to_cart | escape }}">
-      </div>
-      
+
+       {% comment %}   
       {% if collection %}
         {% if collection.previous_product or collection.next_product %}
         <div>     
@@ -128,14 +247,49 @@
         </div>
         {% endif %}
       {% endif %}
+      {% endcomment %}
+     </div>
+    </section>
+    <section class="video">
+      <div class="video-container">
+        <iframe src="{{product.metafields.url.video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="video-credit">
+          {% if product.metafields.credit_name.video != blank %}
+            <div>Credit </div>
+            <div class="credit">
+                {% for value in product.metafields.credit_name.video %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 2 | plus: 1 %}
+                  <div class="item--{{ i }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.credit_role.video %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 2  | plus: 2 %}
+                  <div class="item--{{ i }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+            </div>
+          {% endif %}
+        {% comment %}
+          <table class="credit video-credit"><tbody>
+          {% assign credit_array = product.metafields.credits.video %}
+            {% for value in credit_array %}
+            <tr class="item item--{{ i }}">
+              {% assign i = forloop.index0 %}
+              <td>{{value[0]}}</td>
+              <td>{{value[1]}}</td>
+            </tr>
+          {% endfor %}
+         
+          </tbody>
+        </table>
+        {% endcomment %}
+      </div>
+    </section>
 
   </form>
-
-  <div>{{ product.metafields.links.video }}</div>
-  <div>{{ product.metafields.credit.video }}</div>
-
-  {% if product.tags.size > 0 %}
-     (related modules)
-  {% endif %}
-
 </div>
