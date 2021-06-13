@@ -30,7 +30,7 @@
       {% endif %}  
       <div>
         {{ article.title }}      
-        <h5><time pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time></h5>
+        <h5><time pubdate datetime="{{ article.published_at  | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time></h5>
       </div>
       <div>
         {{ article.featured_image }}
