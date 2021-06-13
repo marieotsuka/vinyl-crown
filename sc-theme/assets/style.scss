@@ -294,12 +294,18 @@ section.title {
     }
 }
 
-*[itemprop="description"] {
+*[itemprop="description"], 
+section[itemprop="description"] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: $spacing_lg;
+}
+
+div, section {
     & p:first-child {
         margin-block-start: 0;
     }
 }
-
 
 
 button, input {
@@ -399,13 +405,6 @@ Page Specific Overrides
 
 }
 .template-product { /* product post, music and/or merch */
-
-    section[itemprop="description"] {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: $spacing_lg;
-    }
-
 
     .subdescription, .tracklist, .credit, .video-credit {
         font-size: $h4;
