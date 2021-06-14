@@ -86,9 +86,11 @@
   <main role="main">
     {{ content_for_layout }}
   </main>
-
-   {% section 'footer' %} 
-
+  {% if template contains 'index' %}  {% comment %}}footer for homepage   {% endcomment %}
+  {% section 'footer-home' %} 
+  {% else %}
+    {% section 'footer' %} 
+   {% endif %}
   {{ 'shop.js'  | asset_url | script_tag }}
 
   {{ 'slick.js' | asset_url | script_tag }}

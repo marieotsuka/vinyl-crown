@@ -464,6 +464,19 @@ Page Specific Overrides
     #cart {
         display: none;
     }
+    footer {
+        position: fixed;
+        bottom:0;
+        min-height: 0;
+        background-color: transparent;
+        ul {
+            display: block;
+            position: fixed;
+            width:auto;
+            bottom: $spacing_sm;
+            right: $spacing_md;
+        }
+    }
 }
 
 .template-page { /* about page */
