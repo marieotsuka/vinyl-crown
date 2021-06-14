@@ -11,43 +11,18 @@
   {% for article in blog.articles %}
   {% assign i = forloop.index0 %}
 
-  {% comment %}
-    Let's extract a blog image.
-    We will look for an image in the excerpt first, and in the blog post itself second.
-    We will remove the image suffix to grab as big an image as we can.
-  {% endcomment %}
-
-  <a href="{{ article.url }}" class="figure item--{{i}}">
-    <figure>
-      {% assign article_has_image = false %}
-      {% assign img_tag = '<' | append: 'img' %}
-      {% if article.excerpt_or_content contains img_tag %}
-        {% assign src = article.excerpt_or_content | split: 'src="' %}
-        {% assign src = src[1] | split: '"' | first %}
-        {% if src %}
-          {% assign article_has_image = true %}
-          {% assign image_src = src | replace: '_small', '' | replace: '_compact', '' | replace: '_medium', '' | replace: '_large', '' | replace: '_grande', '' %}
+    {% if article.content contains "https://"  %}  
+        {% if article.content contains "href"  %}
+          {% include 'article-news-item' %} 
+        {% else %}
+          {% include 'article-press-item' %} 
         {% endif %}
-      {% endif %}  
-      <div>
-        {{ article.title }}      
-        <h5><time pubdate datetime="{{ article.published_at  | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time></h5>
-      </div>
-      <div>
-        {% if article.image.size > 0 %}
-          {% if i == 0 %}
-          <img src="{{ article.image.src | img_url: 'master' }}">   {% comment %} featured, uncompressed img {% endcomment %}
+      {% else %}
+        {% include 'article-news-item' %} 
+    {% endif %}
 
-          {% else %}
-         <img src="{{ article.image.src | img_url: 'medium' }}">  
-         {% endif %}
-    
-        {% endif %}  
-      </div>
-    </figure>
-  </a>
-{% endfor %}
-  
+  {% endfor %}
+
 {% if paginate.pages > 1 %}
   {% comment %}
     When paginating blog articles, a previous article is actually a newer article, not an older one,

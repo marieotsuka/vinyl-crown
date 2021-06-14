@@ -1,0 +1,10 @@
+<a href=" {{ article.content}} " class="figure item--{{i}} press" target="blank">
+<figure>
+  <div>
+    <i>{{ article.title }}↗</i>     
+    <h5>
+        <time pubdate datetime="{{ article.published_at  | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>&nbsp; | &nbsp;{{ article.excerpt }}
+    </h5>
+  </div>
+</figure>
+</a>
