@@ -191,6 +191,36 @@ footer {
     line-height: $h4*1.4;
     color: $vanilla;
     background-color: $black;
+    div { /*newsletter*/
+        text-align: center;
+        padding-bottom: $spacing_md;
+    }
+    ul {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        li:nth-child(2) {
+            text-align: center;
+        }
+        li:nth-child(3) {
+            text-align: right;
+        }
+        a {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 0 12px;
+            text-decoration: none;
+            &:nth-child(1) { /* apple */
+                padding-right: 18px;
+            }
+            img { /*vc logo*/
+                width: 280px;
+            }
+        }
+        svg path {
+            fill: $vanilla;
+        }
+    }
 }
 
 
