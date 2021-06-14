@@ -22,25 +22,32 @@
     <h1>{{ blog.title }}</h1>
   </section>
   
-  <h2>{{ article.title }}</h2>
-  <time pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
+  <section>
+    <h2 class="article-title">{{ article.title }}</h2>
+    <time pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
 
-  {{ article.content }}
+    <h2>{{ article.excerpt}} </h2>
+    <div>
+      {% if article.image.size > 0 %}
+        <img src="{{ article.image.src | img_url: 'master' }}"> 
+      {% endif %}  
+    </div>
+    <div>
+    {{ article.content }}
+    </div>
+  </section>
+  <section>     {% comment %} tags / related modules {% endcomment %}
+    {% if article.tags.size > 0 %}
+      {% comment %} 
+        {% for tag in article.tags %} 
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      {% endcomment %}
+      (related modules)
+    {% endif %}
+</section>
 
-  {% comment %} tags / related modules {% endcomment %}
-
-  {% if article.tags.size > 0 %}
-    {% comment %} 
-      {% for tag in article.tags %} 
-        <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
-      {% endfor %}
-    {% endcomment %}
-
-   (related modules)
-{% endif %}
-
-
-  {% comment %} page nav {% endcomment %}
+  {% comment %} page nav 
 
   {% if blog.next_article or blog.previous_article %}
     {% if blog.next_article %}
@@ -50,5 +57,5 @@
       {{ 'Previous Post' | link_to: blog.previous_article }}
     {% endif %}
   {% endif %}
-
+{% endcomment %}
 {% endpaginate %}

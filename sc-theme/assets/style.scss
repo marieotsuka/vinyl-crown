@@ -71,7 +71,7 @@ body {
     color: $black;
     font-size: $body;
     font-weight: $regular;
-    line-height: $body * 1.2;
+    line-height: $body * 1.35;
     background-color: $vanilla;
     margin: 0;
     padding: 0;
@@ -160,10 +160,10 @@ header {
                 text-align: center;
                 vertical-align: center;
                 border-radius: 3px;
-                &.active, &:hover { 
-                    background-color: $black;
-                    color: $vanilla;
-                }
+            }
+            &.active a, a:hover {
+                background-color: $black;
+                color: $vanilla;
             }
             &:first-child { /*home button*/
                 display: none;
@@ -480,10 +480,10 @@ Page Specific Overrides
             border-left: 3px solid $green-light;
             border-right: 3px solid $vanilla;
             border-bottom: 3px solid $vanilla;
-            &:hover {
-                color: $green;   
-                background-color: $vanilla;
-            }
+        }
+        li a:hover, li.active a {
+            color: $green;   
+            background-color: $vanilla;
         }
     }
     #cart {
@@ -557,7 +557,7 @@ Page Specific Overrides
     }
     .tracklist, #product-variants {
         border: solid 1px;
-        padding: 16px 24px;
+        padding: 8px 24px;
         li {
             display: flex;
             align-items: center;
@@ -617,19 +617,23 @@ Page Specific Overrides
     }
     .tracklist {
         margin-top: $spacing_lg;
-        div { /* heading */
-            padding-bottom: 16px;
+        div:not(div.track_play) { 
+            padding-top:12px;
         }
         ul {
-           
             li {
                 list-style-type: decimal-leading-zero;  
                 display: flex;
                 flex-direction: row;
                 padding: 0;
+                align-items: baseline;
+
                 div {
                     width: 8%;
                     margin-right: 16px;
+                }
+                div.track_play {
+                    margin-right: 32px;
                 }
                 div:nth-child(2) { /* title */
                     width: 50%;
@@ -662,11 +666,14 @@ Page Specific Overrides
     }
     .credit {
         display: grid;  
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 2fr;
     }
     .video-credit {
         display: grid;  
         grid-template-columns: 1fr 2fr 2fr;
+        .credit {
+            grid-template-columns: 1fr 1fr;
+        }
     }
     #product-variants {
         font-size: $h4;
@@ -676,11 +683,12 @@ Page Specific Overrides
             display: flex;
             flex-direction: row;
             li {
+                width: 30%;
                 &:first-child {
                     width: 40%;
                 }
-                &:nth-child(2) {
-                    width: 20%;
+                &:last-child { /*cta*/
+
                 }
             }
         }
@@ -711,7 +719,7 @@ Page Specific Overrides
 
    
     .product-info { /* merch post*/
-        width: 85%; 
+        width: 80%; 
         h1 { /*title*/
             margin-block-start: 0;
         }
@@ -739,6 +747,9 @@ Page Specific Overrides
     main {
         max-width: 66.66%;
         margin: 0 auto;
+        h2.article-title{
+            margin-block-end: 0.26em;
+        }
         h1:not(.title h1) {
             font-size: $h2 * 0.85;
             line-height: $h2 * 0.85 * 1.2;
