@@ -1,20 +1,34 @@
 <section class="see-more">
     {% if product.tags.size > 0 %}
-       (product-recommendations)
   
-       
         {% for tag in product.tags %}
-          {% assign tag_coll = '/collections/all/' | append: tag %}
-          {{ tag | capitalize | link_to: tag_coll }}{% unless forloop.last %},{% endunless %}
-          {% for article in blog.articles %}
-           
-            {% if article.tags contains tag %}
-                {{ article.title }}
-            {% endif %}
-          {% endfor %}
+            {% assign tag_coll = '/collections/all/' | append: tag %}
+
+            {% for product in collections.merch.products %}
+              {% if product.tags contains tag %}
+                  {% include 'product-item' %}
+              {% endif %}
+            {% endfor %}
+
+            {% for article in blogs.news.articles %}
+              {% if article.tags contains tag %}
+
+                    {% if article.content contains "https://"  %}  
+                        {% if article.content contains "href"  %}
+                          {% include 'article-news-item' %} 
+                        {% else %}
+                          {% include 'article-press-item' %} 
+                        {% endif %}
+                      {% else %}
+                        {% include 'article-news-item' %} 
+                    {% endif %}
+
+              {% endif %}
+            {% endfor %}
+     
+
         {% endfor %}
-  
-   
+        
               {%comment%}
               {% if product.tags.size > 0 %}
               <div class="product-single__tags">
@@ -29,5 +43,9 @@
             {% endif %}
             {% endcomment%}
   {% endif %}
-  </section>
-  </section>
+  
+
+    </section>
+
+
+ 

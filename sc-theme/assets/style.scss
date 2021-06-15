@@ -450,6 +450,19 @@ a.item.press { /* item modules: press */
     }
 }
 
+a.item.product { /* item modules: product */
+    figure {
+        min-height: 100%;
+        div.thumbnail {
+            height: auto;
+            img { 
+                position: relative;
+            }
+        }
+    }
+
+}
+
 section.featured {
     margin-bottom: 0;
     a.item { /*featured news*/

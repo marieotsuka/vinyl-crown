@@ -60,7 +60,30 @@
   <section class="product-list">
     {% for product in collection.products %}
       <ul>
-        {% include 'product-item' %}
+        {% comment %}product on sale{% endcomment %}
+        {% assign on_sale = false %}
+        {% if product.compare_at_price > product.price %}
+          {% assign on_sale = true %}
+        {% endif %}
+
+        <li class="{% unless product.available %} sold-out{% endunless %}{% if on_sale %} on-sale{% endif %}">
+
+          <a href="{{ product.url | within: collection }}">
+            <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
+            <h4>{{ product.title }}</h4>
+          
+          {% if product.price_varies %}From{% endif %}
+            <h5 class="san-serif">{{ product.price | money }} — {{ product.variants.size }} {{product.options }} </h5> 
+          {% if on_sale %}
+            <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
+          {% endif %}
+          {% comment %}
+            All themes by Shopify should support the Product Reviews app out of the box.
+            https://apps.shopify.com/product-reviews
+          {% endcomment %}
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+          </a>
+        </li>
       </ul>
     {% else %}
       <p>There are no products in this view.</p>

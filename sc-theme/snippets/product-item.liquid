@@ -1,25 +1,33 @@
-{% comment %}Is this product on sale?{% endcomment %}
-{% assign on_sale = false %}
-{% if product.compare_at_price > product.price %}
-  {% assign on_sale = true %}
-{% endif %}
+{% comment %} product item snippet for see also {% endcomment %}
 
-<li class="{% unless product.available %} sold-out{% endunless %}{% if on_sale %} on-sale{% endif %}">
+<a href=" {{ product.url }} " class="item product item--{{i}}">
+  <figure class="{% if product.featured_image == blank %}no-image{% endif %}">
+    {% assign product_has_image = false %}
+    {% assign img_tag = '<' | append: 'img' %}
+    
+    {% if product.excerpt_or_content contains img_tag %}
+      {% assign src = product.excerpt_or_content | split: 'src="' %}
+      {% assign src = src[1] | split: '"' | first %}
+      {% if src %}
+        {% assign product_has_image = true %}
+        {% assign image_src = src | replace: '_small', '' | replace: '_compact', '' | replace: '_medium', '' | replace: '_large', '' | replace: '_grande', '' %}
+      {% endif %}
+    {% endif %}  
+    
+    <div class="text">
+      {{ product.title }}      
+      {% if product.price_varies %}From{% endif %}
+      <h5 class="san-serif">{{ product.price | money }} — {{ product.variants.size }} {{product.options }} </h5> 
+      {% if on_sale %}
+        <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
+      {% endif %}
+    </div> 
 
-  <a href="{{ product.url | within: collection }}">
-    <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
-    <h4>{{ product.title }}</h4>
-  
-  {% if product.price_varies %}From{% endif %}
-    <h5 class="san-serif">{{ product.price | money }} — {{ product.variants.size }} {{product.options }} </h5> 
-  {% if on_sale %}
-    <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
-  {% endif %}
-  {% comment %}
-    All themes by Shopify should support the Product Reviews app out of the box.
-    https://apps.shopify.com/product-reviews
-  {% endcomment %}
-  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
-  </a>
-</li>
-
+    {% if product.featured_image.size > 0 %}
+      <div class="thumbnail">
+          <img src="{{ product.featured_image.src | img_url: 'medium' }}">  
+      </div>
+    {% endif %} 
+    
+ </figure>
+</a>
