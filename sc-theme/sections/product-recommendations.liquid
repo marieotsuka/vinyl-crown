@@ -1,12 +1,24 @@
 <section class="see-more">
+  {% assign thisproduct = product.title %}
+
     {% if product.tags.size > 0 %}
-  
+
         {% for tag in product.tags %}
             {% assign tag_coll = '/collections/all/' | append: tag %}
 
+          {% for product in collections.music.products %}
+            {% if product.tags contains tag %}
+              {% if product.title <> thisproduct %} {%comment%} except one in the current page {%endcomment%}
+                {% include 'product-item' %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
             {% for product in collections.merch.products %}
               {% if product.tags contains tag %}
+                {% if product.title <> thisproduct %} {%comment%} except one in the current page {%endcomment%}
                   {% include 'product-item' %}
+                {% endif %}
               {% endif %}
             {% endfor %}
 
