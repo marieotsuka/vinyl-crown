@@ -8,28 +8,45 @@
     {% endif %}
   </section>
 
+  {% comment %} featured news {% endcomment %}
   {% for article in blog.articles %}
-  {% assign i = forloop.index0 %}
-
-    {% if article.content contains "https://"  %}  
-        {% if article.content contains "href"  %}
-          {% include 'article-news-item' %} 
-        {% else %}
-          {% include 'article-press-item' %} 
-        {% endif %}
-      {% else %}
+    {% if article.tags contains 'featured' %}
+      <section class="featured">
         {% include 'article-news-item' %} 
+      </section>
     {% endif %}
-
   {% endfor %}
 
-{% if paginate.pages > 1 %}
-  {% comment %}
-    When paginating blog articles, a previous article is actually a newer article, not an older one,
-    because blog articles are shown and paginated in a reversed chronological order.
-    The word 'previous' can be confusing, hence we'll change it.
-  {% endcomment %}
-  {{ paginate | default_pagination | replace: 'Previous', 'Newer articles' | replace: 'Next', 'Older articles' }}
-{% endif %}
+   {% comment %} featured news {% endcomment %}
+    <section class="blog-list">
+      {% for article in blog.articles %}
+        {% assign i = forloop.index0 %}
 
-{% endpaginate %}
+        {% unless article.tags contains 'featured' %}
+          {% if article.content contains "https://"  %}  
+              {% if article.content contains "href"  %}
+                {% include 'article-news-item' %} 
+              {% else %}
+                {% include 'article-press-item' %} 
+              {% endif %}
+            {% else %}
+              {% include 'article-news-item' %} 
+          {% endif %}
+        {% endunless %}
+
+      {% endfor %}
+    </section>
+
+  {% if paginate.pages > 1 %}
+    <section class="pagination">
+        {% comment %}
+          When paginating blog articles, a previous article is actually a newer article, not an older one,
+          because blog articles are shown and paginated in a reversed chronological order.
+          The word 'previous' can be confusing, hence we'll change it.
+        {% endcomment %}
+        {{ paginate | default_pagination: next: 'Previous', previous: 'Next'}}
+    </section>
+  {% endif %}
+
+  {% endpaginate %}
+

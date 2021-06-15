@@ -1,28 +1,32 @@
-<a href=" {{ article.url }} " class="figure item--{{i}} ">
-      <figure>
-        {% assign article_has_image = false %}
-        {% assign img_tag = '<' | append: 'img' %}
-        {% if article.excerpt_or_content contains img_tag %}
-          {% assign src = article.excerpt_or_content | split: 'src="' %}
-          {% assign src = src[1] | split: '"' | first %}
-          {% if src %}
-            {% assign article_has_image = true %}
-            {% assign image_src = src | replace: '_small', '' | replace: '_compact', '' | replace: '_medium', '' | replace: '_large', '' | replace: '_grande', '' %}
-          {% endif %}
-        {% endif %}  
-        <div>
+<a href=" {{ article.url }} " class="item news item--{{i}}">
+    <figure class="{% if article.image == blank %}no-image{% endif %}">
+      {% assign article_has_image = false %}
+      {% assign img_tag = '<' | append: 'img' %}
+      
+      {% if article.excerpt_or_content contains img_tag %}
+        {% assign src = article.excerpt_or_content | split: 'src="' %}
+        {% assign src = src[1] | split: '"' | first %}
+        {% if src %}
+          {% assign article_has_image = true %}
+          {% assign image_src = src | replace: '_small', '' | replace: '_compact', '' | replace: '_medium', '' | replace: '_large', '' | replace: '_grande', '' %}
+        {% endif %}
+      {% endif %}  
+      
+      <div class="text">
           {{ article.title }}      
           <h5><time pubdate datetime="{{ article.published_at  | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time></h5>
-        </div>
-          {% if article.image.size > 0 %}
-            <div>
-              {% if i == 0 %}
-              <img src="{{ article.image.src | img_url: 'master' }}">   {% comment %} featured, uncompressed img {% endcomment %}
+      </div> 
 
-              {% else %}
+      {% if article.image.size > 0 %}
+        <div class="thumbnail">
+          {% if article.tags contains 'featured' %}
+            <img src="{{ article.image.src | img_url: 'master' }}">   {% comment %} featured, uncompressed img {% endcomment %}
+          {% else %}
             <img src="{{ article.image.src | img_url: 'medium' }}">  
-            {% endif %}
-            </div>
-          {% endif %}  
+          {% endif %}
+        </div>
+      {% endif %} 
    </figure>
  </a>
+
+
