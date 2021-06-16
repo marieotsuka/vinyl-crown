@@ -11,9 +11,15 @@
   </section>
 
   <ul>
-    {% for product in collection.products %}
-        <li>
-          <a href="{{ product.url | within: collection }}">
+    {% for product in collections.music.products %}
+    {% assign i = forloop.index0 %}
+    <style>
+      .item__{{i}} a:hover{
+          color: {{product.metafields.keycolor.music}};
+      }
+     </style>
+        <li class="item__{{i}}">
+          <a href="{{ product.url | within: collection }}" style="color: ">
             {{ product.title }} <span class="colophon san-serif">{{product.metafields.type.album}}, {{product.metafields.year.album}}</span>
             <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
           </a>
@@ -28,3 +34,25 @@
 
 {% endpaginate %}
 
+
+<script>
+
+  jQuery('main li a').hover(
+      function(e){
+          var $this = $(this).find('img');
+          var $left = $(this).offset().left + $(this).width() - 200;
+          var $top = $(this).offset().top - 50;
+          var $img_margin = $left + 400;
+          if ($(window).width() < $img_margin){
+            $left = $(this).offset().left + $(this).width() - 400;
+          }
+          $this.css({
+              'left': $left +'px' ,
+              'top': $top+'px'
+          });
+      },
+      function(e){
+        // $this.css({});
+      }
+  );
+</script>

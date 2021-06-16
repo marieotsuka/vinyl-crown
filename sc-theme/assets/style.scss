@@ -581,10 +581,18 @@ Page Specific Overrides
             padding-bottom: 48px;
             a {
                 text-decoration: none;
+                img {
+                    display: none;
+                    width: 400px;
+                    position: absolute;
+                }
+                &:hover {
+                    img {
+                        display: block;
+                    }
+                }
             }
-            img {
-                display: none;
-            }
+
         }
         .colophon {
             position: absolute;
@@ -832,7 +840,6 @@ Page Specific Overrides
         height: $space_heading_sm;
     }
     main {
-      
         h2.article-title{
             margin-block-end: 0.26em;
         }
@@ -840,13 +847,15 @@ Page Specific Overrides
             font-size: $h2 * 0.85;
             line-height: $h2 * 0.85 * 1.2;
         }
-        time {
-            font-size: $h4;
-        }
         section.content {
             max-width: 66.66%;
             margin: 0 auto $spacing_lg auto;
-            a {text-decoration: underline;}
+            a {
+                text-decoration: underline;
+            }
+            time {
+                font-size: $h4;
+            }
         }
     }
 }
