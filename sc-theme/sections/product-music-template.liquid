@@ -164,7 +164,7 @@
 
         <input class="action" type="submit" name="add" id="add" value="Buy">
       {% endcomment %}
-      
+
       <div id="product-add">
         {% if product.available %}
           <button class="action" type="submit" name="add" id="add" value="Buy">Buy</button>
@@ -204,7 +204,28 @@
             <li>{{ variant.title }}</li>
             <li class="san-serif">{{ variant.price | money }}</li>
             <li>    
-              <input class="option" type="submit" name="add" id="add" value="Add">
+              {% if variant.available %}
+                <button class="option" type="submit" name="add" id="add" value="Add"
+                  {% unless variant.available %} aria-disabled="true"{% endunless %}
+                  aria-label="{% unless variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
+                  class="btn product-form__cart-submit{% if section.settings.enable_payment_button and product.selling_plan_groups == empty %} btn--secondary-accent{% endif %}"
+                  {% if settings.enable_ajax %}aria-haspopup="dialog"{% endif %}
+                  data-add-to-cart>
+                    <span data-add-to-cart-text>
+                      Add
+                    </span>
+                </button>
+              
+              
+                
+              
+              
+              
+              
+              
+              {% else %}
+                <button class="option" type="submit" name="add" id="add" value="" disabled>Out of Stock</button>
+              {% endif %} 
             </li>
           </ul>
         {% endfor %}

@@ -82,6 +82,11 @@
               — {{ product.variants.size }} {{ product.options }} 
               {% endif %}
             </h5>
+            {% if product.available %}
+             {% else %}
+            <h5 class="san-serif"> <i>Out of Stock </i></h5>
+            {% endif %}
+            
           {% if on_sale %}
             <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
           {% endif %}

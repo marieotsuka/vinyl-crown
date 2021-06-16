@@ -2,7 +2,7 @@
 <section class="title">
   <h1>Cart</h1>
 </section>
-<section class="content">
+<section class="cart-table">
 
 {% if cart.item_count > 0 %}
 
@@ -13,8 +13,8 @@
         <tr>
           <th>Item</th>
           <th>&nbsp;</th>
-          <th>Price</th>
           <th>Quantity</th>
+          <th>Price</th>
           <th>Total</th>
           <th>&nbsp;</th>
         </tr>
@@ -43,14 +43,10 @@
             </a>
           </td>
           <td>
-            <h2>
-              <a href="{{ collection_url }}{{ item.url }}">
-                {{ item.title }}
-              </a>
-            </h2>
-            {% comment %}
-            Line Item Properties
-            {% endcomment %}
+            <a href="{{ collection_url }}{{ item.url }}">
+              {{ item.title }}
+            </a>
+            
             {% assign properties_amount = item.properties | size %}
             {% if properties_amount > 0 %}
               {% for p in item.properties %}
@@ -64,16 +60,23 @@
                 {% endunless %}
               {% endfor %}
             {% endif %}
-            <h3>{{ item.vendor }}</h3>
           </td>
-          <td>{{ item.price | money }}</td>
           <td>
-            <input type="number" name="updates[]" id="updates_{{ item.id }}" class="quantity" value="{{ item.quantity }}" />
+            <ul>
+              <li>
+                <input type="number" name="updates[]" id="updates_{{ item.id }}" class="quantity" value="{{ item.quantity }}" />
+               </li>
+              <li>
+                <h5>
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0">Remove</a>
+                  <input class="update" type="submit" name="update" value="Update cart" /></h5>
+              </li>
+            </ul>
+          </td>
+          <td>
+            {{ item.price | money }}
           </td>
           <td>{{ item.line_price | money }}</td>
-          <td>
-            <a href="/cart/change?line={{ forloop.index }}&quantity=0">Remove</a>
-          </td>
         </tr>
       {% endfor %}
       
@@ -86,22 +89,25 @@
     a name attribute set to 'checkout' and 'update', respectively. That's case-sensitive.
     {% endcomment %}
     
-    <h3>Subtotal <em>{{ cart.total_price | money }}</em></h3>
-    <a href="{{ continue_shopping_url }}">Continue shopping</a>
-    <input type="submit" name="update" value="Update cart" />
-    <input type="submit" name="checkout" value="Check out" />    
-    {% comment %}Paypal and Google checkout buttons{% endcomment %}
-    {% if additional_checkout_buttons %}
+    <div class="subtotal"><span >Subtotal</span> {{ cart.total_price | money }}</div>
+    <div class="checkout">
+      <a href="{{ continue_shopping_url }}"><button class="action">Continue shopping</button></a>
+      <button class="action" type="submit" name="checkout" value="Check out" />Check out</button>   
+      {% if additional_checkout_buttons %}
       {{ content_for_additional_checkout_buttons }}
     {% endif %}
     
-    {% comment %}
-    For the special instructions to be submitted with order,
-    we need to use a name attribute set to 'note'.
-    {% endcomment %}
-    <p>Special instructions for seller</p>
-    <textarea name="note">{{ cart.note }}</textarea>
-
+    </div>
+      {% comment %}Paypal and Google checkout buttons{% endcomment %}
+    <div class="others">
+      
+      {% comment %}
+      For the special instructions to be submitted with order,
+      we need to use a name attribute set to 'note'.
+      {% endcomment %}
+      <h4>Special instructions for seller</h4>
+      <textarea name="note">{{ cart.note }}</textarea>
+    </div>
   </form>
 
   {% else %}

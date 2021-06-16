@@ -181,6 +181,7 @@ main {
     width: calc(100% - 80px);
     margin: 0 auto $spacing_lg auto;
     min-height: 90vh;
+    max-width: 1400px;
 }
 
 section {
@@ -247,22 +248,32 @@ li {
     list-style-type: none;
 }
 
-// table { /* default: product > credits. *update: using `display:grid` instead for now */ 
-//     border-spacing: 0px;
-//     td {
-//         padding: 0;
-//         padding-right: 16px;
-//     }
-// }
+table { /* default: cart */ 
+    border-spacing: 0px;
+    text-align: left;
+    th {
+        font-size: $h4;
+        font-weight: $semibold;
+        padding-bottom: 8px;
+    }
+    tr {vertical-align: top;}
+    td {
+        padding: 8px $spacing_md 8px 0;
 
-button, input {
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+}
+
+button {
     font-family: $font-primary;
     font-size: $h4;
     line-height: $h4*1.4;
     color: $black;
     font-weight: $semibold;
     text-align: center;
-    padding: 12px;
+    padding: 4px;
     background-color: initial;
     border-top: 3px solid white;
     border-left: 3px solid white;
@@ -275,16 +286,27 @@ button, input {
         color: $vanilla;
         background-color: $black;
     }
+
+    &:disabled,
+    &[disabled]{
+        cursor: default;
+        opacity: .5;
+        &:hover {
+            color: inherit;
+            background-color: inherit;
+        }
+    }
     
 }
 
-button:disabled,
-button[disabled]{
-    opacity: .5;
-    &:hover {
-        color: inherit;
-        background-color: inherit;
-    }
+
+
+input {
+    font-family: $font-primary;
+    background-color: initial;
+    border: solid 1px;
+    border-radius: 3px;
+    padding: 16px;
 }
 
 
@@ -372,10 +394,11 @@ button, input {
     &.action {
         min-width: 200px;
         margin: 0 0 0px 0;
+        padding: 8px;
     }
     &.option {
-        min-width: 100px;
-        padding: 4px;
+       font-size: $h5;
+       line-height: $h5*1.4;
     }
 }
 
@@ -675,6 +698,7 @@ Page Specific Overrides
 }
 .template-product { /* product post, music and/or merch */
 
+
     .subdescription, .tracklist, .credit, .video-credit {
         font-size: $h4;
         line-height: $h4*1.4;
@@ -697,6 +721,8 @@ Page Specific Overrides
     #product-variants {
         font-size: $h4;
         line-height: $h4*1.4;
+        padding: 8px 12px 8px 24px;
+
     }
 
 }
@@ -807,12 +833,16 @@ Page Specific Overrides
             display: flex;
             flex-direction: row;
             li {
-                width: 30%;
-                &:first-child {
-                    width: 40%;
+                width: 40%;
+                &:nth-child(2) { /*price */
+                    width: 20%;
                 }
-                &:last-child { /*cta*/
-
+                &:nth-child(3) { /*btn */
+                    display: flex;
+                    flex-direction: row-reverse;
+                   button {
+                       min-width: 128px;
+                   }
                 }
             }
         }
@@ -849,6 +879,20 @@ Page Specific Overrides
         }
         input[type=radio]:not(:disabled) ~ label {
             cursor: pointer;
+        }
+        
+        &.out-of-stock {
+            opacity: .5;
+            input {
+                pointer-events: none;
+            }
+            input[type=radio]:not(:disabled) ~ label {
+                cursor:default; 
+            }
+           label:hover {
+                    background-color: inherit;
+                    color:inherit;
+            }
         }
     }
     // .merch-slides {
@@ -911,6 +955,66 @@ Page Specific Overrides
         }
     }
 }
+
+
+
+#your-shopping-cart {
+    section.cart-table {
+        margin: 0 auto;
+        max-width: 66.66%;
+        min-width: 900px;
+        input {
+            width: 100px;
+            font-size: $h4;
+            text-align: right;
+        }
+        button.update {
+            font-size:inherit;
+            border:none;
+            padding: 0;
+            display: inline-block;
+        }
+        h5 {
+            font-weight: $semibold;
+            input {
+                font-size: inherit;
+                font-weight: inherit;
+                padding: 4px 0;
+                text-align: left;
+                border: none;
+                text-decoration: underline;
+            }
+        }
+    }
+    .subtotal, .checkout {
+        text-align: right;
+        padding: $spacing_sm 0;
+    }
+    .subtotal {
+        border-top: 1px solid;
+        padding: $spacing_md 0;
+        span {
+            font-size: $h4;
+            display: inline-block;
+            padding-right: 24px;
+            font-weight: $semibold;
+        }
+       
+    }
+    textarea[name="note"] {
+        width: 100%;
+        background-color: inherit;
+    }
+    
+
+}
+
+
+
+
+
+
+
 
 
 /* Slider css from Slick.js */
@@ -1299,3 +1403,9 @@ $slide_width: 580px;
     // opacity: .75;
     // color: black;
 }
+
+
+
+
+
+

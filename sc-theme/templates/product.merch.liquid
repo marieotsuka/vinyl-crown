@@ -72,19 +72,23 @@
         {% assign hide_default_title = true %}
       {% endif %}
       
-      <div id="product-variants" class="merch {% if hide_default_title %} hidden{% endif %}">
-      {% for variant in product.variants %}
-        {% assign i = forloop.index0 %}
-        <div>
-          {% if i == 0 %}
-            <input type="radio" value="{{ variant.title }}" checked="checked">
-            {% else %}
-            <input type="radio" value="{{ variant.title }}">
-          {% endif %}
-            <label for="{{ variant.title }}">{{ variant.title }}</label>
-        </div>
-        {% endfor %}
-      </div>  
+      {% if product.available %}
+        <div id="product-variants" class="merch {% if hide_default_title %} hidden{% endif %}">
+      {% else %}
+        <div id="product-variants" class="out-of-stock merch {% if hide_default_title %} hidden{% endif %}">
+      {% endif %}
+          {% for variant in product.variants %}
+          {% assign i = forloop.index0 %}
+          <div>
+            {% if i == 0 %}
+              <input type="radio" value="{{ variant.title }}" checked="checked">
+              {% else %}
+              <input type="radio" value="{{ variant.title }}">
+            {% endif %}
+              <label for="{{ variant.title }}">{{ variant.title }}</label>
+          </div>
+          {% endfor %}
+        </div>  
 
       {% comment %} 
       <div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
