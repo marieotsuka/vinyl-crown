@@ -24,7 +24,7 @@
   {% include 'twitter-card' %}
 
   {{ content_for_header }}
-
+  {{ 'mixins.scss.css' | asset_url | stylesheet_tag }}
   {{ 'style.scss.css' | asset_url | stylesheet_tag }}
 
   <!--[if lt IE 9]>

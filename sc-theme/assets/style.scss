@@ -23,7 +23,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-// @import "mixins"; later for responsive shortcut
 
 $vanilla: #FFEBC6;
 $black: #200304;
@@ -52,12 +51,17 @@ $spacing_md: $spacing_lg / 2;
 $spacing_sm: $spacing_lg / 4;
 
 $thumbnail: 132px; /* news thumbnail */
+$thumbnail_mobile: $thumbnail * 0.8;
 
 $space_heading: 158px;
 $space_heading_sm: 114px;
+$space_heading_xs: 44px;
 
 $transition: 0.25s;
 
+$mobile:  "(max-width: 414px)";
+$tablet: "(min-width: 768px) and (max-width: 1024px)";
+$desktop: "(min-width: 1025px)";
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,6 +82,14 @@ body {
     background-color: $vanilla;
     margin: 0;
     padding: 0;
+    @media #{$tablet} {
+        font-size: $h4;
+        line-height: $h4 * 1.4;
+    }
+    @media #{$mobile} {
+        font-size: $h4;
+        line-height: $h4 * 1.4;
+    }
 }
 
 a {
@@ -93,24 +105,56 @@ h1 { /* default: page title */
     font-weight: $regular;
     font-style: italic;
     line-height: $h1 * 1.2;
+    @media #{$tablet} {
+        font-size: $h2;
+        line-height: $h2 * 1.2;
+    }
+    @media #{$mobile} {
+        font-size: $h2;
+        line-height: $h2 * 1.2;
+    }
 }
 
 h2 {
     font-size: $h2;
     font-weight: $regular;
     line-height: $h2 * 1.2;
+    @media #{$tablet} {
+        font-size: $body;
+        line-height: $body * 1.35;
+    }
+    @media #{$mobile} {
+        font-size: $body;
+        line-height: $body * 1.35;
+    }
 }
 
 h3 {
     font-size: $h3;
     font-weight: $regular;
     line-height: $h3 * 1.2;
+    @media #{$tablet} {
+        font-size: $body;
+        line-height: $body * 1.35;
+    }
+    @media #{$mobile} {
+        font-size: $body;
+        line-height: $body * 1.35;
+    }
 }
 
 h4 {
     font-size: $h4;
     font-weight: $regular;
     line-height: $h4 * 1.4;
+    @media #{$tablet} {
+        font-size: $h5;
+        line-height: $h5 * 1.4;
+    }
+    @media #{$mobile} {
+        font-size: $h5;
+        line-height: $h5 * 1.4;
+    }
 }
 
 h5 {
@@ -124,6 +168,10 @@ h5 {
     font-family: $font-secondary;
     font-size: $h5;
     line-height: $h5 * 1.4;
+    @media #{$mobile} {
+        font-size: $h5 * 0.8;
+        line-height: $h5 * 1.4 * 0.8;
+    }
 }
 
 /*
@@ -140,6 +188,9 @@ header {
         display: inline-block;
         top: 30px;
         right: $spacing_md;
+        @media #{$mobile} {
+            display: none;
+        }
         ul {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -167,6 +218,12 @@ header {
                 vertical-align: center;
                 border-radius: 3px;
                 transition: background-color $transition;
+                @media #{$tablet} {
+                    font-size: $h5;
+                    line-height: $h5*1.4;
+                    width: 60px;
+                    height: 60px;
+                }
             }
             &.active a, a:hover {
                 background-color: $black;
@@ -185,11 +242,20 @@ main {
     margin: 0 auto $spacing_lg auto;
     min-height: 70vh; /* window height - footer */
     max-width: 1400px;
+
+    @media #{$mobile} {
+        width: calc(100% - 40px);
+        margin: 0 auto $spacing_md auto;
+        max-width: 100%;
+    }
 }
 
 section {
     margin-bottom: $spacing_lg;
     overflow: hidden;
+    @media #{$mobile} {
+        margin-bottom: $spacing_md;
+    }
 }
 
 footer {
@@ -200,6 +266,15 @@ footer {
     line-height: $h4*1.4;
     color: $vanilla;
     background-color: $black;
+    @media #{$tablet} {
+        font-size: $h5;
+        line-height: $h5*1.4;
+    }
+    @media #{$mobile} {
+        padding: $spacing_sm;
+        font-size: $h5;
+        line-height: $h5*1.4;
+    }
     div { /*newsletter*/
         text-align: center;
         padding-bottom: $spacing_md;
@@ -208,6 +283,14 @@ footer {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        @media #{$tablet} {
+            display: flex;
+            flex-direction: column;
+         }
+        @media #{$mobile} {
+           display: flex;
+           flex-direction: column;
+        }
         
         a {
             display: inline-block;
@@ -219,13 +302,45 @@ footer {
             }
             img { /*vc logo*/
                 width: 280px;
+                @media #{$tablet} {
+                    width: 200px;
+                }
+                @media #{$mobile} {
+                    width: 160px;
+                }
             }
         }
-        li:nth-child(2) {
-            text-align: center;
+        li:first-child { /* (c) column*/
+            @media #{$tablet} {
+                order: 2;
+                margin-bottom: -21px;
+            }
+            @media #{$mobile} {
+                order: 2;
+                margin-bottom: -21px;
+            }
         }
-        li:nth-child(3) {
+        li:nth-child(2) { /* icons column */
+            text-align: center;
+            @media #{$tablet} {
+                order: 1;
+                width: 100%;
+                padding-bottom: 30px;
+            }
+            @media #{$mobile} {
+                order: 1;
+                width: 100%;
+                padding-bottom: 30px;
+            }
+        }
+        li:nth-child(3) { /* vc logo column*/
             text-align: right;
+            @media #{$tablet} {
+                order: 3;
+            }
+            @media #{$mobile} {
+                order: 3;
+            }
             a {
                 padding: 0;
             }
@@ -255,15 +370,31 @@ li {
 table { /* default: cart */ 
     border-spacing: 0px;
     text-align: left;
+    @media #{$tablet} {
+        font-size: $h4;
+        width: 100vw;
+    }
+    @media #{$mobile} {
+        font-size: $h4;
+        width: 100vw;
+    }
     th {
         font-size: $h4;
         font-weight: $semibold;
         padding-bottom: 8px;
+        @media #{$tablet} {
+            font-size: $h5;
+        }
+        @media #{$mobile} {
+            font-size: $h5;
+        }
     }
     tr {vertical-align: top;}
     td {
         padding: 8px $spacing_md 8px 0;
-
+        @media #{$mobile} {
+            padding: 8px $spacing_sm 8px 0;
+        }
         &:last-child {
             padding-right: 0;
         }
@@ -288,6 +419,14 @@ a.option {
     border-bottom: 3px solid $black;
     cursor: pointer;
     transition: background-color $transition;
+    @media #{$tablet} {
+        font-size: $h5;
+        line-height: $h5*1.4;
+    }
+    @media #{$mobile} {
+        font-size: $h5;
+        line-height: $h5*1.4;
+    }
 
     &:hover {
         color: $vanilla;
@@ -313,6 +452,9 @@ input {
     border-radius: 3px;
     padding: 16px;
     display: inline-block;
+    @media #{$mobile} {
+        padding: 12px;
+    }
 
     &[type="radio"] {
         visibility: hidden;
@@ -341,6 +483,22 @@ label {
     margin-right: 8px;
     transition: background-color $transition;
     text-align:center;
+    @media #{$tablet} {
+        font-size: $h5;
+        line-height: $h5*1.4;
+        label {
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+    }
+    @media #{$mobile} {
+        font-size: $h5;
+        line-height: $h5*1.4;
+        label {
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+    }
 
     &:hover {
         background-color: $black;
@@ -389,6 +547,24 @@ header {
         top: $spacing_md;
         left: $spacing_md;
         z-index: 10;
+        @media #{$tablet} {
+            top: 30px;
+            left: 30px;
+        }
+        @media #{$mobile} {
+            top: 10px;
+            left: 15px;
+        }
+        svg {
+            @media #{$tablet} {
+                width: 110px;
+            }
+            @media #{$mobile} {
+                width: 90px;
+            }
+
+        }
+
     }
     a#cart {
         display: inline-block;
@@ -404,6 +580,12 @@ header {
         text-decoration: none;
         z-index: 100;
         transition: background-color $transition;
+        @media #{$tablet} {
+            top: 10+155px;
+        }
+        @media #{$mobile} {
+            display: none;
+        }
 
         &:hover {
             background: $black;
@@ -417,9 +599,21 @@ section.title {
     // max-width: 800px;
     height: $space_heading;
     margin: 30px auto 48px auto;
+    @media #{$mobile} {
+        height: $space_heading / 2;
+        margin: 30px auto 24px auto;
+    }
     h1 {
         margin-block-start: 0;
         margin-block-end: 0.4em;
+        @media #{$tablet} {
+            font-size: $h3;
+            line-height: $h3 * 1.3;
+        }
+        @media #{$mobile} {
+            font-size: $h3;
+            line-height: $h3 * 1.3;
+        }
     }
     h4 {
         margin-block-start: 1em;
@@ -431,6 +625,10 @@ section[itemprop="description"] {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: $spacing_lg;
+    @media #{$mobile} { 
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
 }
 
 div, section {
@@ -455,7 +653,7 @@ button, input, a {
 a.item { /* item modules */
     display: inline-block;
     text-decoration: none;
-    width: calc(33.33% - 20px);
+    width: calc(33.33% - 24px);
     padding: 16px;
     margin: 16px 12px;
     border-top: 3px solid white;
@@ -464,11 +662,39 @@ a.item { /* item modules */
     border-bottom: 3px solid $black;
     transition: background-color $transition;
 
+
     &:hover {
         color: $vanilla;
         background-color: $black; 
     }
-    
+    /*spacing for 3columns: desktop*/
+    &:nth-of-type(3n+1) {
+        margin-left: 0;
+    }
+    &:nth-of-type(3n) {
+            margin-right:0;
+    }
+
+    @media #{$tablet} {
+        width: calc(50% - 20px);
+        &:nth-of-type(3n+1) {
+            margin-left: 12px;
+        }
+        &:nth-of-type(3n) {
+            margin-right:12px;
+        }
+        &:nth-of-type(2n+1) {
+            margin-left: 0;
+        }
+        &:nth-of-type(2n) {
+            margin-right: 0;
+        }
+        
+    }
+    @media #{$mobile} {
+        width: 100%;
+        margin: 8px 0;
+    }
 
     figure {
         // display: grid;
@@ -476,17 +702,30 @@ a.item { /* item modules */
         display: flex;
         flex-direction: row;
         column-gap: 24px;
-        min-height: 132px;
+        min-height: $thumbnail;
         line-height: 1.9rem;
+        @media #{$tablet} {
+            min-height: $thumbnail_mobile;
+            line-height: $h4 * 1.4;
+        }
         div.text { 
             display: inline-block;
             width: calc(100% - 132px - 24px);
+            @media #{$mobile} {
+                width: calc(100% - 105.6px - 24px);
+            }
         }
         div.thumbnail { 
             display: inline-block;
             width:100%;
             height: $thumbnail;
             width: $thumbnail;
+            @media #{$mobile} {
+                height: $thumbnail_mobile;
+                width: $thumbnail_mobile;
+            }
+        
+            
             position: relative;
             overflow: hidden;
             // padding-top: 100%;
@@ -521,13 +760,7 @@ a.item { /* item modules */
 
 
 
-    /*spacing for 3columns: desktop*/
-    &:nth-of-type(3n+1) {
-        margin-left: 0;
-    }
-    &:nth-of-type(3n) {
-         margin-right:0;
-    }
+
    
 }
 
@@ -559,6 +792,9 @@ a.item.product { /* item modules: product */
 
 section.featured {
     margin-bottom: $spacing_md;
+    @media #{$mobile} {
+        margin-bottom: $spacing_sm;
+    }
     a.item { /*featured news*/
           width: 100%;
           padding: 0;
@@ -575,6 +811,15 @@ section.featured {
               column-gap: 84px;
               font-size: $h2;
               line-height: $h2 * 1.1;
+              @media #{$tablet} {
+                font-size: $h3;
+                line-height: $h3 * 1.1;
+            }
+              @media #{$mobile} {
+                display: block;
+                font-size: $h3;
+                line-height: $h3 * 1.1;
+            }
               div.text {
                   width: 100%;
               }
@@ -586,10 +831,22 @@ section.featured {
                   padding-top: 56.25%;
               }
               h5, time { /*date*/
-                  font-size: $h4;
-                  line-height: $h4*1.4;
-                  margin-block-end: 0;
-                  margin-block-start: 1em;
+                font-size: $h4;
+                line-height: $h4*1.4;
+                margin-block-end: 0;
+                margin-block-start: 1em;
+                @media #{$tablet} {
+                    font-size: $h5;
+                    line-height: $h5 * 1.4;
+                    margin-block-start: 0.5em;
+                    margin-block-end: 1.2em;
+                }
+                  @media #{$mobile} {
+                    font-size: $h5;
+                    line-height: $h5 * 1.4;
+                    margin-block-start: 0.5em;
+                    margin-block-end: 1.2em;
+                }
             }
         }
     }
@@ -598,6 +855,12 @@ section.featured {
 section.content { /*news article, cart page */
     max-width: 66.66%;
     margin: 0 auto $spacing_lg auto;
+    @media #{$tablet} {
+        max-width: 90%;
+    }
+    @media #{$mobile} {
+        max-width: 100%;
+    }
     a {
         text-decoration: underline;
         transition: text-decoration $transition;
@@ -607,6 +870,9 @@ section.content { /*news article, cart page */
     }
     time {
         font-size: $h4;
+        @media #{$mobile} {
+            font-size: $h5;
+        }
     }
 }
 
@@ -638,6 +904,10 @@ Page Specific Overrides
             width:auto;
             bottom: $spacing_sm;
             right: $spacing_md;
+            @media #{$mobile} {
+                bottom: $spacing_md;
+                right: $spacing_sm;
+            }
             a {
                 padding: 0 8px;
                 &:nth-child(1) {
@@ -687,24 +957,53 @@ Page Specific Overrides
         line-height: $h4*1.4;
         grid-template-columns: 1fr 2fr;
         column-gap: $spacing_lg;
+        
+        @media #{$tablet} {
+            font-size: $h5;
+            line-height: $h5*1.4;
+            grid-template-columns: 1fr 1fr;
+            column-gap: $spacing_sm;
+        }
+        @media #{$mobile} {
+            grid-template-columns: 1fr;
+            column-gap: 0;
+        }
     }
 }
 
 .template-collection {
     section.title {
         height: $space_heading_sm;
+        @media #{$mobile} {
+            height: $space_heading_xs;
+        }
     }
 }
 
 .template-collection.music { /* music list page */
  
     main {
-        max-width: calc(100% - 200px);
         text-align: center;
+        ul {
+            max-width: calc(100% - 200px);
+            margin: 0 auto;
+            @media #{$mobile} {
+                max-width: 100%;
+            }
+        }
         li {
             font-size: $xlarge;
             line-height: $xlarge;
             padding-bottom: 48px;
+            @media #{$tablet} {
+                font-size: $h2;
+                line-height: $h2 * 1.3;
+            }
+            @media #{$mobile} {
+                font-size: $h2;
+                line-height: $h2 * 1.3;
+            }
+
             a {
                 text-decoration: none;
                 transition: all $transition;
@@ -739,6 +1038,16 @@ Page Specific Overrides
         grid-template-columns: 1fr 1fr 1fr;
         column-gap: $spacing_lg;
         text-align: center;
+
+        @media #{$tablet} {
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: $spacing_sm;
+        }
+        
+        @media #{$mobile} {
+            grid-template-columns: 1fr;
+            column-gap: 0;
+        }
         a {
             text-decoration: none;
         }
@@ -755,6 +1064,10 @@ Page Specific Overrides
     .subdescription, .tracklist, .credit, .video-credit {
         font-size: $h4;
         line-height: $h4*1.4;
+        @media #{$tablet} {
+            font-size: $h5;
+            line-height: $h5 * 1.4;
+        }
     }
     .subdescription {
         font-style: italic;
@@ -762,6 +1075,13 @@ Page Specific Overrides
     .tracklist, #product-variants {
         border: solid 1px;
         padding: 8px 24px;
+        
+        @media #{$mobile} {
+            font-size: $h5;
+            line-height: $h5 * 1.4;
+            padding: 8px 16px;
+        }
+
         li {
             display: flex;
             align-items: center;
@@ -782,11 +1102,20 @@ Page Specific Overrides
 
 .template-product.music { /* music detail */
     section.title {
+        @media #{$mobile} {
+            margin-top: 100px;   
+            height: auto;     
+        }
         .platforms a{ /* platform links */
             padding: 0 12px;
             text-decoration: none;
             &:nth-child(2) { /* apple */
                 padding-right: 18px;
+            }
+        }
+        h4 {
+            @media #{$mobile} {
+                padding: 0 10%; 
             }
         }
     }
@@ -797,6 +1126,9 @@ Page Specific Overrides
         text-align: center; 
         img {
             max-width: 860px;
+            @media #{$tablet} {
+                max-width: 600px;
+            }
         }
     }
     .tracklist {
@@ -815,12 +1147,23 @@ Page Specific Overrides
                 div {
                     width: 8%;
                     margin-right: 16px;
+                    @media #{$mobile} {
+                        margin-right: 8px;
+                    }
                 }
                 div.track_play {
                     margin-right: 32px;
+                    @media #{$mobile} {
+                        margin-right: 50px;
+                    }
                 }
                 div:nth-child(2) { /* title */
                     width: 50%;
+                }
+                div:nth-child(3) { /* duration */
+                    @media #{$mobile} {
+                        display: none;
+                    }
                 }
                 div.track_play a{
                     display: inline-block;
@@ -834,7 +1177,6 @@ Page Specific Overrides
                     border-bottom: 3px solid #200304;
                     border-radius: 50%;
                     transition: background-color $transition;
-
                     &:hover {
                         background-color:$black;
                         svg path {
@@ -854,6 +1196,17 @@ Page Specific Overrides
         display: grid;  
         grid-template-columns: 1fr 2fr;
         margin-bottom: $spacing_md;
+        @media #{$tablet} {
+            margin-top: 0;
+            font-size: $h5;
+            line-height: $h5 * 1.4;
+        }
+        @media #{$mobile} {
+            margin-top: $spacing_md;
+            font-size: $h5;
+            line-height: $h5 * 1.4;
+            grid-template-columns: 1fr 1fr;
+        }
     }
     .video { /* music post > video section */
         clear:both;
@@ -876,6 +1229,16 @@ Page Specific Overrides
     .video-credit {
         display: grid;  
         grid-template-columns: 1fr 2fr 2fr;
+        @media #{$tablet} {
+            font-size: $h5;
+            line-height: $h5 * 1.4;
+        }
+        @media #{$mobile} {
+            font-size: $h5;
+            line-height: $h5 * 1.4;
+            grid-template-columns: 1fr;
+            margin-bottom: $spacing_sm;
+        }
         .credit {
             grid-template-columns: 1fr 1fr;
         }
@@ -909,6 +1272,10 @@ Page Specific Overrides
         border: none;
         padding: 0;
         margin: $spacing_md 0; 
+        @media #{$mobile} {
+            margin: $spacing_sm 0; 
+    
+        }
         div {
             display: inline-block;
             width: fit-content;
@@ -922,12 +1289,24 @@ Page Specific Overrides
         width: 80%; 
         h1 { /*title*/
             margin-block-start: 0;
+            @media #{$mobile} {
+                font-size: $h3;
+                line-height: $h3 * 1.4;
+            }
         }
         h3 { /*description*/
+            @media #{$mobile} {
+                font-size: $h4;
+                line-height: $h4 * 1.4;
+            }
             ul { 
                 font-family: $font-secondary;
                 font-size: $h4;
                 line-height: $h4*1.4;
+                @media #{$mobile} {
+                    font-size: $xsmall;
+                    line-height: $xsmall * 1.4;
+                }
                 li::before {
                     content: '— ';
                 }
@@ -964,6 +1343,9 @@ Page Specific Overrides
 .template-article { /* news post */
     section.title {
         height: $space_heading_sm;
+        @media #{$mobile} {
+            height: $space_heading_xs;
+        }
     }
     main {
         h2.article-title{
@@ -983,11 +1365,20 @@ Page Specific Overrides
         margin: 0 auto;
         max-width: 66.66%;
         min-width: 900px;
+        @media #{$mobile} {
+            width: 100%;
+            max-width: 100%;
+            min-width: auto;
+        }
+      
         input {
             font-family: $font-primary;
             width: 100px;
             font-size: $h4;
             text-align: right;
+            @media #{$mobile} {
+                width: 60px;
+            }
 
         }
         
@@ -1064,6 +1455,10 @@ $slide_width: 580px;
   width: $slide_width;
   height: $slide_width/3 * 4;
   margin: 0px 20px;
+    @media #{$mobile} {
+        width: 100vw;
+        height: 133.33vw;
+    }
 }
 
 .slick-slide img {
@@ -1072,6 +1467,10 @@ $slide_width: 580px;
   height: $slide_width/3 * 4;
   object-fit: cover; /* cover image */
   object-position: center;
+    @media #{$mobile} {
+        width: 100vw;
+        height: 133.33vw;
+    }
 }
 
 .slick-prev:before,
@@ -1344,6 +1743,9 @@ $slide_width: 580px;
 {
     margin-bottom: 80px;
     width: 45vw;
+    @media #{$mobile} {
+        width: 100vw;
+    }
 }
 
 .slick-dots
@@ -1378,6 +1780,11 @@ $slide_width: 580px;
     border-left: 3px solid white;
     border-right: 3px solid $black;
     border-bottom: 3px solid $black;
+
+    @media #{$mobile} {
+        width: 24px;
+        height: 24px;
+    }
 
     &:first-child {
         margin-left: 0;
