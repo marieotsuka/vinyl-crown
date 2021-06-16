@@ -82,6 +82,9 @@ body {
 
 a {
     color: $black;
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 
@@ -981,10 +984,13 @@ Page Specific Overrides
         max-width: 66.66%;
         min-width: 900px;
         input {
+            font-family: $font-primary;
             width: 100px;
             font-size: $h4;
             text-align: right;
+
         }
+        
         button.update {
             font-size:inherit;
             border:none;
@@ -998,13 +1004,20 @@ Page Specific Overrides
                 font-weight: $semibold;
             }
             
-            input {
+            input.update { 
+                display: inline;
+                background-color: transparent;
                 font-size: inherit;
                 font-weight: inherit;
                 padding: 4px 0;
                 text-align: left;
                 border: none;
                 text-decoration: underline;
+                cursor: pointer;
+                &:hover {
+                    text-decoration: none;
+                   
+                }
             }
         }
     }

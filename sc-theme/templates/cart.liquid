@@ -91,8 +91,8 @@
     
     <div class="subtotal"><span >Subtotal</span> {{ cart.total_price | money }}</div>
     <div class="checkout">
-      <a href="/" {% comment %}{{ continue_shopping_url }}{% endcomment %}><button class="action">Continue shopping</button></a>
-            {% comment %}<input type="submit" name="checkout" value="Checkout" />  {% endcomment %}
+    {% comment %}  <a href="{{ shop.url }}" ><button class="action">Continue shopping</button></a>{% endcomment %}
+    {% comment %}<input type="submit" name="checkout" value="Checkout" />  {% endcomment %}
       <button class="action" type="submit" name="checkout" value="Check out" />Check out</button>   
 
       {% if additional_checkout_buttons %} {% comment %}Paypal and Google checkout buttons{% endcomment %}
