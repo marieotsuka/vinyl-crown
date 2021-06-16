@@ -103,8 +103,13 @@
       {% endcomment %}
                 
       <div id="product-add">
-        <input type="submit" name="add" id="add" value="{{ add_to_cart | escape }}">
+        {% if product.available %}
+          <button class="action" type="submit" name="add" id="add" value="Buy">Buy</button>
+        {% else %}
+          <button class="action" type="submit" name="add" id="add" value="" disabled>Out of Stock</button>
+        {% endif %}
       </div>
+
       {% if collection %}
         {% if collection.previous_product or collection.next_product %}
         <div>     

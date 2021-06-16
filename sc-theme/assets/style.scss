@@ -56,6 +56,9 @@ $thumbnail: 132px; /* news thumbnail */
 $space_heading: 158px;
 $space_heading_sm: 114px;
 
+$transition: 0.25s;
+
+
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Basic Type
@@ -160,6 +163,7 @@ header {
                 text-align: center;
                 vertical-align: center;
                 border-radius: 3px;
+                transition: background-color $transition;
             }
             &.active a, a:hover {
                 background-color: $black;
@@ -221,9 +225,11 @@ footer {
                 padding: 0;
             }
         }
-
-        svg path {
-            fill: $vanilla;
+        svg {
+            transform: scale(0.8);
+            path {
+                fill: $vanilla;
+            }
         }
     }
 }
@@ -263,9 +269,21 @@ button, input {
     border-right: 3px solid $black;
     border-bottom: 3px solid $black;
     cursor: pointer;
+    transition: background-color $transition;
+
     &:hover {
         color: $vanilla;
         background-color: $black;
+    }
+    
+}
+
+button:disabled,
+button[disabled]{
+    opacity: .5;
+    &:hover {
+        color: inherit;
+        background-color: inherit;
     }
 }
 
@@ -313,6 +331,8 @@ header {
         padding: 6px 8px;
         text-decoration: none;
         z-index: 100;
+        transition: background-color $transition;
+
         &:hover {
             background: $black;
             color: $vanilla;
@@ -327,7 +347,7 @@ section.title {
     margin: 30px auto 48px auto;
     h1 {
         margin-block-start: 0;
-        margin-block-end: 0;
+        margin-block-end: 0.4em;
     }
     h4 {
         margin-block-start: 1em;
@@ -351,7 +371,7 @@ div, section {
 button, input {
     &.action {
         min-width: 200px;
-        margin: 56px 0;
+        margin: 0 0 0px 0;
     }
     &.option {
         min-width: 100px;
@@ -369,6 +389,7 @@ a.item { /* item modules */
     border-left: 3px solid white;
     border-right: 3px solid $black;
     border-bottom: 3px solid $black;
+    transition: background-color $transition;
 
     &:hover {
         color: $vanilla;
@@ -495,10 +516,26 @@ section.featured {
                   line-height: $h4*1.4;
                   margin-block-end: 0;
                   margin-block-start: 1em;
-              }
-          }
-      }
-  }
+            }
+        }
+    }
+}
+
+section.content { /*news article, cart page */
+    max-width: 66.66%;
+    margin: 0 auto $spacing_lg auto;
+    a {
+        text-decoration: underline;
+        transition: text-decoration $transition;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    time {
+        font-size: $h4;
+    }
+}
+
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Page Specific Overrides
@@ -527,6 +564,15 @@ Page Specific Overrides
             width:auto;
             bottom: $spacing_sm;
             right: $spacing_md;
+            a {
+                padding: 0 8px;
+                &:nth-child(1) {
+                    padding: 0 12px;
+                }
+            }
+            svg {
+                transform: scale(0.7);
+            }
         }
     }
 }
@@ -534,6 +580,8 @@ Page Specific Overrides
 .template-page { /* about page */
     color: $vanilla;
     background-color: $green;
+
+
     #logo svg path{
         fill: $vanilla;
     }
@@ -555,6 +603,10 @@ Page Specific Overrides
         color: $vanilla;
         background-color: $green;
         border: solid 1px $vanilla;
+        &:hover {
+            color: $green;
+            background-color: $vanilla;
+        }
     }
     section[itemprop="description"] {
         font-size: $h4;
@@ -581,9 +633,11 @@ Page Specific Overrides
             padding-bottom: 48px;
             a {
                 text-decoration: none;
+                transition: all $transition;
+
                 img {
                     display: none;
-                    width: 400px;
+                    width: 300px;
                     position: absolute;
                 }
                 &:hover {
@@ -657,6 +711,9 @@ Page Specific Overrides
             }
         }
     }
+    #product-add {
+        margin-bottom: $spacing_md;
+    }
     .hero { 
         text-align: center; 
         img {
@@ -664,7 +721,7 @@ Page Specific Overrides
         }
     }
     .tracklist {
-        margin-top: $spacing_lg;
+        margin-top: $spacing_md;
         div:not(div.track_play) { 
             padding-top:12px;
         }
@@ -697,6 +754,8 @@ Page Specific Overrides
                     border-right: 3px solid #200304;
                     border-bottom: 3px solid #200304;
                     border-radius: 50%;
+                    transition: background-color $transition;
+
                     &:hover {
                         background-color:$black;
                         svg path {
@@ -715,6 +774,7 @@ Page Specific Overrides
     .credit {
         display: grid;  
         grid-template-columns: 1fr 2fr;
+        margin-bottom: $spacing_md;
     }
     .video { /* music post > video section */
         clear:both;
@@ -773,6 +833,8 @@ Page Specific Overrides
             border-radius: 3px;
             padding: 8px 24px;
             margin-right: 8px;
+            transition: background-color $transition;
+
             &:hover {
                 background-color: $black;
                 color: $vanilla;
@@ -846,16 +908,6 @@ Page Specific Overrides
         h1:not(.title h1) {
             font-size: $h2 * 0.85;
             line-height: $h2 * 0.85 * 1.2;
-        }
-        section.content {
-            max-width: 66.66%;
-            margin: 0 auto $spacing_lg auto;
-            a {
-                text-decoration: underline;
-            }
-            time {
-                font-size: $h4;
-            }
         }
     }
 }

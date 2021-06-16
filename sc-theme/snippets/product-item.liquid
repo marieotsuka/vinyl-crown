@@ -16,11 +16,15 @@
     
     <div class="text">
       {{ product.title }}      
-      {% if product.price_varies %}From{% endif %}
-      <h5 class="san-serif">{{ product.price | money }} — {{ product.variants.size }} {{product.options }} </h5> 
-      {% if on_sale %}
-        <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
-      {% endif %}
+      <h5 class="san-serif">
+        {% if product.price_varies %}
+          From
+        {% endif %}
+        {{ product.price | money }} 
+        {% if product.variants.size > 0 %}
+        — {{ product.variants.size }} {{ product.options }} 
+        {% endif %}
+      </h5>
     </div> 
 
     {% if product.featured_image.size > 0 %}

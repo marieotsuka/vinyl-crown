@@ -41,18 +41,17 @@
       function(e){
           var $this = $(this).find('img');
           var $left = $(this).offset().left + $(this).width() - 200;
-          var $top = $(this).offset().top - 50;
+          var $top = $(this).offset().top - 100;
           var $img_margin = $left + 400;
           if ($(window).width() < $img_margin){
             $left = $(this).offset().left + $(this).width() - 400;
           }
           $this.css({
-              'left': $left +'px' ,
+              'left': $left +'px',
               'top': $top+'px'
           });
       },
       function(e){
-        // $this.css({});
       }
   );
 </script>
