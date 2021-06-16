@@ -69,10 +69,26 @@
       
       {% assign hide_default_title = false %}
       {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
-        {% assign hide_default_title = true %}
+    
       {% endif %}
       
-      {% if product.available %}
+      
+     
+        <div id="product-variants" class="merch">
+        {% if variant.available %}
+          {% for variant in product.variants %}
+              <input type="radio" class="merch  {% unless variant.available %}out-of-stock{% endunless %}" name="id" value="{{ variant.id }}" id="radio_{{ variant.id }}"  />
+                 {% comment %} {% if forloop.first %}checked="checked"{% endif %} {% endcomment %}
+              <label for="radio_{{ variant.id }}" class="radio {% unless variant.available %}out-of-stock{% endunless %}">
+              {{ variant.title | escape }}
+              </label>
+            {% endfor %}
+        {% endif %}
+        </div>
+      
+      
+      {% comment %} 
+          {% if variant.available %}
         <div id="product-variants" class="merch {% if hide_default_title %} hidden{% endif %}">
       {% else %}
         <div id="product-variants" class="out-of-stock merch {% if hide_default_title %} hidden{% endif %}">
@@ -89,7 +105,8 @@
           </div>
           {% endfor %}
         </div>  
-
+    {% endcomment %}
+    
       {% comment %} 
       <div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
         <select id="product-select" name="id">

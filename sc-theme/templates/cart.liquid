@@ -35,7 +35,6 @@
         {% if forloop.first %}
           {% assign continue_shopping_url = collection_url %}
         {% endif %}
-
         <tr>
           <td>
             <a href="{{ collection_url }}{{ item.url }}">
@@ -44,8 +43,9 @@
           </td>
           <td>
             <a href="{{ collection_url }}{{ item.url }}">
-              {{ item.title }}
-            </a>
+              <i>{{ item.title }}</i>
+            </a> 
+         
             
             {% assign properties_amount = item.properties | size %}
             {% if properties_amount > 0 %}
@@ -91,23 +91,23 @@
     
     <div class="subtotal"><span >Subtotal</span> {{ cart.total_price | money }}</div>
     <div class="checkout">
-      <a href="{{ continue_shopping_url }}"><button class="action">Continue shopping</button></a>
+      <a href="/" {% comment %}{{ continue_shopping_url }}{% endcomment %}><button class="action">Continue shopping</button></a>
+            {% comment %}<input type="submit" name="checkout" value="Checkout" />  {% endcomment %}
       <button class="action" type="submit" name="checkout" value="Check out" />Check out</button>   
-      {% if additional_checkout_buttons %}
-      {{ content_for_additional_checkout_buttons }}
-    {% endif %}
-    
+
+      {% if additional_checkout_buttons %} {% comment %}Paypal and Google checkout buttons{% endcomment %}
+        {{ content_for_additional_checkout_buttons }}
+      {% endif %}
     </div>
-      {% comment %}Paypal and Google checkout buttons{% endcomment %}
-    <div class="others">
       
       {% comment %}
       For the special instructions to be submitted with order,
       we need to use a name attribute set to 'note'.
-      {% endcomment %}
-      <h4>Special instructions for seller</h4>
-      <textarea name="note">{{ cart.note }}</textarea>
-    </div>
+      <div class="others">
+        <h4>Special instructions for seller</h4>
+        <textarea name="note">{{ cart.note }}</textarea>
+      </div>
+     {% endcomment %}
   </form>
 
   {% else %}

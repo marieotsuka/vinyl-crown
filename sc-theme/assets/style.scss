@@ -180,7 +180,7 @@ header {
 main {
     width: calc(100% - 80px);
     margin: 0 auto $spacing_lg auto;
-    min-height: 90vh;
+    min-height: 70vh; /* window height - footer */
     max-width: 1400px;
 }
 
@@ -190,6 +190,7 @@ section {
 }
 
 footer {
+    max-height: 30vh;
     min-height: 10vh;
     padding: $spacing_md;
     font-size: $h4;
@@ -266,7 +267,10 @@ table { /* default: cart */
     }
 }
 
-button {
+button,  
+a.action, 
+a.option {
+    display: inline-block;
     font-family: $font-primary;
     font-size: $h4;
     line-height: $h4*1.4;
@@ -300,15 +304,58 @@ button {
 }
 
 
-
 input {
-    font-family: $font-primary;
-    background-color: initial;
+    // background-color: initial;
     border: solid 1px;
     border-radius: 3px;
     padding: 16px;
+    display: inline-block;
+
+    &[type="radio"] {
+        visibility: hidden;
+        height: 0;
+        width: 0;
+        position: absolute;
+    }
+    &[type="radio"]:checked + label {
+        background-color:$black;
+        color: $vanilla;
+    }
+    &[type=radio]:not(:disabled) ~ label {
+        cursor: pointer;
+        display: inline-block;
+    }
+    
 }
 
+label {
+    font-family: $font-primary;
+    font-size: $h4;
+    line-height: $h4*1.4;
+    border: solid 1px;
+    border-radius: 3px;
+    padding: 8px 24px;
+    margin-right: 8px;
+    transition: background-color $transition;
+    text-align:center;
+
+    &:hover {
+        background-color: $black;
+        color: $vanilla;
+    }  
+    
+    &.out-of-stock {
+        opacity: .3;
+        pointer-events: none;
+        cursor:default; 
+        
+       &:hover {
+                background-color: inherit;
+                color:inherit;
+        }
+    }
+
+}
 
 time {
     font-family: $font-secondary;
@@ -390,7 +437,7 @@ div, section {
 }
 
 
-button, input {
+button, input, a {
     &.action {
         min-width: 200px;
         margin: 0 0 0px 0;
@@ -508,7 +555,7 @@ a.item.product { /* item modules: product */
 }
 
 section.featured {
-    margin-bottom: 0;
+    margin-bottom: $spacing_md;
     a.item { /*featured news*/
           width: 100%;
           padding: 0;
@@ -522,6 +569,7 @@ section.featured {
           figure {
               display: grid;
               grid-template-columns: 1fr 2fr;
+              column-gap: 84px;
               font-size: $h2;
               line-height: $h2 * 1.1;
               div.text {
@@ -659,12 +707,14 @@ Page Specific Overrides
                 transition: all $transition;
 
                 img {
-                    display: none;
+                    opacity: 0;
                     width: 300px;
                     position: absolute;
+                    transition: opacity $transition;
                 }
                 &:hover {
                     img {
+                        opacity: 1;
                         display: block;
                     }
                 }
@@ -828,6 +878,8 @@ Page Specific Overrides
         }
     }
     #product-variants {
+        opacity: 1;
+        transition: opacity $transition;
         width: 80%;
         ul {
             display: flex;
@@ -858,42 +910,7 @@ Page Specific Overrides
             display: inline-block;
             width: fit-content;
         }
-        label {
-            border: solid 1px;
-            border-radius: 3px;
-            padding: 8px 24px;
-            margin-right: 8px;
-            transition: background-color $transition;
-
-            &:hover {
-                background-color: $black;
-                color: $vanilla;
-            }        
-        }
-        input[type=radio] {
-            display: none;
-        }
-        input[type=radio]:checked + label {
-            background-color: $black;
-            color: $vanilla;
-        }
-        input[type=radio]:not(:disabled) ~ label {
-            cursor: pointer;
-        }
-        
-        &.out-of-stock {
-            opacity: .5;
-            input {
-                pointer-events: none;
-            }
-            input[type=radio]:not(:disabled) ~ label {
-                cursor:default; 
-            }
-           label:hover {
-                    background-color: inherit;
-                    color:inherit;
-            }
-        }
+       
     }
     // .merch-slides {
     //         overflow: hidden;
@@ -974,8 +991,13 @@ Page Specific Overrides
             padding: 0;
             display: inline-block;
         }
+
+
         h5 {
-            font-weight: $semibold;
+            th & {
+                font-weight: $semibold;
+            }
+            
             input {
                 font-size: inherit;
                 font-weight: inherit;
