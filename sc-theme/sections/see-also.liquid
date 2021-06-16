@@ -1,0 +1,93 @@
+<section class="see-also">
+  
+{%comment%}if this module is placed in a product page {%endcomment%}
+  {% assign thisproduct = product.title %}
+
+    {% if product.tags.size > 0 %}
+
+        {% for tag in product.tags %}
+            {% assign tag_coll = '/collections/all/' | append: tag %}
+
+          {% for product in collections.music.products limit: 10 %}
+            {% if product.tags contains tag %}
+              {% if product.title <> thisproduct %} {%comment%} except one in the current page {%endcomment%}
+                {% include 'product-item' %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+            {% for product in collections.merch.products limit: 10 %}
+              {% if product.tags contains tag %}
+                {% if product.title <> thisproduct %} {%comment%} except one in the current page {%endcomment%}
+                  {% include 'product-item' %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+            {% for article in blogs.news.articles limit: 10 %}
+              {% if article.tags contains tag %}
+
+                    {% if article.content contains "https://"  %}  
+                        {% if article.content contains "href"  %}
+                          {% include 'article-news-item' %} 
+                        {% else %}
+                          {% include 'article-press-item' %} 
+                        {% endif %}
+                      {% else %}
+                        {% include 'article-news-item' %} 
+                    {% endif %}
+
+              {% endif %}
+            {% endfor %}
+
+        {% endfor %}
+      
+  {% endif %}
+  {%comment%}if this module is placed in an article page {%endcomment%}
+
+  {% if article.tags.size > 0 %}
+  {% assign thisarticle = article.title %}
+
+        {% for tag in article.tags %}
+
+          {% for product in collections.music.products limit: 10 %}
+            {% if product.tags contains tag %}
+                {% include 'product-item' %}
+            {% endif %}
+          {% endfor %}
+
+            {% for product in collections.merch.products limit: 10 %}
+              {% if product.tags contains tag %}
+                    {% include 'product-item' %}
+              {% endif %}
+            {% endfor %}
+
+            {% for article in blogs.news.articles limit: 10 %}
+              {% if article.tags contains tag %}
+                {% if article.title <> thisarticle %} {%comment%} except one in the current page {%endcomment%}
+
+                    
+                      {% if article.content contains "https://"  %}  
+                          {% if article.content contains "href"  %}
+                            {% include 'article-news-item' %} 
+                          {% else %}
+                            {% include 'article-press-item' %} 
+                          {% endif %}
+                        {% else %}
+                          {% include 'article-news-item' %} 
+                      {% endif %}
+                    
+                  {% endif %}
+
+              {% endif %}
+            {% endfor %}
+     
+
+        {% endfor %}
+      
+  {% endif %}
+
+</section>
+
+
+ 
