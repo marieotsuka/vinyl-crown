@@ -51,6 +51,7 @@ $spacing_md: $spacing_lg / 2;
 $spacing_sm: $spacing_lg / 4;
 
 $thumbnail: 132px; /* news thumbnail */
+$thumbnail_tablet: $thumbnail * 0.6;
 $thumbnail_mobile: $thumbnail * 0.8;
 
 $space_heading: 158px;
@@ -59,8 +60,8 @@ $space_heading_xs: 44px;
 
 $transition: 0.25s;
 
-$mobile:  "(max-width: 414px)";
-$tablet: "(min-width: 415x) and (max-width: 1024px)";
+$mobile:  "(max-width: 633px)";
+$tablet: "(min-width: 640px) and (max-width: 1024px)";
 $desktop: "(min-width: 1025px)";
 
 /*
@@ -71,6 +72,7 @@ Basic Type
 
 * {
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -187,10 +189,10 @@ header {
         position:fixed;
         display: inline-block;
         top: 30px;
-        right: $spacing_md;
+        left: $spacing_md;
         @media #{$tablet} {
-            top: 30px;
-            right:30px;
+            top: $spacing_sm;
+            left:$spacing_sm;
         }
         @media #{$mobile} {
             display: none;
@@ -225,8 +227,21 @@ header {
                 @media #{$tablet} {
                     font-size: $h5;
                     line-height: $h5*1.4;
-                    width: 60px;
-                    height: 60px;
+                    width: 58px;
+                    height: 58px;
+                    margin: 1.5px;
+                    border-top: 2px solid white;
+                    border-left: 2px solid white;
+                    border-right: 2px solid $black;
+                    border-bottom: 2px solid $black;
+                }
+                @media #{$mobile} {
+                    font-size: $h5;
+                    line-height: $h5*1.4;
+                    border-top: 2px solid white;
+                    border-left: 2px solid white;
+                    border-right: 2px solid $black;
+                    border-bottom: 2px solid $black;
                 }
             }
             &.active a, a:hover {
@@ -438,10 +453,18 @@ a.option {
     @media #{$tablet} {
         font-size: $h5;
         line-height: $h5*1.4;
+        border-top: 2px solid white;
+        border-left: 2px solid white;
+        border-right: 2px solid $black;
+        border-bottom: 2px solid $black;
     }
     @media #{$mobile} {
         font-size: $h5;
         line-height: $h5*1.4;
+        border-top: 2px solid white;
+        border-left: 2px solid white;
+        border-right: 2px solid $black;
+        border-bottom: 2px solid $black;
     }
 
     &:hover {
@@ -560,16 +583,21 @@ Page Agnostic Overrides
 header {
     #logo {
         position: fixed;
-        top: $spacing_md;
-        left: $spacing_md;
+        top: 60px;
+        right: 10px;
+        // top: $spacing_md;
+        // left: $spacing_md;
         z-index: 10;
         @media #{$tablet} {
-            top: 30px;
-            left: 30px;
+            top: 40px;
+            right: 4px;
+            // top: 30px;
+            // left: 30px;
         }
         @media #{$mobile} {
             top: 10px;
-            left: 15px;
+            // right: 15px;
+            right: 4px;
         }
         svg {
             @media #{$tablet} {
@@ -585,8 +613,10 @@ header {
     a#cart {
         display: inline-block;
         position: fixed;
-        top: 40+155px;
-        right: $spacing_md;
+        top: 4px;
+        right: 4px;
+        // top: 40+155px;
+        // right: $spacing_md;
         background-color: $vanilla;
         font-size: $xsmall;
         line-height: $xsmall * 1.3;
@@ -597,8 +627,12 @@ header {
         z-index: 100;
         transition: background-color $transition;
         @media #{$tablet} {
-            top: 10+155px;
-            right: 30px;
+            // top: 10+155px;
+            // left: 30px;
+            top: 4px;
+            right: 4px;
+            padding: 4px 6px;
+          
         }
         @media #{$mobile} {
             display: none;
@@ -700,6 +734,10 @@ a.item { /* item modules */
     @media #{$tablet} {
         margin: 8px 8px;
         width: calc(50% - 12px);
+        border-top: 2px solid white;
+        border-left: 2px solid white;
+        border-right: 2px solid $black;
+        border-bottom: 2px solid $black;
         &:nth-of-type(3n+1) {
             margin-left: 8px;
         }
@@ -717,6 +755,10 @@ a.item { /* item modules */
     @media #{$mobile} {
         width: 100%;
         margin: 8px 0;
+        border-top: 2px solid white;
+        border-left: 2px solid white;
+        border-right: 2px solid $black;
+        border-bottom: 2px solid $black;
     }
 
     figure {
@@ -728,12 +770,15 @@ a.item { /* item modules */
         min-height: $thumbnail;
         line-height: 1.9rem;
         @media #{$tablet} {
-            min-height: $thumbnail_mobile;
+            min-height: $thumbnail_tablet;
             line-height: $h4 * 1.4;
         }
         div.text { 
             display: inline-block;
             width: calc(100% - 132px - 24px);
+            @media #{$tablet} {
+                width: calc(100% - 79.2px - 24px);
+            }
             @media #{$mobile} {
                 width: calc(100% - 105.6px - 24px);
             }
@@ -743,6 +788,10 @@ a.item { /* item modules */
             width:100%;
             height: $thumbnail;
             width: $thumbnail;
+            @media #{$tablet} {
+                height: $thumbnail_tablet;
+                width: $thumbnail_tablet;
+            }
             @media #{$mobile} {
                 height: $thumbnail_mobile;
                 width: $thumbnail_mobile;
@@ -960,6 +1009,18 @@ Page Specific Overrides
             border-left: 3px solid $green-light;
             border-right: 3px solid $vanilla;
             border-bottom: 3px solid $vanilla;
+            @media #{$tablet} {
+                border-top: 2px solid $green-light;
+                border-left: 2px solid $green-light;
+                border-right: 2px solid $vanilla;
+                border-bottom: 2px solid $vanilla;
+            } 
+            @media #{$mobile} {
+                border-top: 2px solid $green-light;
+                border-left: 2px solid $green-light;
+                border-right: 2px solid $vanilla;
+                border-bottom: 2px solid $vanilla;
+            }            
         }
         li a:hover, li.active a {
             color: $green;   
@@ -1022,8 +1083,8 @@ Page Specific Overrides
             line-height: $xlarge;
             padding-bottom: 48px;
             @media #{$tablet} {
-                font-size: $h2;
-                line-height: $h2 * 1.3;
+                font-size: $h1;
+                line-height: $h1 * 1.2;
                 padding-bottom: 24px;
             }
             @media #{$mobile} {
@@ -1056,14 +1117,17 @@ Page Specific Overrides
             }
 
         }
-        span {
-            display: inline-block;
-        }
+        // span {
+        //     display: inline-block;
+        // }
         .colophon {
-            position: absolute;
-            display: contents;
-            padding-left: $spacing_sm;
-            word-break:keep-all;
+            // position: absolute;
+            // display: contents;
+            // padding-left: $spacing_sm;
+            display: inline-block;
+            width: 0;
+            word-break: keep-all;
+            white-space: nowrap;
         }
     }    
 }
@@ -1195,9 +1259,12 @@ Page Specific Overrides
                 flex-direction: row;
                 padding: 0;
                 align-items: baseline;
-
+                display: grid;
+                grid-template-columns: 1fr 10fr 2fr 2fr 2fr;
+                &:last-child {
+                    padding-bottom: 12px;
+                }
                 div {
-                    width: 8%;
                     margin-right: 16px;
                     @media #{$mobile} {
                         margin-right: 8px;
@@ -1209,24 +1276,24 @@ Page Specific Overrides
                         margin-right: 50px;
                     }
                 }
-                div:nth-child(2) { /* title */
-                    width: 50%;
+                div:nth-child(5n+2) { /* title */
+                    width: 100%;
                 }
-                div:nth-child(3) { /* duration */
+                div:nth-child(5n+3) { /* duration */
                     @media #{$mobile} {
                         display: none;
                     }
                 }
                 div.track_play a{
                     display: inline-block;
-                    width: 50px;
-                    height:  50px;
+                    width: 40px;
+                    height:  40px;
                     text-align: center;
-                    padding-top: 12px;
-                    border-top: 3px solid #fff;
-                    border-left: 3px solid #fff;
-                    border-right: 3px solid #200304;
-                    border-bottom: 3px solid #200304;
+                    padding-top: 5.5px;
+                    border-top: 2px solid #fff;
+                    border-left: 2px solid #fff;
+                    border-right: 2px solid #200304;
+                    border-bottom: 2px solid #200304;
                     border-radius: 50%;
                     transition: background-color $transition;
                     &:hover {
@@ -1259,6 +1326,13 @@ Page Specific Overrides
             line-height: $h5 * 1.4;
             grid-template-columns: 1fr 1fr;
         }
+        .name {
+            text-transform: capitalize;
+        }
+        .role {
+            text-transform: lowercase;
+            font-style: italic;
+        }
     }
     .video { /* music post > video section */
         clear:both;
@@ -1280,10 +1354,12 @@ Page Specific Overrides
     }
     .video-credit {
         display: grid;  
-        grid-template-columns: 1fr 2fr 2fr;
+        grid-template-columns: 1fr 4fr;
+
         @media #{$tablet} {
             font-size: $h5;
             line-height: $h5 * 1.4;
+            grid-template-columns: 1fr 8fr;
         }
         @media #{$mobile} {
             font-size: $h5;
@@ -1291,11 +1367,16 @@ Page Specific Overrides
             grid-template-columns: 1fr;
             margin-bottom: $spacing_sm;
         }
+        div:nth-child(2) {
+            column-count: 2;
+        }
         .credit {
-            grid-template-columns: 1fr 1fr;
+            div {
+                padding-right: 8px;
+            }
         }
     }
-    // #product-variants {
+    // #product-variants { /*previous layout for variants */
     //     opacity: 1;
     //     transition: opacity $transition;
     //     width: 80%;
@@ -1881,11 +1962,19 @@ $slide_width: 580px;
     @media #{$tablet} {
         width: 24px;
         height: 24px;
+        border-top: 2px solid white;
+        border-left: 2px solid white;
+        border-right: 2px solid $black;
+        border-bottom: 2px solid $black;
     }
 
     @media #{$mobile} {
         width: 24px;
         height: 24px;
+        border-top: 2px solid white;
+        border-left: 2px solid white;
+        border-right: 2px solid $black;
+        border-bottom: 2px solid $black;
     }
 
     &:first-child {

@@ -8,7 +8,7 @@
     {% endif %}
   </section>
 
-  {% comment %} featured news {% endcomment %}
+  {% comment %} featured news item {% endcomment %}
   {% for article in blog.articles %}
     {% if article.tags contains 'featured' %}
       <section class="featured">
@@ -17,14 +17,14 @@
     {% endif %}
   {% endfor %}
 
-   {% comment %} featured news {% endcomment %}
+   {% comment %} other news items {% endcomment %}
     <section class="blog-list">
       {% for article in blog.articles %}
         {% assign i = forloop.index0 %}
 
         {% unless article.tags contains 'featured' %}
           {% if article.content contains "https://"  %}  
-              {% if article.content contains "href"  %}
+              {% if article.content contains "href"  %}   
                 {% include 'article-news-item' %} 
               {% else %}
                 {% include 'article-press-item' %} 
