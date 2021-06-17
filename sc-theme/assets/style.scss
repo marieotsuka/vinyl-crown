@@ -879,8 +879,8 @@ section.featured {
           }
           figure {
               display: grid;
-              grid-template-columns: 1fr 2fr;
-              column-gap: 84px;
+              grid-template-columns: 2fr 1fr;
+              column-gap: 48px;
               font-size: $h2;
               line-height: $h2 * 1.1;
               @media #{$tablet} {
@@ -894,6 +894,7 @@ section.featured {
             }
               div.text {
                   width: 100%;
+                  order: 2;
               }
               div.thumbnail{ /*thumanail*/
                   height:0;
@@ -901,6 +902,7 @@ section.featured {
                   max-width:100%;
                   height: 0;
                   padding-top: 56.25%;
+                  order: 1;
               }
               h5, time { /*date*/
                 font-size: $h4;
