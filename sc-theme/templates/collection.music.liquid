@@ -20,7 +20,7 @@
      </style>
         <li class="item__{{i}}">
           <a href="{{ product.url | within: collection }}" style="color: ">
-            {{ product.title }} <span class="colophon san-serif">{{product.metafields.type.album}}, {{product.metafields.year.album}}</span>
+            <span>{{ product.title }}</span> <span class="colophon san-serif">{{product.metafields.type.album}}, {{product.metafields.year.album}}</span>
             <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
           </a>
         </li>
@@ -39,8 +39,14 @@
   jQuery('main li a').hover(
       function(e){
           var $this = $(this).find('img');
+          var $colophon = $(this).find('.colophon');
+
           var $left = $(this).offset().left + $(this).width() - 200;
           var $top = $(this).offset().top - 100;
+
+          // var $c_left = $(this).offset().left + $(this).width() - 200;
+          // var $c_top = $(this).offset().top - 100;
+
           var $img_margin = $left + 400;
           if ($(window).width() < $img_margin){
             $left = $(this).offset().left + $(this).width() - 400;
@@ -49,6 +55,10 @@
               'left': $left +'px',
               'top': $top+'px'
           });
+          // $colophon.css({
+          //     'left': $left +'px',
+          //     'top': $top+'px'
+          // });
       },function(e){
      
       }

@@ -24,7 +24,6 @@
   {% include 'twitter-card' %}
 
   {{ content_for_header }}
-  {{ 'mixins.scss.css' | asset_url | stylesheet_tag }}
   {{ 'style.scss.css' | asset_url | stylesheet_tag }}
 
   <!--[if lt IE 9]>
@@ -49,6 +48,7 @@
       input:hover, 
       a.item:hover,
       a.action:hover,
+      label:hover,
       footer {
         color: {{product.metafields.keycolor.music}};
       }

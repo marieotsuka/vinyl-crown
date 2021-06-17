@@ -60,7 +60,7 @@ $space_heading_xs: 44px;
 $transition: 0.25s;
 
 $mobile:  "(max-width: 414px)";
-$tablet: "(min-width: 768px) and (max-width: 1024px)";
+$tablet: "(min-width: 415x) and (max-width: 1024px)";
 $desktop: "(min-width: 1025px)";
 
 /*
@@ -188,6 +188,10 @@ header {
         display: inline-block;
         top: 30px;
         right: $spacing_md;
+        @media #{$tablet} {
+            top: 30px;
+            right:30px;
+        }
         @media #{$mobile} {
             display: none;
         }
@@ -243,6 +247,11 @@ main {
     min-height: 70vh; /* window height - footer */
     max-width: 1400px;
 
+    @media #{$tablet} {
+        width: calc(100% - 60px);
+        margin: 0 auto $spacing_md auto;
+        max-width: 100%;
+    }
     @media #{$mobile} {
         width: calc(100% - 40px);
         margin: 0 auto $spacing_md auto;
@@ -253,6 +262,9 @@ main {
 section {
     margin-bottom: $spacing_lg;
     overflow: hidden;
+    @media #{$tablet} {
+        margin-bottom: $spacing_md;
+    }
     @media #{$mobile} {
         margin-bottom: $spacing_md;
     }
@@ -269,6 +281,7 @@ footer {
     @media #{$tablet} {
         font-size: $h5;
         line-height: $h5*1.4;
+        height: 217.219px;
     }
     @media #{$mobile} {
         padding: $spacing_sm;
@@ -372,7 +385,7 @@ table { /* default: cart */
     text-align: left;
     @media #{$tablet} {
         font-size: $h4;
-        width: 100vw;
+        width: 100%;
     }
     @media #{$mobile} {
         font-size: $h4;
@@ -392,6 +405,9 @@ table { /* default: cart */
     tr {vertical-align: top;}
     td {
         padding: 8px $spacing_md 8px 0;
+        @media #{$tablet} {
+            padding: 8px $spacing_sm 8px 0;
+        }
         @media #{$mobile} {
             padding: 8px $spacing_sm 8px 0;
         }
@@ -582,6 +598,7 @@ header {
         transition: background-color $transition;
         @media #{$tablet} {
             top: 10+155px;
+            right: 30px;
         }
         @media #{$mobile} {
             display: none;
@@ -625,6 +642,11 @@ section[itemprop="description"] {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: $spacing_lg;
+
+    @media #{$tablet} { 
+        grid-template-columns: 1fr 1fr;
+        column-gap: $spacing_md;
+    }
     @media #{$mobile} { 
         grid-template-columns: 1fr;
         column-gap: 0;
@@ -676,12 +698,13 @@ a.item { /* item modules */
     }
 
     @media #{$tablet} {
-        width: calc(50% - 20px);
+        margin: 8px 8px;
+        width: calc(50% - 12px);
         &:nth-of-type(3n+1) {
-            margin-left: 12px;
+            margin-left: 8px;
         }
         &:nth-of-type(3n) {
-            margin-right:12px;
+            margin-right:8px;
         }
         &:nth-of-type(2n+1) {
             margin-left: 0;
@@ -987,6 +1010,9 @@ Page Specific Overrides
         ul {
             max-width: calc(100% - 200px);
             margin: 0 auto;
+            @media #{$tablet} {
+                max-width: calc(100% - 60px);
+            }
             @media #{$mobile} {
                 max-width: 100%;
             }
@@ -998,6 +1024,7 @@ Page Specific Overrides
             @media #{$tablet} {
                 font-size: $h2;
                 line-height: $h2 * 1.3;
+                padding-bottom: 24px;
             }
             @media #{$mobile} {
                 font-size: $h2;
@@ -1013,6 +1040,12 @@ Page Specific Overrides
                     width: 300px;
                     position: absolute;
                     transition: opacity $transition;
+                    @media #{$tablet} {
+                        display:none;
+                    }
+                    @media #{$mobile} {
+                        display:none;
+                    }
                 }
                 &:hover {
                     img {
@@ -1023,10 +1056,14 @@ Page Specific Overrides
             }
 
         }
+        span {
+            display: inline-block;
+        }
         .colophon {
             position: absolute;
             display: contents;
             padding-left: $spacing_sm;
+            word-break:keep-all;
         }
     }    
 }
@@ -1041,7 +1078,7 @@ Page Specific Overrides
 
         @media #{$tablet} {
             grid-template-columns: 1fr 1fr 1fr;
-            column-gap: $spacing_sm;
+            column-gap: $spacing_md;
         }
         
         @media #{$mobile} {
@@ -1096,6 +1133,21 @@ Page Specific Overrides
         line-height: $h4*1.4;
         padding: 8px 12px 8px 24px;
 
+    }
+
+    #product-variants {  /*initially from merch */
+        border: none;
+        padding: 0;
+        margin: $spacing_md 0; 
+        @media #{$mobile} {
+            margin: $spacing_sm 0; 
+    
+        }
+        div {
+            display: inline-block;
+            width: fit-content;
+        }
+       
     }
 
 }
@@ -1243,58 +1295,59 @@ Page Specific Overrides
             grid-template-columns: 1fr 1fr;
         }
     }
-    #product-variants {
-        opacity: 1;
-        transition: opacity $transition;
-        width: 80%;
-        ul {
-            display: flex;
-            flex-direction: row;
-            li {
-                width: 40%;
-                &:nth-child(2) { /*price */
-                    width: 20%;
-                }
-                &:nth-child(3) { /*btn */
-                    display: flex;
-                    flex-direction: row-reverse;
-                   button {
-                       min-width: 128px;
-                   }
-                }
-            }
-        }
-    }
+    // #product-variants {
+    //     opacity: 1;
+    //     transition: opacity $transition;
+    //     width: 80%;
+    //     ul {
+    //         display: flex;
+    //         flex-direction: row;
+    //         li {
+    //             width: 40%;
+    //             &:nth-child(2) { /*price */
+    //                 width: 20%;
+    //             }
+    //             &:nth-child(3) { /*btn */
+    //                 display: flex;
+    //                 flex-direction: row-reverse;
+    //                button {
+    //                    min-width: 128px;
+    //                }
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 .template-product.merch { /* merch detail */
-    #product-variants { 
-        border: none;
-        padding: 0;
-        margin: $spacing_md 0; 
-        @media #{$mobile} {
-            margin: $spacing_sm 0; 
-    
-        }
-        div {
-            display: inline-block;
-            width: fit-content;
-        }
-       
-    }
+   
     // .merch-slides {
     //         overflow: hidden;
     // }
     .product-info { /* merch post*/
         width: 80%; 
+        @media #{$tablet} {
+            width: 100%; 
+        }
+        @media #{$mobile} {
+            width: 100%; 
+        }
         h1 { /*title*/
             margin-block-start: 0;
+            @media #{$tablet} {
+                font-size: $h3;
+                line-height: $h3 * 1.4;
+            }
             @media #{$mobile} {
                 font-size: $h3;
                 line-height: $h3 * 1.4;
             }
         }
         h3 { /*description*/
+            @media #{$tablet} {
+                font-size: $h4;
+                line-height: $h4 * 1.4;
+            }
             @media #{$mobile} {
                 font-size: $h4;
                 line-height: $h4 * 1.4;
@@ -1303,15 +1356,29 @@ Page Specific Overrides
                 font-family: $font-secondary;
                 font-size: $h4;
                 line-height: $h4*1.4;
+                @media #{$tablet} {
+                    font-size: $h5;
+                    line-height: $h5 * 1.4;
+                }
                 @media #{$mobile} {
-                    font-size: $xsmall;
-                    line-height: $xsmall * 1.4;
+                    font-size: $h5;
+                    line-height: $h5 * 1.4;
                 }
                 li::before {
                     content: '— ';
                 }
                 li {
                     padding-bottom: 4px;
+                    text-indent: -1.5rem;
+                    padding-left: 1.5rem;
+                    @media #{$tablet} {
+                        text-indent: -1.1rem;
+                        padding-left: 1.1rem;
+                    }
+                    @media #{$mobile} {
+                        text-indent: -1.1rem;
+                        padding-left: 1.1rem;
+                    }
                 }
             }
 
@@ -1327,6 +1394,15 @@ Page Specific Overrides
         padding-top: 8px;
         margin-top: -40px;
         font-size: $h4;
+        font-weight: $semibold;
+        @media #{$tablet} {
+            font-size: $h5;
+            margin-top:0;
+        }
+        @media #{$mobile} {
+            font-size: $h5;
+            margin-top:0;
+        }
         span {
             padding: 0 4px;
             &:first-child {
@@ -1365,6 +1441,11 @@ Page Specific Overrides
         margin: 0 auto;
         max-width: 66.66%;
         min-width: 900px;
+        @media #{$tablet} {
+            width: 100%;
+            max-width: 100%;
+            min-width: auto;
+        }
         @media #{$mobile} {
             width: 100%;
             max-width: 100%;
@@ -1424,6 +1505,12 @@ Page Specific Overrides
             display: inline-block;
             padding-right: 24px;
             font-weight: $semibold;
+            @media #{$tablet} {
+                font-size: $h5;
+            }
+            @media #{$mobile} {
+                font-size: $h5;
+            }
         }
        
     }
@@ -1451,10 +1538,16 @@ Page Specific Overrides
 }
 
 $slide_width: 580px;
+
+
 .slick-slide {
   width: $slide_width;
   height: $slide_width/3 * 4;
   margin: 0px 20px;
+    @media #{$tablet} {
+        width: 50vw;
+        height: 64.33vw;
+    }
     @media #{$mobile} {
         width: 100vw;
         height: 133.33vw;
@@ -1467,6 +1560,10 @@ $slide_width: 580px;
   height: $slide_width/3 * 4;
   object-fit: cover; /* cover image */
   object-position: center;
+    @media #{$tablet} {
+        width: 50vw;
+        height: 64.33vw;
+    }
     @media #{$mobile} {
         width: 100vw;
         height: 133.33vw;
@@ -1621,7 +1718,7 @@ $slide_width: 580px;
 
 /*slick-theme*/
 
-@charset 'UTF-8';
+
 /* Slider */
 .slick-loading .slick-list
 {
@@ -1780,6 +1877,11 @@ $slide_width: 580px;
     border-left: 3px solid white;
     border-right: 3px solid $black;
     border-bottom: 3px solid $black;
+
+    @media #{$tablet} {
+        width: 24px;
+        height: 24px;
+    }
 
     @media #{$mobile} {
         width: 24px;

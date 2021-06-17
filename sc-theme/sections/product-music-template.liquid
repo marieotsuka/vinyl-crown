@@ -161,8 +161,9 @@
       All themes by Shopify should support the Product Reviews app out of the box.
       https://apps.shopify.com/product-reviews
     {% endcomment %}
-
-    <div id="product-add">
+ 
+    {% comment %}
+    <div id="product-add"> /*product-add semi-final*/
       {% if product.available %}
             {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
               <button class="action" type="submit" name="add" id="add" value="">Buy</button>
@@ -173,6 +174,8 @@
         <button class="action" type="submit" name="add" id="add" value="" disabled>Out of Stock</button>
       {% endif %}
     </div>
+    {% endcomment %}
+
     {% comment %}
       <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
@@ -230,10 +233,32 @@
       {% endfor %}</ul>
     </div>
     {% endcomment %} 
+
+
+
+    {% if product.variants.size > 1 %}
+      <div id="product-variants">
+          {% for variant in product.variants %}
+              <input type="radio" class="  {% unless variant.available %}out-of-stock{% endunless %}" name="id" value="{{ variant.id }}" id="radio_{{ variant.id }}"  />
+                {% comment %} {% if forloop.first %}checked="checked"{% endif %} {% endcomment %}
+              <label for="radio_{{ variant.id }}" class="radio {% unless variant.available %}out-of-stock{% endunless %}">
+              {{ variant.title | escape }} — <span class="san-serif">{{ variant.price | money }}</span>
+              </label>
+            {% endfor %}
+        </div>
+    {% endif %} 
   
-    
+    <div id="product-add">
+      {% if product.available %}
+        <button class="action" type="submit" name="add" id="add" value="Buy">Buy</button>
+      {% else %}
+        <button class="action" type="submit" name="add" id="add" value="" disabled>Out of Stock</button>
+      {% endif %}
+    </div>
+      {% comment %}  /*table form semi-final*/
     {% if product.variants.size > 1 %}
 
+    
         <div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
           {% for variant in product.variants %}
             <ul>
@@ -264,20 +289,13 @@
             </ul>
           {% endfor %}
 
-          {% comment %}   
-          <select id="product-select" name="id">
-          {% for variant in product.variants %}
-        
-            <option{% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
-            {{ variant.title }} - {{ variant.price | money }}
-            </option>
-                
-          {% endfor %}
-          </select>
-          {% endcomment %}
         </div>     
     {% endif %}    
-             
+           {% endcomment %}
+
+
+
+
       {% comment %}      
         <div id="backorder" class="hidden">
           <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
