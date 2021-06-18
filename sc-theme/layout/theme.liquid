@@ -5,19 +5,20 @@
 <!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->  
 <head>
+  <!--
+		Design and Development by Minkyoung Kim and Marie Otsuka 
+	-->
+
   <meta charset="utf-8" />
   <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
 
-  <title>
-  {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
-  </title>
+  <title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
 
   {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}" />
   {% endif %}
 
   <link rel="canonical" href="{{ canonical_url }}" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
   {% include 'open-graph-tags' %}
@@ -35,49 +36,46 @@
     {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
   {% endif %}
   {% if template contains 'music' %}  <!--key color setup for music products-->
-    <style>
-      body,
-      header nav li a,
-      header nav ul,
-      header nav div,
-      header a#cart  {
+  
+  <style>
+    /* custom color overwrites for music detail page */
+    body,
+    header nav li a,
+    header nav div,
+    header a#cart  {
+      background-color: {{product.metafields.keycolor.music}};
+    }
+    header nav li.active a,
+    header nav li a:hover, 
+    header a#cart:hover,
+    button:hover,
+    input:hover, 
+    a.item:hover,
+    a.action:hover,
+    label:hover,
+    input[type=radio]:checked+label,
+    footer {
+      color: {{product.metafields.keycolor.music}};
+    }
+    .template-product.music .tracklist ul li div.track_play a:hover svg path,
+    footer ul svg path{
+      fill: {{product.metafields.keycolor.music}};
+    }
+    @media (max-width: 633px) {
+      header nav ul {
         background-color: {{product.metafields.keycolor.music}};
       }
-      header nav li.active a,
-      header nav li a:hover, 
-      header a#cart:hover,
-      button:hover,
-      input:hover, 
-      a.item:hover,
-      a.action:hover,
-      label:hover,
-      input[type=radio]:checked+label,
-      footer {
-        color: {{product.metafields.keycolor.music}};
-      }
-      .template-product.music .tracklist ul li div.track_play a:hover svg path,
-      footer ul svg path{
-        fill: {{product.metafields.keycolor.music}};
-      }
-      @media (max-width: 633px) {
-        header nav li.active a {
-          background-color: {{product.metafields.keycolor.music}};
-          color: #200304;
-        }
-      }
-    </style>
+    }
+  </style>
+
   {% endif %}
   
   <!-- Additional Shopify helpers that will likely be added to the global shopify_common.js some day soon. -->
   {{ 'shopify_common.js'  | asset_url | script_tag }}
-
   {{ 'option_selection.js' | shopify_asset_url | script_tag }}
-
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
   <script>jQuery('html').removeClass('no-js').addClass('js');</script>
-	<!--
-		Design and Development by Minkyoung Kim and Marie Otsuka 
-	-->
+
 </head>
 
 
@@ -90,14 +88,10 @@
     Have a look in assets/shop.js.liquid to see sample JavaScript for this.
   {% endcomment %}      
  
-  {% comment %}}
-    We have a template file to render.
-    That's what content_for_layout is for.
-  {% endcomment %}
   <main role="main">
     {{ content_for_layout }}
   </main>
-  {% if template contains 'index' %}  {% comment %}}footer for homepage   {% endcomment %}
+  {% if template contains 'index' %} {% comment %} footer for homepage {% endcomment %}
   {% section 'footer-home' %} 
   {% else %}
     {% section 'footer' %} 

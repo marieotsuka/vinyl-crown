@@ -273,7 +273,7 @@ header {
                 background-color: $black;
                 color: $vanilla;
                 @media #{$mobile} {
-                    color: $black;
+                    // color: $black;                    
                 }
             }
             &:first-child { /*home button*/
@@ -643,6 +643,11 @@ figure {
 Page Agnostic Overrides
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 */
+
+body.no-scroll { /*when mobile menu is opened */
+    height:100%;
+    overflow: hidden;
+}
 
 header {
     #logo {

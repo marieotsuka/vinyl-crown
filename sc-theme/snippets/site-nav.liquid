@@ -63,8 +63,14 @@
   </ul>
 </nav>
 <script>
+  /*
+  ----------------------------------------
+  Toggle mobile menu
+  ----------------------------------------
+  */
+
   jQuery('nav div').click(function() {
-        console.log('test');
         $('nav ul').toggleClass('visible');  
+        $('body').toggleClass('no-scroll');
   });
 </script> 
