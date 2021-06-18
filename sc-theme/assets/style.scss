@@ -60,7 +60,7 @@ $space_heading_xs: 44px;
 
 $transition: 0.25s;
 
-$mobile:  "(max-width: 633px)";
+$mobile: "(max-width: 633px)";
 $tablet: "(min-width: 640px) and (max-width: 1024px)";
 $desktop: "(min-width: 1025px)";
 
@@ -185,7 +185,9 @@ h5 {
 Element Defaults
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 */
-
+.visible {
+    display: block;
+}
 
 header {
     nav {
@@ -194,19 +196,37 @@ header {
         display: inline-block;
         top: 30px;
         left: $spacing_md;
+        z-index: 100;
         @media #{$tablet} {
             top: $spacing_sm;
             left:$spacing_sm;
         }
-        @media #{$mobile} {
-            display: none;
-        }
+        // @media #{$mobile} {
+        //     top: 10px;
+        //     left: 10px;
+        // }
         ul {
             display: grid;
             grid-template-columns: 1fr 1fr;
             margin: -2.5px;
+            @media #{$mobile} {
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 20vh 0;
+                width: 100%;
+                height: 100%;
+                display:block;
+                margin: 0;
+                background-color:$vanilla;
+                z-index: -10;
+                display: none;
+            }
         }
-        li {
+        li { 
+            @media #{$mobile} {
+               height: 12vh;
+            }
             a {
                 display: flex;
                 justify-content: center;
@@ -240,22 +260,54 @@ header {
                     border-bottom: 2px solid $black;
                 }
                 @media #{$mobile} {
-                    font-size: $h5;
-                    line-height: $h5*1.4;
-                    border-top: 2px solid white;
-                    border-left: 2px solid white;
-                    border-right: 2px solid $black;
-                    border-bottom: 2px solid $black;
+                    width: 100%;
+                    height: 100%;
+                    font-size: $h3;
+                    line-height: $h3*1.4;
+                    border: none;
+                    margin: 0;
+                    border-radius: 0px;
                 }
             }
             &.active a, a:hover {
                 background-color: $black;
                 color: $vanilla;
+                @media #{$mobile} {
+                    color: $black;
+                }
             }
             &:first-child { /*home button*/
                 display: none;
+                @media #{$mobile} {
+                    display: block;
+                }
             }
 
+        }
+        div { /*div: menu btn for mobile*/
+            display: none; 
+            position: fixed;
+            top: 10px;
+            right:10px;
+            padding-top: 16px;
+            font-size: $xsmall;
+            line-height: $xsmall*1.4;
+            font-style: italic;
+            width: 72px;
+            height: 72px;
+            margin: 1.5px;
+            background-color: $vanilla;
+            border-top: 2px solid white;
+            border-left: 2px solid white;
+            border-right: 2px solid $black;
+            border-bottom: 2px solid $black;
+            padding-left: 4px;
+            vertical-align: center;
+            // border-radius: 3px;
+            border-radius: 50%;
+            @media #{$mobile} {
+                display: block;
+            }
         }
     }
 }
@@ -610,6 +662,7 @@ header {
             top: 10px;
             // right: 15px;
             right: 4px;
+            display: none;
         }
         svg {
             @media #{$tablet} {
@@ -1027,6 +1080,9 @@ Page Specific Overrides
         fill: $vanilla;
     }
     nav {
+        ul {
+            background-color: $green;
+        }
         li a {
             color: $vanilla;
             background-color: $green;
@@ -1041,15 +1097,22 @@ Page Specific Overrides
                 border-bottom: 2px solid $vanilla;
             } 
             @media #{$mobile} {
-                border-top: 2px solid $green-light;
-                border-left: 2px solid $green-light;
-                border-right: 2px solid $vanilla;
-                border-bottom: 2px solid $vanilla;
+                border: none;
             }            
         }
         li a:hover, li.active a {
             color: $green;   
             background-color: $vanilla;
+        }
+        div {
+            background-color: $green;
+            border-top: 2px solid $green-light;
+            border-left: 2px solid $green-light;
+            border-right: 2px solid $vanilla;
+            border-bottom: 2px solid $vanilla;
+            svg path{
+                fill: $vanilla;
+            }
         }
     }
     #cart {

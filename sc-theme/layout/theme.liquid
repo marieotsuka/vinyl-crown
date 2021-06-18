@@ -38,6 +38,8 @@
     <style>
       body,
       header nav li a,
+      header nav ul,
+      header nav div,
       header a#cart  {
         background-color: {{product.metafields.keycolor.music}};
       }
@@ -56,6 +58,12 @@
       .template-product.music .tracklist ul li div.track_play a:hover svg path,
       footer ul svg path{
         fill: {{product.metafields.keycolor.music}};
+      }
+      @media (max-width: 633px) {
+        header nav li.active a {
+          background-color: {{product.metafields.keycolor.music}};
+          color: #200304;
+        }
       }
     </style>
   {% endif %}
