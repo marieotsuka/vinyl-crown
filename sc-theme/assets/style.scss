@@ -201,10 +201,11 @@ header {
             top: $spacing_sm;
             left:$spacing_sm;
         }
-        // @media #{$mobile} {
-        //     top: 10px;
-        //     left: 10px;
-        // }
+        @media #{$mobile} {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
         ul {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -286,9 +287,9 @@ header {
         }
         div { /*div: menu btn for mobile*/
             display: none; 
-            position: fixed;
-            top: 10px;
-            right:10px;
+            position: absolute;
+            top: 0px;
+            right:0px;
             padding-top: 16px;
             font-size: $xsmall;
             line-height: $xsmall*1.4;
@@ -638,6 +639,14 @@ figure {
     margin-inline-end: 0px;
 }
 
+caption {
+    display: block;
+    padding-top: 16px;
+    font-size: $h5;
+    line-height: $h5 * 1.4;
+    text-align: left;
+}
+
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Page Agnostic Overrides
@@ -738,6 +747,9 @@ section.title {
     }
     h4 {
         margin-block-start: 1em;
+    }
+    a {
+        text-decoration: none;
     }
 }
 

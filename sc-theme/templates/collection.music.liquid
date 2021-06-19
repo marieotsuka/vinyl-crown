@@ -7,7 +7,7 @@
 {% paginate collection.products by 10 %}
 
   <section class="title">
-    <h1>{{ collection.title }}</h1>
+    <h1><a href="{{ collection.url }}">{{ collection.title }}</a></h1>
   </section>
 
   <ul>

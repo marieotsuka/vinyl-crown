@@ -16,11 +16,22 @@
 {% endif %}
 
 <script>
+  /*
+  ----------------------------------------
+  Image treatment
+  ----------------------------------------
+  */
+
   jQuery(function($) {
+    //  Display image to the right column
     var image = $("section div:first-child img");
         image.hide();
-        $("section div:nth-child(2)").append(image);
-        $("section div:nth-child(2) img:first-child").css({'display':'block'});
-      });
-  
-  </script>
+        $("div.profilepic").append(image);
+        $("div.profilepic img:first-child").css({'display':'block'});
+    //display image caption from image.alt
+    image.each(function(){
+      var alt = jQuery(this).attr("alt");;
+      $( "<caption>"+ alt +"</caption>" ).insertAfter(this);
+    });
+  });
+</script>

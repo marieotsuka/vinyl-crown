@@ -23,7 +23,7 @@
 {% endcase %}
 
 <section class="title">
-  <h1>{{ collections.merch.title }}</h1>
+  <h1><a href="{{ collection.url }}">{{ collections.merch.title }}</a></h1>
 </section>
 <div itemscope itemtype="http://schema.org/Product">
   
@@ -77,8 +77,7 @@
         <div id="product-variants" class="merch">
         {% if variant.available %}
           {% for variant in product.variants %}
-              <input type="radio" class="merch  {% unless variant.available %}out-of-stock{% endunless %}" name="id" value="{{ variant.id }}" id="radio_{{ variant.id }}"  />
-                 {% comment %} {% if forloop.first %}checked="checked"{% endif %} {% endcomment %}
+              <input type="radio" class="merch  {% unless variant.available %}out-of-stock{% endunless %}" name="id" value="{{ variant.id }}" id="radio_{{ variant.id }}" {% if forloop.first %}checked="checked"{% endif %}  />
               <label for="radio_{{ variant.id }}" class="radio {% unless variant.available %}out-of-stock{% endunless %}">
               {{ variant.title | escape }}
               </label>
