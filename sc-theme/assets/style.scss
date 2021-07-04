@@ -1051,14 +1051,48 @@ Page Specific Overrides
 
 .template-index { /* homepage */ 
     background-color: black;
+    main {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        font-size: $h4;
+        line-height: $h4*1.4;
+        font-weight: $semibold;
+        a {
+            color: $vanilla; 
+        }
+        li {
+            position: absolute;
+            text-decoration: underline;
+            cursor: pointer;
+            &:hover {text-decoration: none;}
+        }
+        .video {
+            opacity:0;
+            position: fixed;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            z-index:-10;
+            iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .show, .default {
+            opacity:1;
+        }
+    }
     #logo svg path{
         fill: $vanilla;
     }
     #cart {
         display: none;
-    }
-    main {
-        margin: 0;
     }
     footer {
         position: fixed;
