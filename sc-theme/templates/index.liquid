@@ -20,7 +20,7 @@
   {% for value in shop.metafields.url.home %}
     {% assign i = forloop.index0 %}
     <div class="video item--{{ i }} {% if shop.metafields.default.home[i] != "0" %} default {% endif %}">
-      <iframe src="https://www.youtube.com/embed/{{value}}?controls=0&showinfo=0&modestbranding=1&autoplay=1&mute=1&enablejsapi=1&loop=1&playlist={{value}}&start={{shop.metafields.start.home[i]}}&end={{shop.metafields.end.home[i]}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/{{value}}?controls=0&showinfo=0&modestbranding=0&autoplay=1&mute=1&enablejsapi=1&start={{shop.metafields.start.home[i]}}&end={{shop.metafields.end.home[i]}}&loop=1&playlist={{value}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   {% endfor %}
 {% endif %}
