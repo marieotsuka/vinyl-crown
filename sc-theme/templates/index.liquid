@@ -11,7 +11,7 @@
   {% for value in shop.metafields.title.home %}
     {% assign i = forloop.index0 %}
     <a href="/collections/music/products/{{shop.metafields.music.home[i]}}">
-      <li class="item--{{ i }} {% if shop.metafields.default.home[i] != "0" %} default {% endif %}" style="order:{{i}}">
+      <li class="item--{{ i }} {% if shop.metafields.default.home[i] == "1" %} default {% endif %}" style="order:{{i}}">
       {{value}}
       </li>
     </a>
@@ -19,8 +19,13 @@
   </ul>
   {% for value in shop.metafields.url.home %}
     {% assign i = forloop.index0 %}
-    <div class="video item--{{ i }} {% if shop.metafields.default.home[i] != "0" %} default {% endif %}">
-      <iframe src="https://www.youtube.com/embed/{{value}}?controls=0&showinfo=0&modestbranding=0&autoplay=1&mute=1&enablejsapi=1&start={{shop.metafields.start.home[i]}}&end={{shop.metafields.end.home[i]}}&loop=1&playlist={{value}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="video item--{{ i }} {% if shop.metafields.default.home[i] == "1" %} default {% endif %}">
+     <iframe src="https://www.youtube.com/embed/{{value}}?controls=0&showinfo=0&modestbranding=0&autoplay=1&mute=1&enablejsapi=1&start={{shop.metafields.start.home[i]}}&end={{shop.metafields.end.home[i]}}&loop=1&playlist={{value}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+    {%comment %} <script>
+        jQuery(function($) {
+        console.log('d');  
+      });
+    </script>{% endcomment %}
     </div>
   {% endfor %}
 {% endif %}
@@ -45,7 +50,6 @@
     $('main li').hover(function(e){
       var classname = $(this).attr('class');
       $('div.'+ classname).toggleClass('show');
-      $('main li').not(this).toggleClass('hide');
     });
     // $('main div iframe').each(function(){
     //   var min = Math.ceil(50);
@@ -67,5 +71,6 @@
     //     'height': vWidth + '%'
     //   })
     // });
+    
   });
 </script>
