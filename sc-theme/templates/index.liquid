@@ -7,18 +7,20 @@
 {{ page.content }}
 {% endcomment %}
 {% if shop.metafields.title.home != blank %}
+  <ul>
   {% for value in shop.metafields.title.home %}
     {% assign i = forloop.index0 %}
     <a href="/collections/music/products/{{shop.metafields.music.home[i]}}">
-      <li class="item--{{ i }}" style="order:{{i}}">
+      <li class="item--{{ i }} {% if shop.metafields.default.home[i] != "0" %} default {% endif %}" style="order:{{i}}">
       {{value}}
       </li>
     </a>
   {% endfor %}
+  </ul>
   {% for value in shop.metafields.url.home %}
     {% assign i = forloop.index0 %}
-    <div class="video item--{{ i }} {{shop.metafields.default.home}} {% if shop.metafields.default.home != "0" %} default {% endif %}" style="order:{{i}}">
-      <iframe src=" {{value}}?controls=0&showinfo=0&modestbranding=1&autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="video item--{{ i }} {% if shop.metafields.default.home[i] != "0" %} default {% endif %}">
+      <iframe src="https://www.youtube.com/embed/{{value}}?controls=0&showinfo=0&modestbranding=1&autoplay=1&mute=1&enablejsapi=1&loop=1&playlist={{value}}&start={{shop.metafields.start.home[i]}}&end={{shop.metafields.end.home[i]}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   {% endfor %}
 {% endif %}
@@ -33,16 +35,37 @@
 
   jQuery(function($) {
     $('main li').each(function(){
-      var xPos = Math.floor(Math.random() * window.innerWidth);
-      var yPos = Math.floor(Math.random() * window.innerHeight);
-      $(this).css({
-        'top': yPos + 'px',
-        'left': xPos + 'px'
-      })
+      // var xPos = Math.floor(Math.random() * window.innerWidth);
+      // var yPos = Math.floor(Math.random() * window.innerHeight);
+      // $(this).css({
+      //   'top': yPos + 'px',
+      //   'left': xPos + 'px'
+      // })
     });
     $('main li').hover(function(e){
       var classname = $(this).attr('class');
       $('div.'+ classname).toggleClass('show');
+      $('main li').not(this).toggleClass('hide');
     });
+    // $('main div iframe').each(function(){
+    //   var min = Math.ceil(50);
+    //   var max = Math.floor(100);
+    //   var vWidth = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    // //   var vxmin = Math.ceil(0);
+    // //   var vxmax = Math.floor(2/window.innerWidth);
+    // //   var vxPos = Math.floor(Math.random() * (vxmax - vxmin + 1)) + vxmin;
+    
+    // //   var vmin = Math.ceil(0);
+    // //   var vmax = Math.floor(2/window.innerHeight);
+    // //   var vyPos = Math.floor(Math.random() * (vymax - vymin + 1)) + vymin;
+      
+    //   $(this).css({
+    // //     'top': vyPos + '%',
+    // //     'left': vxPos + '%',
+    //     'width': vWidth + '%',
+    //     'height': vWidth + '%'
+    //   })
+    // });
   });
 </script>

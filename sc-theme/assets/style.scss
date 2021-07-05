@@ -232,10 +232,10 @@ header {
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
-                width: 75px;
-                height: 75px;
+                width: 65px;
+                height: 65px;
                 margin: 2.5px;
-                font-size: $h4;
+                font-size: 1rem;
                 line-height: $h4*1.4;
                 font-weight: $semibold;
                 color: inherit;
@@ -661,8 +661,8 @@ body.no-scroll { /*when mobile menu is opened */
 header {
     #logo {
         position: fixed;
-        top: 60px;
-        right: 10px;
+        top: 50px;
+        right: 20px;
         // top: $spacing_md;
         // left: $spacing_md;
         z-index: 10;
@@ -1051,6 +1051,21 @@ Page Specific Overrides
 
 .template-index { /* homepage */ 
     background-color: black;
+    header nav li a{
+        background-color: transparent;
+        border-top: 3px solid  $vanilla;
+        border-left: 3px solid  $vanilla;
+        border-right: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+        color: $vanilla;
+        &:hover {
+            background-color: $vanilla;
+            color:$black;
+        }
+        @media #{$mobile} {
+            color: $black;
+        }
+    }
     main {
         width: 100vw;
         height: 100vh;
@@ -1058,14 +1073,66 @@ Page Specific Overrides
         font-size: $h4;
         line-height: $h4*1.4;
         font-weight: $semibold;
-        a {
-            color: $vanilla; 
+        @media #{$tablet} {
+            font-size: $h5;
+            line-height: $h5*1.4;
         }
-        li {
+        @media #{$mobile} {
+            font-size: $h5;
+            line-height: $h5*1.4;
+        }
+        ul {
             position: absolute;
-            text-decoration: underline;
-            cursor: pointer;
-            &:hover {text-decoration: none;}
+            bottom: 30px;
+            left: 40px;
+            width: calc(100vw - 225px);
+            display:flex;
+            flex-direction: row;
+        }
+        a {
+            display:block;
+            position: relative;
+            padding: 1rem 5rem 0rem 0rem;
+            color: $vanilla; 
+            text-decoration: none;
+            @media #{$tablet} {
+                padding: 1rem 2rem 0rem 0rem;
+            }
+            @media #{$mobile} {
+                padding: 1rem 2rem 0rem 0rem;
+            }
+            // &:first-child {
+            //     top: 25vh;
+            //     left:5vw;
+            // }
+            // &:nth-child(2){
+            //     top: 40vh;
+            //     left: 50vw;
+            // }
+            // &:nth-child(3){
+            //     top: 25vh;
+            //     left: 75vw;
+            // }
+            // &:nth-child(4){
+            //     top: 75vh;
+            //     left: 7vw;
+            // }
+            // &:nth-child(5){
+            //     top: 75vh;
+            //     left: 75vw;
+            // }
+            li {
+                text-decoration: none;
+                cursor: pointer;
+                opacity:1;
+                &:hover {
+                    text-decoration: underline;
+                }
+                &.default:hover {
+                    text-decoration: underline;
+                }
+            }
+            
         }
         .video {
             opacity:0;
@@ -1075,17 +1142,23 @@ Page Specific Overrides
             width: 100%;
             height: 0;
             padding-bottom: 56.25%;
+            background-color: black;
             z-index:-10;
             iframe {
                 position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
+                top:  -23vh;
+                left:  -23vw;
+                width: 146vw;
+                height: 146vh;
+                min-height: 146vh;
+                min-width: 146vw;
             }
         }
         .show, .default {
             opacity:1;
+        }
+        .hide {
+            opacity:0;
         }
     }
     #logo svg path{
