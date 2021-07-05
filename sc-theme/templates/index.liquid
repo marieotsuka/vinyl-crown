@@ -3,5 +3,46 @@
   http://docs.shopify.com/themes/liquid-basics/what-is-true-and-false-in-liquid
   Learn how to read theme settings in your theme.
 {% endcomment %}
-
+{% comment %}
 {{ page.content }}
+{% endcomment %}
+{% if shop.metafields.title.home != blank %}
+  {% for value in shop.metafields.title.home %}
+    {% assign i = forloop.index0 %}
+    <a href="/collections/music/products/{{shop.metafields.music.home[i]}}">
+      <li class="item--{{ i }}" style="order:{{i}}">
+      {{value}}
+      </li>
+    </a>
+  {% endfor %}
+  {% for value in shop.metafields.url.home %}
+    {% assign i = forloop.index0 %}
+    <div class="video item--{{ i }} {{shop.metafields.default.home}} {% if shop.metafields.default.home != "0" %} default {% endif %}" style="order:{{i}}">
+      <iframe src=" {{value}}?controls=0&showinfo=0&modestbranding=1&autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+<script>
+  /*
+  ----------------------------------------
+  Setup random x y position for each li
+  ----------------------------------------
+  */
+
+  jQuery(function($) {
+    $('main li').each(function(){
+      var xPos = Math.floor(Math.random() * window.innerWidth);
+      var yPos = Math.floor(Math.random() * window.innerHeight);
+      $(this).css({
+        'top': yPos + 'px',
+        'left': xPos + 'px'
+      })
+    });
+    $('main li').hover(function(e){
+      var classname = $(this).attr('class');
+      $('div.'+ classname).toggleClass('show');
+    });
+  });
+</script>
