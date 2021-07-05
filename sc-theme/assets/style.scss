@@ -1402,18 +1402,34 @@ Page Specific Overrides
                     //     display: none;
                     // }
                 }
-                div.track_play a{
+                div.track_play{
                     display: inline-block;
                     width: 40px;
                     height: 40px;
                     text-align: center;
-                    padding-top: 5.5px;
-                    border-top: 2px solid #fff;
-                    border-left: 2px solid #fff;
-                    border-right: 2px solid #200304;
-                    border-bottom: 2px solid #200304;
-                    border-radius: 50%;
-                    transition: background-color $transition;
+                    position: relative;
+                    top: 15px;
+
+                    svg{
+                        position: absolute;
+                        left: 16px;
+                        top: 14px;
+                    }
+
+                    .play_button{
+                        position: absolute;
+                        width: 40px;
+                        height: 40px;
+                        border-top: 2px solid #fff;
+                        border-left: 2px solid #fff;
+                        border-right: 2px solid #200304;
+                        border-bottom: 2px solid #200304;
+                        border-radius: 50%;
+                        transition: background-color $transition;
+                        animation: play-anim 5s linear infinite;
+                        animation-play-state: paused;
+                    }
+                    
                     @media #{$tablet} {
                         width: 30px;
                         height: 30px;
@@ -1423,12 +1439,29 @@ Page Specific Overrides
                         height: 30px;
                     }
                     &:hover {
-                        background-color:$black;
-                        svg path {
+                        cursor: pointer;
+                        .play_button{
+                            background-color:$black;
+                        }
+
+                        svg .fill {
                             fill: $vanilla;
                         }
                     }
-                    
+                    .pause_icon{
+                      display: none;
+                    }  
+                    &.playing{
+                        .pause_icon{
+                            display: inline;
+                        }
+                        .play_icon{
+                            display: none;
+                        }
+                        .play_button{
+                            animation-play-state: running;
+                        }
+                    }
                 }
                 div.lyrics-popup {
                     display: none;
@@ -1533,6 +1566,14 @@ Page Specific Overrides
     // }
 }
 
+@keyframes play-anim{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
 .template-product.merch { /* merch detail */
    
     // .merch-slides {

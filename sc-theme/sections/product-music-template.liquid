@@ -60,56 +60,14 @@
           </p>
         </div>
 
-        {% if product.metafields.tracks.album != blank %}
+        {% if product.metafields.spotifyid.spotifyid != blank %}
         <div class="tracklist">
           <div class="san-serif">Tracklist</div>
-            <ul>
-              <li>
-                {% for value in product.metafields.track_title.album %}
-                  {% assign i = forloop.index0 %}
-                  {% assign num = i  | times: 1 | plus: 1 %}
-                  {% assign j = i  | times: 5 | plus: 2 %}
-                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
-                    {{num}}
-                  </div>
-                  <div class="item--{{ j }}" style="order:{{j}}">
-                    {{value}}
-                  </div>
-                {% endfor %}
-                {% for value in product.metafields.track_duration.album %}
-                  {% assign i = forloop.index0 %}
-                  {% assign j = i  | times: 5 | plus: 3 %}
-                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
-                    {{value}}
-                  </div>
-                {% endfor %}
-                {% for value in product.metafields.track_url.album %}
-                  {% assign i = forloop.index0 %}
-                  {% assign j = i  | times: 5 | plus: 4 %}
-                    <div class="item--{{ j }} track_play" style="order:{{j}}">
-                      <a href="{{value}}" target="_blanks">
-                        <svg width="10" height="12" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M13 7.5L0.249999 14.8612L0.25 0.138783L13 7.5Z" fill="#200304"/>
-                        </svg>
-                      </a>
-                    </div>
-                {% endfor %}
-                {% if product.metafields.track_lyrics.album != blank %}
-                  {% for value in product.metafields.track_lyrics.album %}
-                    {% assign i = forloop.index0 %}
-                    {% assign j = i  | times: 5  | plus: 5 %}
-                      <div class="item--{{ j }}" style="order:{{j}}">
-                        <a><i>lyrics</i></a>
-                        <div class="lyrics-popup">
-                          {{value}}
-                        </div>
-                      </div>                   
-                  {% endfor %}
-                {% endif %}
-              </li>
-            </ul>
-          </div>
-          
+          <ul id="trackplayer">
+
+          </ul>
+        </div>
+        
       {% endif %}
       </div>
       <div>
@@ -147,7 +105,7 @@
             </table>
         {% endif %}
         {% endcomment %}
-    <script>
+<!--     <script>
       var obj = JSON.parse(localStorage.getItem("_myobject"));
       obj.map(function(item) { 
           // (really just the first key)
@@ -155,7 +113,7 @@
               return "Number: " + key + " - Time: " + item[key]; 
       }).join(" ");
     </script>
-    
+     -->
 
     {% comment %}
       All themes by Shopify should support the Product Reviews app out of the box.
@@ -367,4 +325,84 @@
           });
       }
   );
+
+  jQuery(function($) {
+    $.getJSON( 'https://sc-player.herokuapp.com/{{product.metafields.spotifyid.spotifyid}}', function( data ) {
+      var items = [];
+      let tracks = data.data.items;
+
+      console.log(tracks);
+
+      $.each( tracks, function( key, val ) {
+        let track = val;
+        let num = key + 1;
+
+        //calculate and format duration from milliseconds
+        let ms = track.duration_ms;
+        let minutes = Math.floor(ms / 60000);
+        let seconds = ((ms % 60000) / 1000).toFixed(0);
+        let duration = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+
+        //compile track item
+        items.push(`
+          <li>
+            <div class="san-serif">
+              ${num}
+            </div>
+            <div class="">
+              ${track.name}
+            </div>
+            <div class="san-serif">
+              ${duration}
+            </div>
+            <div class="track_play" data-preview="${track.preview_url}">
+              <div class="play_button"></div>
+              <svg class="play_icon" width="10" height="12" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="fill" d="M13 7.5L0.249999 14.8612L0.25 0.138783L13 7.5Z" fill="#200304"/>
+              </svg>
+              <svg class="pause_icon" xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12"><rect class="fill" width="3.25" height="12"/><rect class="fill" x="6.75" width="3.25" height="12"/></svg>
+            </div>
+            <div class="">
+              <a><i>lyrics</i></a>
+              <div class="lyrics-popup">
+                test
+              </div>
+            </div>
+          </li>
+          `);
+      });
+      
+
+      $('#trackplayer').append( items.join("") );
+
+      let audioObject;
+
+      $('.track_play').on('click', function(){
+        console.log('play');
+        let preview = $(this).data('preview');        
+
+        if ($(this).hasClass('playing')){
+          //already playing, so pause
+          audioObject.pause();
+          $(this).removeClass('playing');
+        }else{
+          if (audioObject) {
+            audioObject.pause();
+            $('.playing').removeClass('playing');
+          }
+          audioObject = new Audio(preview);
+          audioObject.play();
+          $(this).addClass('playing');
+
+          audioObject.addEventListener('ended', function () {
+              $(this).removeClass('playing');
+          });
+        }      
+      });
+
+    });
+
+  });
+
+
 </script>

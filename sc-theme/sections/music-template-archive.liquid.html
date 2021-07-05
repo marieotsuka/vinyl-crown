@@ -1,0 +1,43 @@
+              <li>
+                {% for value in product.metafields.track_title.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign num = i  | times: 1 | plus: 1 %}
+                  {% assign j = i  | times: 5 | plus: 2 %}
+                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
+                    {{num}}
+                  </div>
+                  <div class="item--{{ j }}" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.track_duration.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 5 | plus: 3 %}
+                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
+                    {{value}}
+                  </div>
+                {% endfor %}
+                {% for value in product.metafields.track_url.album %}
+                  {% assign i = forloop.index0 %}
+                  {% assign j = i  | times: 5 | plus: 4 %}
+                    <div class="item--{{ j }} track_play" style="order:{{j}}">
+                      <a href="{{value}}" target="_blanks">
+                        <svg width="10" height="12" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M13 7.5L0.249999 14.8612L0.25 0.138783L13 7.5Z" fill="#200304"/>
+                        </svg>
+                      </a>
+                    </div>
+                {% endfor %}
+                {% if product.metafields.track_lyrics.album != blank %}
+                  {% for value in product.metafields.track_lyrics.album %}
+                    {% assign i = forloop.index0 %}
+                    {% assign j = i  | times: 5  | plus: 5 %}
+                      <div class="item--{{ j }}" style="order:{{j}}">
+                        <a><i>lyrics</i></a>
+                        <div class="lyrics-popup">
+                          {{value}}
+                        </div>
+                      </div>                   
+                  {% endfor %}
+                {% endif %}
+              </li>
