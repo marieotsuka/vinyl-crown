@@ -398,8 +398,10 @@
       //add tracklist to DOM
       $('#trackplayer').append( items.join("") );
 
-      // populate lyrics info
-      // loop through tracklist
+      setupPreviews();
+
+      // populate lyrics info after setting up tracklist
+      // loop through tracklist array
       tracklist.forEach( (song, index) => {
         let trackuri = encodeURIComponent(song);
         let trackno = index+1;
@@ -414,35 +416,33 @@
 
     });
 
-
-   //play track previews
-   let audioObject;
-   $('.track-play').on('click', function(){
-     let preview = $(this).data('preview');        
-
-     if ($(this).hasClass('playing')){
-       //already playing, so pause
-       audioObject.pause();
-       $(this).removeClass('playing');
-     }else{
-       if (audioObject) {
-         audioObject.pause();
-         $('.playing').removeClass('playing');
-       }
-       audioObject = new Audio(preview);
-       audioObject.play();
-       $(this).addClass('playing');
-
-       audioObject.addEventListener('ended', function () {
-           $(this).removeClass('playing');
-       });
-     }      
-   });
-
-
-
 });
 
+function setupPreviews(){
+  //play track previews
+  let audioObject;
+  $('.track-play').on('click', function(){
+    let preview = $(this).data('preview');        
+
+    if ($(this).hasClass('playing')){
+      //already playing, so pause
+      audioObject.pause();
+      $(this).removeClass('playing');
+    }else{
+      if (audioObject) {
+        audioObject.pause();
+        $('.playing').removeClass('playing');
+      }
+      audioObject = new Audio(preview);
+      audioObject.play();
+      $(this).addClass('playing');
+
+      audioObject.addEventListener('ended', function () {
+          $(this).removeClass('playing');
+      });
+    }      
+  });
+}
 function initializePopups(){
   //toggle lyrics popups
 

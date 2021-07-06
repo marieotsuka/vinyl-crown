@@ -1485,10 +1485,11 @@ Page Specific Overrides
             div:nth-child(2){
                text-align: center;
             }
+            margin-top: 12px;
         }
         ul {
             li {
-                padding-top: 12px;
+                
                 list-style-type: decimal-leading-zero;  
                 // display: flex;
                 // flex-direction: row;
@@ -1522,22 +1523,22 @@ Page Specific Overrides
                     }
 
                     display: inline-block;
-                    width: 40px;
-                    height: 40px;
+                    width: 36px;
+                    height: 36px;
                     text-align: center;
                     position: relative;
-                    top: 15px;
-
+                    top: 12px;
                     svg{
                         position: absolute;
-                        left: 16px;
-                        top: 14px;
+                        left: 15px;
+                        top: 12px;
                     }
 
                     .play-button{
                         position: absolute;
-                        width: 40px;
-                        height: 40px;
+                        width: 36px;
+                        height: 36px;
+                        padding-top: 12px;
                         border-top: 3px solid white;
                         border-left: 3px solid white;
                         border-right: 3px solid  $black;
