@@ -1445,18 +1445,23 @@ Page Specific Overrides
             margin-top: 100px;   
             height: auto;     
         }
-        .platforms a{ /* platform links */
-            padding: 0 12px;
-            text-decoration: none;
-            &:nth-child(2) { /* apple */
-                padding-right: 18px;
-            }
-        }
         h4 {
             @media #{$mobile} {
                 padding: 0 10%; 
             }
         }
+        .platforms a{ /* platform links */
+            padding: 0 12px;
+            &:nth-child(2) { /* apple */
+                padding-right: 18px;
+            }
+        }
+    }
+    .platforms a{ /* platform links */
+        text-decoration: none;
+    }
+    #music .platforms a{
+        padding: 0 8px;
     }
     #product-add {
         margin-bottom: $spacing_md;
@@ -1472,11 +1477,18 @@ Page Specific Overrides
     }
     .tracklist {
         margin-top: $spacing_md;
-        div:not(div.track_play) { 
-            padding-top:12px;
+        padding-right: 0;
+
+        .track-header{
+            display: grid;
+            grid-template-columns: 11fr 2fr 2fr;
+            div:nth-child(2){
+               text-align: center;
+            }
         }
         ul {
             li {
+                padding-top: 12px;
                 list-style-type: decimal-leading-zero;  
                 // display: flex;
                 // flex-direction: row;
@@ -1487,7 +1499,7 @@ Page Specific Overrides
                 &:last-child {
                     padding-bottom: 12px;
                 }
-                div {
+                .track-cell {
                     margin-right: 16px;
                     @media #{$tablet} {
                         margin-right: 8px;
@@ -1495,9 +1507,12 @@ Page Specific Overrides
                     @media #{$mobile} {
                         margin-right: 8px;
                     }
+                    &:last-child{
+                        margin-right: 0;
+                    }
                 }
 
-                div.track_play {
+                div.track-play {
                     margin-right: 32px;
                     @media #{$tablet} {
                         margin-right: 8px;
@@ -1505,17 +1520,7 @@ Page Specific Overrides
                     @media #{$mobile} {
                         margin-right: 10px;
                     }
-                }
-                div:nth-child(5n+2) { /* title */
-                    width: 100%;
-                }
-                div:nth-child(5n+3) { /* duration */
-                
-                    // @media #{$mobile} {
-                    //     display: none;
-                    // }
-                }
-                div.track_play{
+
                     display: inline-block;
                     width: 40px;
                     height: 40px;
@@ -1529,7 +1534,7 @@ Page Specific Overrides
                         top: 14px;
                     }
 
-                    .play_button{
+                    .play-button{
                         position: absolute;
                         width: 40px;
                         height: 40px;
@@ -1566,7 +1571,7 @@ Page Specific Overrides
                     }
                     &:hover {
                         cursor: pointer;
-                        .play_button{
+                        .play-button{
                             background-color:$black;
                         }
 
@@ -1589,13 +1594,75 @@ Page Specific Overrides
                         }
                     }
                 }
-                div.lyrics-popup {
-                    display: none;
-                }
             }
 
         }
     }
+
+    //lyrics popups
+    .track-lyrics{
+        
+        .lyrics-button{
+            font-size: 33px;
+            &:hover{
+                color: $vanilla;
+                cursor: pointer;
+            }
+        }
+        .lyrics-popup {
+            display: none;
+            z-index: 100;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top:0;
+            left: 0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lyrics-box{
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .lyrics-header{
+            background-color: $black;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 40px;
+            padding: 8px 24px;
+        }
+        .lyrics-close-button{
+            position: absolute;
+            right: 0px;
+            top: 3px;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .lyrics-body{
+            margin-top: 40px;
+            height: calc(500px - 40px);
+            width: 100%;
+            overflow-y: scroll;
+            padding: 8px 24px;
+            padding-bottom: 40px;
+            font-size: .8em;
+            line-height: 1.4;
+        }
+
+    }
+    .track-lyrics[data-popup=open] .lyrics-popup{
+        display: flex;
+    }
+
     .credit {
         display: grid;  
         grid-template-columns: 1fr 2fr;
@@ -1692,6 +1759,9 @@ Page Specific Overrides
     // }
 }
 
+.lockscroll{
+    overflow: hidden;
+}
 @keyframes play-anim{
     0%{
         transform: rotate(0deg);
