@@ -2,9 +2,9 @@
   Important notes about pagination:
   - Never access collection.products before the opening paginate tag.
   - Never paginate by more than 50.
-{% endcomment %}
 
 {% paginate collection.products by 10 %}
+{% endcomment %}
 
   <section class="title">
     <h1><a href="{{ collection.url }}">{{ collection.title }}</a></h1>
@@ -30,12 +30,12 @@
       <p>There are no products in this view.</p>
     {% endfor %}
   </ul>
+  {% comment %}
   {% if paginate.pages > 1 %}
     {{ paginate | default_pagination }}
   {% endif %}
-
-{% endpaginate %}
-
+  {% endpaginate %}
+  {% endcomment %}
 
 <script>
   /*

@@ -4,7 +4,7 @@
   - Never paginate by more than 50.
 {% endcomment %}
 
-{% paginate collection.products by 10 %}
+{% paginate collection.products by 6 %}
 
   <section class="title">
     <h1><a href="{{ collection.url }}">{{ collection.title }}</a></h1>
@@ -12,7 +12,6 @@
 
   {% comment %}
     Collection sorting. Needs the JavaScript that is at the bottom of this file.
-  {% endcomment %}
   {% if collection.products_count > 1 %}
     <select class="sort-by right">
       <option value="manual">Featured</option>
@@ -25,6 +24,7 @@
       <option value="best-selling">Best Selling</option>
     </select>
   {% endif %}
+ {% endcomment %}
 
   {% comment %}
     Listing all tags within the current collection.
@@ -101,12 +101,13 @@
     {% else %}
       <p>There are no products in this view.</p>
     {% endfor %}
-
-    {% if paginate.pages > 1 %}
-      {{ paginate | default_pagination }}
+  </section>
+  {% if paginate.pages > 1 %}
+      <section class="pagination">
+        {{ paginate | default_pagination: next: 'Previous', previous: 'Next'}}
+      </section>
     {% endif %}
   {% endpaginate %}
-  </section>
 
 {% comment %}
   JavaScript for collection sorting.
