@@ -50,7 +50,7 @@
           {% if product.metafields.subdescription.album.size > 0 %}
             <p class="subdescription">{{product.metafields.subdescription.album}}</p>
           {% endif %}
-          <p class="san-serif">
+          <p class="sans-serif">
           {% if product.metafields.type.album.size > 0 %}
             <span>{{product.metafields.type.album}},</span>
           {% endif %}
@@ -63,7 +63,7 @@
 
         {% if product.metafields.spotifyid.spotifyid != blank %}
         <div class="tracklist">
-          <div class="track-header san-serif">
+          <div class="track-header sans-serif">
             <div>Tracklist</div>
             <div>Preview</div>
             <div>Lyrics</div>
@@ -204,7 +204,7 @@
           {% for variant in product.variants %}
               <input type="radio" class="{% unless variant.available %}out-of-stock{% endunless %}" name="id" value="{{ variant.id }}" id="radio_{{ variant.id }}"  {% if forloop.first %}checked="checked"{% endif %}/>
               <label for="radio_{{ variant.id }}" class="radio {% unless variant.available %}out-of-stock{% endunless %}">
-              {{ variant.title | escape }} — <span class="san-serif">{{ variant.price | money }}</span>
+              {{ variant.title | escape }} — <span class="sans-serif">{{ variant.price | money }}</span>
               </label>
             {% endfor %}
         </div>
@@ -225,7 +225,7 @@
           {% for variant in product.variants %}
             <ul>
               <li>{{ variant.title }}</li>
-              <li class="san-serif">{{ variant.price | money }}</li>
+              <li class="sans-serif">{{ variant.price | money }}</li>
               <li>    
                       {% if variant.available %}
                       <input class="option" type="radio" name="id" value="{{ variant.id }}" id="radio_{{ variant.id }}" {% if forloop.first %}checked="checked"{% endif %} />
@@ -353,13 +353,13 @@
         //compile track item
         items.push(`
           <li class="track-item">
-            <div class="track-cell san-serif">
+            <div class="track-cell sans-serif">
               ${num}
             </div>
             <div class="track-cell track-title">
               ${track.name}
             </div>
-            <div class="track-cell san-serif">
+            <div class="track-cell sans-serif">
               ${duration}
             </div>
             <div class="track-cell track-play" data-preview="${track.preview_url}">

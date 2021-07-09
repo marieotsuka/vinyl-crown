@@ -3,7 +3,7 @@
                   {% assign i = forloop.index0 %}
                   {% assign num = i  | times: 1 | plus: 1 %}
                   {% assign j = i  | times: 5 | plus: 2 %}
-                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
+                  <div class="item--{{ j }} sans-serif" style="order:{{j}}">
                     {{num}}
                   </div>
                   <div class="item--{{ j }}" style="order:{{j}}">
@@ -13,7 +13,7 @@
                 {% for value in product.metafields.track_duration.album %}
                   {% assign i = forloop.index0 %}
                   {% assign j = i  | times: 5 | plus: 3 %}
-                  <div class="item--{{ j }} san-serif" style="order:{{j}}">
+                  <div class="item--{{ j }} sans-serif" style="order:{{j}}">
                     {{value}}
                   </div>
                 {% endfor %}
