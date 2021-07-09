@@ -59,10 +59,15 @@
           {% endif %}
           </p>
         </div>
+        {% include 'platforms' %}
 
         {% if product.metafields.spotifyid.spotifyid != blank %}
         <div class="tracklist">
-          <div class="san-serif">Tracklist</div>
+          <div class="track-header san-serif">
+            <div>Tracklist</div>
+            <div>Preview</div>
+            <div>Lyrics</div>
+          </div>
           <ul id="trackplayer">
 
           </ul>
@@ -326,12 +331,12 @@
       }
   );
 
+  let tracklist = [];
+
   jQuery(function($) {
     $.getJSON( 'https://sc-player.herokuapp.com/{{product.metafields.spotifyid.spotifyid}}', function( data ) {
       var items = [];
       let tracks = data.data.items;
-
-      console.log(tracks);
 
       $.each( tracks, function( key, val ) {
         let track = val;
@@ -343,29 +348,45 @@
         let seconds = ((ms % 60000) / 1000).toFixed(0);
         let duration = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 
+        tracklist.push(track.name);
+
         //compile track item
         items.push(`
-          <li>
-            <div class="san-serif">
+          <li class="track-item">
+            <div class="track-cell san-serif">
               ${num}
             </div>
-            <div class="">
+            <div class="track-cell track-title">
               ${track.name}
             </div>
-            <div class="san-serif">
+            <div class="track-cell san-serif">
               ${duration}
             </div>
-            <div class="track_play" data-preview="${track.preview_url}">
-              <div class="play_button"></div>
+            <div class="track-cell track-play" data-preview="${track.preview_url}">
+              <div class="play-button"></div>
               <svg class="play_icon" width="10" height="12" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path class="fill" d="M13 7.5L0.249999 14.8612L0.25 0.138783L13 7.5Z" fill="#200304"/>
               </svg>
               <svg class="pause_icon" xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12"><rect class="fill" width="3.25" height="12"/><rect class="fill" x="6.75" width="3.25" height="12"/></svg>
             </div>
-            <div class="">
-              <a><i>lyrics</i></a>
+            <div class="track-cell track-lyrics" data-popup="closed">
+              <div class="lyrics-button">...</div>
               <div class="lyrics-popup">
-                test
+                <div class="lyrics-box">
+                  <div class="lyrics-header">${track.name}
+                    <div class="lyrics-close-button">
+                      <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="27.2308" y1="9.14994" x2="9.14922" y2="27.2315" class="svg-stroke"/>
+                        <line x1="27.2308" y1="9.14994" x2="9.14922" y2="27.2315" class="svg-stroke"/>
+                        <line x1="27.2308" y1="9.14994" x2="9.14922" y2="27.2315" class="svg-stroke"/>
+                        <line x1="9.1497" y1="8.93111" x2="27.2312" y2="27.0126" class="svg-stroke"/>
+                        <line x1="9.1497" y1="8.93111" x2="27.2312" y2="27.0126" class="svg-stroke"/>
+                        <line x1="9.1497" y1="8.93111" x2="27.2312" y2="27.0126" class="svg-stroke"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="lyrics-body"</div>
+                </div>
               </div>
             </div>
           </li>
@@ -373,36 +394,88 @@
       });
       
 
+
+      //add tracklist to DOM
       $('#trackplayer').append( items.join("") );
 
-      let audioObject;
+      setupPreviews();
 
-      $('.track_play').on('click', function(){
-        console.log('play');
-        let preview = $(this).data('preview');        
-
-        if ($(this).hasClass('playing')){
-          //already playing, so pause
-          audioObject.pause();
-          $(this).removeClass('playing');
-        }else{
-          if (audioObject) {
-            audioObject.pause();
-            $('.playing').removeClass('playing');
-          }
-          audioObject = new Audio(preview);
-          audioObject.play();
-          $(this).addClass('playing');
-
-          audioObject.addEventListener('ended', function () {
-              $(this).removeClass('playing');
-          });
-        }      
+      // populate lyrics info after setting up tracklist
+      // loop through tracklist array
+      tracklist.forEach( (song, index) => {
+        let trackuri = encodeURIComponent(song);
+        let trackno = index+1;
+        let lyrics='';
+        $.getJSON( 'https://sc-player.herokuapp.com/lyrics/' + trackuri, function( lyricsjson ) {
+          // console.log(lyricsjson);
+          lyrics = formatter( lyricsjson.data.replace(/\n/g, '<br />') );
+          $(`.track-item:nth-child(${trackno}) .lyrics-body`).html(lyrics);
+        });
       });
+      initializePopups();
 
     });
 
+});
+
+function setupPreviews(){
+  //play track previews
+  let audioObject;
+  $('.track-play').on('click', function(){
+    let preview = $(this).data('preview');        
+
+    if ($(this).hasClass('playing')){
+      //already playing, so pause
+      audioObject.pause();
+      $(this).removeClass('playing');
+    }else{
+      if (audioObject) {
+        audioObject.pause();
+        $('.playing').removeClass('playing');
+      }
+      audioObject = new Audio(preview);
+      audioObject.play();
+      $(this).addClass('playing');
+
+      audioObject.addEventListener('ended', function () {
+          $(this).removeClass('playing');
+      });
+    }      
+  });
+}
+function initializePopups(){
+  //toggle lyrics popups
+
+  $('.lyrics-button').on('click', function(e){
+    let thistrack = $(this).parent();
+    if( $(thistrack).attr('data-popup') == 'open' ){
+      $(thistrack).attr('data-popup', 'closed');
+      $('body').removeClass('lockscroll');
+    }else{
+      $('[data-popup=open]').attr('data-popup', 'closed'); //close others
+      $(thistrack).attr('data-popup', 'open');
+      $('body').addClass('lockscroll');
+    }    
   });
 
+  $('.lyrics-popup').click(function(e){
+    let trackitem = $(this).parent();
+    if( $(trackitem).attr('data-popup') == 'open' ){
+      $(trackitem).attr('data-popup', 'closed');
+      $('body').removeClass('lockscroll');
+    }
+    // console.log(e.target);
+    // if(e.target.hasClass())
+  });
+}
 
+function formatter(a) {
+  //helps fix quote marks to proper curly quotes in strings
+  a = a.replace(/(^|[-\u2014\s(\["])'/g, "$1\u2018");       // opening singles
+  a = a.replace(/'/g, "\u2019");                            // closing singles & apostrophes
+  a = a.replace(/(^|[-\u2014/\[(\u2018\s])"/g, "$1\u201c"); // opening doubles
+  a = a.replace(/"/g, "\u201d");                            // closing doubles
+  a = a.replace(/--/g, "\u2014");                           // em-dashes
+  return a
+};
 </script>

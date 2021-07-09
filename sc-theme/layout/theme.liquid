@@ -62,8 +62,12 @@
     body,
     header nav li a,
     header nav div,
-    header a#cart  {
+    header a#cart,
+    .lyrics-box {
       background-color: {{product.metafields.keycolor.music}};
+    }
+    .lyrics-close-button .svg-stroke{
+      stroke: {{product.metafields.keycolor.music}};
     }
     header nav li.active a,
     header nav li a:hover, 
@@ -74,7 +78,8 @@
     a.action:hover,
     label:hover,
     input[type=radio]:checked+label,
-    footer {
+    footer,
+    .lyrics-header {
       color: {{product.metafields.keycolor.music}};
     }
     .template-product.music .tracklist ul li div.track_play a:hover svg path,
