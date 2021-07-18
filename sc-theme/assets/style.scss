@@ -385,15 +385,16 @@ footer {
             &:nth-child(1) { /* apple */
                 padding-right: 18px;
             }
-            img { /*vc logo*/
-                width: 280px;
-                @media #{$tablet} {
-                    width: 200px;
-                }
-                @media #{$mobile} {
-                    width: 160px;
-                }
-            }
+        
+            // img { /*vc logo*/
+            //     width: 280px;
+            //     @media #{$tablet} {
+            //         width: 200px;
+            //     }
+            //     @media #{$mobile} {
+            //         width: 160px;
+            //     }
+            // }
         }
         li:first-child { /* (c) column*/
             @media #{$tablet} {
@@ -422,13 +423,25 @@ footer {
             text-align: right;
             @media #{$tablet} {
                 order: 3;
-                svg {
-                    transform: scale(0.7);
-                }
             }
             @media #{$mobile} {
                 order: 3;
             }
+            svg {
+                width: 335px; 
+                height: 19px; 
+                 @media #{$tablet} {
+                    transform: scale(0.7);
+                    transform-origin: right;
+                }
+                @media #{$mobile} {
+                    transform: scale(0.7);
+                    transform-origin: right;
+                    width: 200px;
+                    height: 23px;
+                }
+            }
+           
             a {
                 padding: 0;
             }
@@ -1114,9 +1127,9 @@ Page Specific Overrides
             position: absolute;
             bottom: 30px;
             left: 40px;
-            // width: calc(100vw - 225px);
-            // display:flex;
-            // flex-direction: row;
+            width: calc(100vw - 225px);
+            display:flex;
+            flex-direction: row;
             @media #{$tablet} {
                 display: none;
             }
@@ -1129,8 +1142,12 @@ Page Specific Overrides
             position: relative;
             // position:absolute;
             padding: 1rem 3rem 0rem 0rem;
+            // padding: 1rem 0 0 0;
             color: $vanilla; 
             text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
             // &:first-child {
             //     top: 25vh;
             //     left:5vw;
@@ -1197,13 +1214,20 @@ Page Specific Overrides
             margin-left: 0;
             color: $vanilla; 
             text-decoration: none;
-            width: auto;
+            width: fit-content;
             height: auto;
             cursor: pointer;
             border-top: 0px;
             border-left: 0px;
             border-right: 0px;
             border-bottom: 0px;
+            @media #{$tablet} {
+                display: none;
+            }
+            @media #{$mobile} {
+                display: none;
+            }
+
         }
         
         .video {
@@ -1417,6 +1441,12 @@ Page Specific Overrides
             width: 0;
             word-break: keep-all;
             white-space: nowrap;
+            @media #{$tablet} {
+               width: auto; /*center-aligned for when it is in a seprate line*/
+            }
+            @media #{$mobile} {
+               width: auto; /*center-aligned for when it is in a seprate line*/
+            }
         }
     }    
 }
