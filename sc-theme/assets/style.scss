@@ -12,13 +12,13 @@
   ## Archive
   ## Article
   ## Elements
-  ## Mailchimp
 # Page Specific Overrides
   ## Nav
   ## Structure
   ## Pages 
   ## Posts
   ## Slider
+  ## Mailchimp
 --------------------------------------------------------------*/
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -360,6 +360,7 @@ footer {
         font-size: $h5;
         line-height: $h5*1.4;
     }
+
     ul {
         width: 100%;
         display: grid;
@@ -450,42 +451,6 @@ footer {
         }
     }
 }
-
-/*mailchimp newsletter*/
-
-#mc_embed_signup { 
-    text-align: center;
-    form {
-        display: flex;
-        justify-content: center;
-        margin-right: -6rem;
-    }
-    input[type=email]{
-        font-family: $font-primary;
-        border: 1px solid $vanilla;
-        padding: 8px;
-        color: $vanilla;
-        width: 330px;
-        font-size: 1rem;
-        &:focus{
-            outline: none;
-        }
-        margin-bottom: $spacing_md;
-    }
-    input[type=email]::placeholder {
-      color: $vanilla;
-      font-size: 1rem;
-    }
-    #mc-embedded-subscribe{
-        color: $vanilla;
-        border: 0;
-        font-size: 2rem;
-        position: relative;
-        top: -20px;
-    }
-}
-
-
 
 
 ul {
@@ -1246,7 +1211,8 @@ Page Specific Overrides
             margin-left: 0;
             color: $vanilla; 
             text-decoration: none;
-            width: fit-content;
+            // width: fit-content;
+            width: auto;
             height: auto;
             cursor: pointer;
             border-top: 0px;
@@ -2092,6 +2058,9 @@ Page Specific Overrides
 
 
 
+
+
+
 /* Slider css from Slick.js */
 
 
@@ -2519,7 +2488,64 @@ $slide_width: 580px;
 }
 
 
+/*mailchimp newsletter*/
 
+#mc_embed_signup { 
+    text-align: center;
+    form {
+        display: flex;
+        justify-content: center;
+    }
+    input[type=email]{
+        font-family: $font-primary;
+        border: 1px solid $vanilla;
+        padding: 8px;
+        color: $vanilla;
+        width: 330px;
+        font-size: 1rem;
+        margin-bottom: $spacing_md;
+        &:focus{
+            outline: none;
+        }
+  
+        @media #{$mobile} {
+           width: 80vw;
+        }
+    }
+    input[type=email]::placeholder {
+      color: $vanilla;
+      font-size: 1rem;
+    }
+    #mc-embedded-subscribe{
+        color: $vanilla;
+        border: 0;
+        font-size: 2rem;
+        position: relative;
+        top: -20px;
+        &:hover{
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        margin-right: -6rem;
 
+        @media #{$tablet} {
+           margin-right: 0;
+           font-size: $h3;
+        }
+        @media #{$mobile} {
+           margin-right: 0;
+           font-size: $h3;
+        }
+    }
+
+    input[type=email], input[type=email]::placeholder{
+        @media #{$tablet} {
+            font-size: $h5;
+        }
+        @media #{$mobile} {
+            font-size: $h5;
+        }
+    }
+}
 
 

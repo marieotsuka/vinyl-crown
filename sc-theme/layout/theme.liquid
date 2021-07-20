@@ -79,8 +79,14 @@
     label:hover,
     input[type=radio]:checked+label,
     footer,
-    .lyrics-header {
+    .lyrics-header, 
+    #mc_embed_signup input.email,
+    #mc_embed_signup input.email::placeholder,
+    #mc_embed_signup #mc-embedded-subscribe{
       color: {{product.metafields.keycolor.music}};
+    }
+    #mc_embed_signup input.email{
+      border-color: {{product.metafields.keycolor.music}};
     }
     .template-product.music .tracklist ul li div.track_play a:hover svg path,
     footer ul svg path,
