@@ -10,7 +10,7 @@
   <div class="slider">
     {% for value in shop.metafields.url.home %}
     {% assign i = forloop.index0 %}
-      <div class="video item--{{ i }}" data-title="{{shop.metafields.title.home[i]}}">
+      <div class="video item--{{ i }}" data-title="{{shop.metafields.title.home[i]}}" data-url="{{shop.metafields.music.home[i]}}">
         <iframe src="https://www.youtube.com/embed/{{value}}?controls=0&showinfo=0&modestbranding=0&autoplay=1&mute=1&enablejsapi=1&start={{shop.metafields.start.home[i]}}&end={{shop.metafields.end.home[i]}}&loop=1&playlist={{value}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
       </div>
     {% endfor %}
@@ -29,8 +29,8 @@
       variableWidth: true,
       customPaging : function(slider, i) {
         var title = $(slider.$slides[i]).find('[data-title]').data('title');
-        return '<a class="pager__item" href="/collections/music/products/{{shop.metafields.music.home[i]}}"> '+ title +' </a>';
-        // console.log('test?');
+        var url = $(slider.$slides[i]).find('[data-url]').data('url');
+        return '<a class="pager__item" href="/collections/music/products/' + url + '">'+ title +' </a>';
       }
     });
     // slick carousel go to slide on hover
