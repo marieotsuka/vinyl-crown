@@ -360,10 +360,7 @@ footer {
         font-size: $h5;
         line-height: $h5*1.4;
     }
-    div { /*newsletter*/
-        text-align: center;
-        padding-bottom: $spacing_md;
-    }
+
     ul {
         width: 100%;
         display: grid;
@@ -1214,7 +1211,8 @@ Page Specific Overrides
             margin-left: 0;
             color: $vanilla; 
             text-decoration: none;
-            width: fit-content;
+            // width: fit-content;
+            width: auto;
             height: auto;
             cursor: pointer;
             border-top: 0px;
@@ -2490,7 +2488,64 @@ $slide_width: 580px;
 }
 
 
+/*mailchimp newsletter*/
 
+#mc_embed_signup { 
+    text-align: center;
+    form {
+        display: flex;
+        justify-content: center;
+    }
+    input[type=email]{
+        font-family: $font-primary;
+        border: 1px solid $vanilla;
+        padding: 8px;
+        color: $vanilla;
+        width: 330px;
+        font-size: 1rem;
+        margin-bottom: $spacing_md;
+        &:focus{
+            outline: none;
+        }
+  
+        @media #{$mobile} {
+           width: 80vw;
+        }
+    }
+    input[type=email]::placeholder {
+      color: $vanilla;
+      font-size: 1rem;
+    }
+    #mc-embedded-subscribe{
+        color: $vanilla;
+        border: 0;
+        font-size: 2rem;
+        position: relative;
+        top: -20px;
+        &:hover{
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        margin-right: -6rem;
 
+        @media #{$tablet} {
+           margin-right: 0;
+           font-size: $h3;
+        }
+        @media #{$mobile} {
+           margin-right: 0;
+           font-size: $h3;
+        }
+    }
+
+    input[type=email], input[type=email]::placeholder{
+        @media #{$tablet} {
+            font-size: $h5;
+        }
+        @media #{$mobile} {
+            font-size: $h5;
+        }
+    }
+}
 
 
