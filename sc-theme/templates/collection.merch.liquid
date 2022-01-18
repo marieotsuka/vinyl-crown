@@ -69,7 +69,7 @@
         <li class="{% unless product.available %} sold-out{% endunless %}{% if on_sale %} on-sale{% endif %}">
 
           <a href="{{ product.url | within: collection }}">
-            <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
+            <img src="{{ product | img_url: '600x600' }}" alt="{{ product.featured_image.alt | escape }}" />
             
             <h4>{{ product.title }}</h4>
 

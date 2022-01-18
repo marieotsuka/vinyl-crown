@@ -1,7 +1,10 @@
 <a href=" {{ article.content}} " class="item item--{{i}} press" target="blank">
 <figure>
   <div>
-    <i>{{ article.title }}↗</i>     
+    <i>{{ article.title }}
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: -2px; padding-left: 2px;">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.5689 0.0688741L18.048 0.502333C18.3229 0.528933 18.5241 0.773313 18.4975 1.04817L18.0641 5.52725C18.0375 5.8021 17.7931 6.00336 17.5182 5.97676C17.2434 5.95016 17.0421 5.70578 17.0687 5.43092L17.3859 2.15334L1.3177 15.386L0.681988 14.614L16.7502 1.38141L13.4726 1.06422C13.1977 1.03763 12.9965 0.793246 13.0231 0.518387C13.0497 0.243529 13.2941 0.0422754 13.5689 0.0688741Z" fill="#200304"/>
+      </svg></i>     
     <h5>
         <time pubdate datetime="{{ article.published_at  | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>&nbsp; | &nbsp;{{ article.excerpt }}
     </h5>

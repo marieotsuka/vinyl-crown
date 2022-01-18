@@ -21,7 +21,7 @@
           <a href="{{ product.url | within: collection }}">
             <span>{{ product.title }}</span> <span class="colophon sans-serif">{{product.metafields.type.album}}, {{product.metafields.year.album}}</span>
             {% if product.images.size > 0 %}
-              <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
+              <img src="{{ product | img_url: '450x450' }}" alt="{{ product.featured_image.alt | escape }}" />
             {% endif %}
           </a>
         </li>

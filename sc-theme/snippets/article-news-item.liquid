@@ -16,13 +16,12 @@
           {{ article.title }}      
           <h5><time pubdate datetime="{{ article.published_at  | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time></h5>
       </div> 
-
       {% if article.image.size > 0 %}
         <div class="thumbnail">
           {% if article.tags contains 'featured' %}
             <img src="{{ article.image.src | img_url: 'master' }}">   {% comment %} featured, uncompressed img {% endcomment %}
-          {% else %}
-            <img src="{{ article.image.src | img_url: 'medium' }}">  
+          {% else %} 
+            <img src="{{ article.image.src | img_url: '198x198' }}">  {% comment %} thumbnail, max-width (132px) * 1.5 {% endcomment %} 
           {% endif %}
         </div>
       {% endif %} 
