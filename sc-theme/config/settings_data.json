@@ -1,10 +1,21 @@
 {
   "current": {
+    "checkout_logo_image": "shopify:\/\/shop_images\/IMG_0311.jpg",
+    "checkout_accent_color": "#2a3f3b",
+    "checkout_button_color": "#200304",
     "customer_layout": "theme",
     "example_option": "option",
-    "sections" : {
-      
-    }
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer-home": {
+        "type": "footer-home",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
   },
   "presets": {
     "Naked": {

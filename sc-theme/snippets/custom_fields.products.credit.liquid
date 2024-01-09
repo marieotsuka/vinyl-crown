@@ -1,0 +1,15 @@
+{% if product.metafields.custom_fields["credit"] != blank %}
+  <div class="custom-field custom-field__credit custom-field__type--text-repeater">
+    <h3 class="custom-field--title">credit</h3>
+    <div class="custom-field--value">
+      {% for item in product.metafields.custom_fields["credit"] %}
+        <div class="fc-repeater-field-item fc-repeater-field-item--{{ forloop.index0 }} field__credit field-type--text">
+           <h4 class="custom-field--title">credit</h4>
+           <div class="custom-field--value">
+             {{ item["credit"] }}
+           </div>
+        </div>
+       {% endfor %}
+    </div>
+  </div>
+{% endif %}

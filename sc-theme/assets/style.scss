@@ -204,7 +204,8 @@ header {
         @media #{$mobile} {
             position: absolute;
             top: 10px;
-            right: 10px;
+            // right: 10px;
+            left: 0;
         }
         ul {
             display: grid;
@@ -261,7 +262,7 @@ header {
                     border-bottom: 2px solid $black;
                 }
                 @media #{$mobile} {
-                    width: 100%;
+                    width: 100vw;
                     height: 100%;
                     font-size: $h3;
                     line-height: $h3*1.4;
@@ -285,11 +286,11 @@ header {
             }
 
         }
-        div { /*div: menu btn for mobile*/
+        div { /*div: logo for mobile*/
             display: none; 
             position: absolute;
             top: 0px;
-            right:0px;
+            right: 140px;
             padding-top: 16px;
             font-size: $xsmall;
             line-height: $xsmall*1.4;
@@ -297,17 +298,24 @@ header {
             width: 72px;
             height: 72px;
             margin: 1.5px;
-            background-color: $vanilla;
-            border-top: 2px solid white;
-            border-left: 2px solid white;
-            border-right: 2px solid $black;
-            border-bottom: 2px solid $black;
-            padding-left: 4px;
+
+            //sc logo
+            // right:0px;
+            // background-color: $vanilla;
+            // border-top: 2px solid white;
+            // border-left: 2px solid white;
+            // border-right: 2px solid $black;
+            // border-bottom: 2px solid $black;
+            // padding-left: 4px;
+
             vertical-align: center;
             // border-radius: 3px;
             border-radius: 50%;
             @media #{$mobile} {
                 display: block;
+                width: 100vw;
+                left: 0;
+                text-align: center;
             }
         }
     }
@@ -322,11 +330,14 @@ main {
     @media #{$tablet} {
         width: calc(100% - 60px);
         margin: 0 auto $spacing_md auto;
+        margin-top: 100px; //for vinyl crown logo
         max-width: 100%;
     }
     @media #{$mobile} {
         width: calc(100% - 40px);
         margin: 0 auto $spacing_md auto;
+        margin-top: 100px; //for vinyl crown logo
+
         max-width: 100%;
     }
 }
@@ -675,8 +686,10 @@ body.no-scroll { /*when mobile menu is opened */
 header {
     #logo {
         position: fixed;
-        top: 50px;
-        right: 20px;
+        // top: 50px; //sc logo position
+        // right: 20px;
+        top: 22px; //vinyl crown logo position
+        right: 22px;
         // top: $spacing_md;
         // left: $spacing_md;
         z-index: 10;
@@ -706,10 +719,9 @@ header {
     a#cart {
         display: inline-block;
         position: fixed;
-        top: 4px;
+        // top: 4px; //sc logo
+        top: 0px; //vinyl crown logo
         right: 4px;
-        // top: 40+155px;
-        // right: $spacing_md;
         background-color: $vanilla;
         font-family: $font-secondary;
         font-size: $xsmall;
@@ -1091,21 +1103,48 @@ Page Specific Overrides
 
 .template-index { /* homepage */ 
     background-color: black;
-    header nav li a{
-        background-color: transparent;
-        border-top: 3px solid  $vanilla;
-        border-left: 3px solid  $vanilla;
-        border-right: 3px solid transparent;
-        border-bottom: 3px solid transparent;
-        color: $vanilla;
-        &:hover {
-            background-color: $vanilla;
-            color:$black;
+    &.no-scroll header nav div{ //nav opened
+        svg path {
+            fill: black;      
+         }
+    }
+
+    
+    header nav div{
+        svg path {
+            fill: $vanilla;       
+         }
+         color: $vanilla;   
+        
+    }
+    header nav li {
+        a {
+            background-color: transparent;
+            border-top: 3px solid  $vanilla;
+            border-left: 3px solid  $vanilla;
+            border-right: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            color: $vanilla;
+            &:hover {
+                background-color: $vanilla;
+                color:$black;
+            }
+           
+            @media #{$mobile} {
+                color: $black;
+                border: none;
+            }
         }
-        @media #{$mobile} {
-            color: $black;
+
+        &.active a, a:hover {
+            background-color: $black;
+            color: $vanilla;
+            @media #{$mobile} {
+                // color: $black;                    
+            }
         }
     }
+  
     .slick-slider .slick-list { 
         @media #{$mobile} {
             height: 100vh;
@@ -1334,11 +1373,12 @@ Page Specific Overrides
             background-color: $vanilla;
         }
         div {
-            background-color: $green;
-            border-top: 2px solid $green-light;
-            border-left: 2px solid $green-light;
-            border-right: 2px solid $vanilla;
-            border-bottom: 2px solid $vanilla;
+            // sc logo
+            // background-color: $green;
+            // border-top: 2px solid $green-light;
+            // border-left: 2px solid $green-light;
+            // border-right: 2px solid $vanilla;
+            // border-bottom: 2px solid $vanilla;
             svg path{
                 fill: $vanilla;
             }
