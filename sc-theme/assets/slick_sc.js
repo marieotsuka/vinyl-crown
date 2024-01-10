@@ -16,7 +16,7 @@
  */
 /* global window, document, define, jQuery, setInterval, clearInterval */
 
-console.log('slick.js is loaded')
+console.log('slick_sc.js is loaded')
 ;(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {

@@ -436,8 +436,7 @@ footer {
                 order: 3;
             }
             svg {
-                width: 335px; 
-                height: 19px; 
+                width: 260px;
                  @media #{$tablet} {
                     transform: scale(0.7);
                     transform-origin: right;
@@ -688,7 +687,7 @@ header {
         position: fixed;
         // top: 50px; //sc logo position
         // right: 20px;
-        top: 22px; //vinyl crown logo position
+        top: 44px; //vinyl crown logo position
         right: 55px;
         z-index: 10;
         @media #{$tablet} {
@@ -702,6 +701,7 @@ header {
             display: none;
         }
         svg {
+            width: 220px;
             @media #{$tablet} {
                 // width: 110px; //sc logo
                 width: 235px; //vc logo
@@ -1099,6 +1099,7 @@ Page Specific Overrides
 
 .template-index { /* homepage */ 
     background-color: black;
+    // overflow: hidden;
     &.no-scroll header nav div{ //nav opened
         svg path {
             fill: black;      
