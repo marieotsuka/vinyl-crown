@@ -2,7 +2,7 @@
   Reading query parameters and storing them in a Shopify.queryParams object.
   Necessary for collection sorting and advanced collection filtering.
 ======================================================================= */
-console.log('shopify_common_sc.js is loaded')
+console.log('shopify_common.js is loaded');
 
 Shopify.queryParams = {};
 if (location.search.length) {

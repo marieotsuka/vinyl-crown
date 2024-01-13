@@ -31,32 +31,32 @@
   {{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
   <![endif]-->
 
-  {{ 'shopify_common_sc.js' | shopify_asset_url | script_tag }}
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
   {% if template contains 'customers' %}  
     {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
   {% endif %}
   {% if template contains 'music' %}  <!--key color setup for music products-->
   <!--favicons-->
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ 'apple-touch-icon-57x57.png' | asset_url }}" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'apple-touch-icon-114x114.png' | asset_url }}" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'apple-touch-icon-72x72.png' | asset_url }}" />
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'apple-touch-icon-144x144.png' | asset_url }}" />
-  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ 'apple-touch-icon-60x60.png' | asset_url }}" />
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ 'apple-touch-icon-120x120.png' | asset_url }}" />
-  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ 'apple-touch-icon-76x76.png' | asset_url }}" />
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'apple-touch-icon-152x152.png' | asset_url }}" />
-  <link rel="icon" type="image/png" href="{{ 'favicon-196x196.png' | asset_url }}" sizes="196x196" />
-  <link rel="icon" type="image/png" href="{{ 'favicon-96x96.png' | asset_url }}" sizes="96x96" />
-  <link rel="icon" type="image/png" href="{{ 'favicon-32x32.png' | asset_url }}" sizes="32x32" />
-  <link rel="icon" type="image/png" href="{{ 'favicon-16x16.png' | asset_url }}" sizes="16x16" />
-  <link rel="icon" type="image/png" href="{{ 'favicon-128.png' | asset_url }}" sizes="128x128" />
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ 'apple-touch-icon-sc-57x57.png' | asset_url }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'apple-touch-icon-sc-114x114.png' | asset_url }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'apple-touch-icon-sc-72x72.png' | asset_url }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'apple-touch-icon-sc-144x144.png' | asset_url }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ 'apple-touch-icon-sc-60x60.png' | asset_url }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ 'apple-touch-icon-sc-120x120.png' | asset_url }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ 'apple-touch-icon-sc-76x76.png' | asset_url }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'apple-touch-icon-sc-152x152.png' | asset_url }}" />
+  <link rel="icon" type="image/png" href="{{ 'favicon-sc-196x196.png' | asset_url }}" sizes="196x196" />
+  <link rel="icon" type="image/png" href="{{ 'favicon-sc-96x96.png' | asset_url }}" sizes="96x96" />
+  <link rel="icon" type="image/png" href="{{ 'favicon-sc-32x32.png' | asset_url }}" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ 'favicon-sc-16x16.png' | asset_url }}" sizes="16x16" />
+  <link rel="icon" type="image/png" href="{{ 'favicon-sc-128.png' | asset_url }}" sizes="128x128" />
   <meta name="application-name" content="&nbsp;"/>
   <meta name="msapplication-TileColor" content="#FFFFFF" />
-  <meta name="msapplication-TileImage" content="{{ 'mstile-144x144.png' | asset_url }}" />
-  <meta name="msapplication-square70x70logo" content="{{ 'mstile-70x70.png' | asset_url }}" />
-  <meta name="msapplication-square150x150logo" content="{{ 'mstile-150x150.png' | asset_url }}" />
-  <meta name="msapplication-wide310x150logo" content="{{ 'mstile-310x150.png' | asset_url }}" />
-  <meta name="msapplication-square310x310logo" content="{{ 'mstile-310x310.png' | asset_url }}" />
+  <meta name="msapplication-TileImage" content="{{ 'mstile-sc-144x144.png' | asset_url }}" />
+  <meta name="msapplication-square70x70logo" content="{{ 'mstile-sc-70x70.png' | asset_url }}" />
+  <meta name="msapplication-square150x150logo" content="{{ 'mstile-sc-150x150.png' | asset_url }}" />
+  <meta name="msapplication-wide310x150logo" content="{{ 'mstile-sc-310x150.png' | asset_url }}" />
+  <meta name="msapplication-square310x310logo" content="{{ 'mstile-sc-310x310.png' | asset_url }}" />
   <style>
     /* custom color overwrites for music detail page */
     body,
@@ -103,7 +103,8 @@
   {% endif %}
   
   <!-- Additional Shopify helpers that will likely be added to the global shopify_common.js some day soon. -->
-  {{ 'shopify_common_sc.js'  | asset_url | script_tag }}
+  {{ 'shopify_common.js'  | asset_url | script_tag }}
+
   {{ 'option_selection.js' | shopify_asset_url | script_tag }}
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
   <script>jQuery('html').removeClass('no-js').addClass('js');</script>
@@ -128,11 +129,11 @@
   {% else %}
     {% section 'footer' %} 
    {% endif %}
-  {{ 'shop_sc.js'  | asset_url | script_tag }}
+  {{ 'shop.js'  | asset_url | script_tag }}
 
-  {{ 'slick_sc.js' | asset_url | script_tag }}
+  {{ 'slick.js' | asset_url | script_tag }}
 
-  {{ 'common_sc.js' | asset_url | script_tag }}
+  {{ 'common.js' | asset_url | script_tag }}
 
 </body>
 </html>

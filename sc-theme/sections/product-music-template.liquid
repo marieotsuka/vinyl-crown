@@ -335,6 +335,7 @@
   let tracklist = [];
 
   jQuery(function($) {
+    console.log('https://sc-player.herokuapp.com/{{product.metafields.spotifyid.spotifyid}}');
     $.getJSON( 'https://sc-player.herokuapp.com/{{product.metafields.spotifyid.spotifyid}}', function( data ) {
       var items = [];
       let tracks = data.data.items;
